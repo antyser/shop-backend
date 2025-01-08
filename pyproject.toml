@@ -10,6 +10,7 @@ python = "^3.12"
 agentql = "^1.6.2"
 dotenv = "^0.0.5"
 loguru = "^0.7.3"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.2.0"

@@ -79,6 +79,6 @@ async def parse_product_details(url: str) -> dict[str, str | None]:
 # Example usage
 if __name__ == "__main__":
     product_url = "https://www.amazon.com/Unscented-Dishwasher-AspenClean-Plant-Based-Detergent/dp/B09X6FPH1L"
-    result = asyncio.run(parse_product_details(product_url))
+    result: dict[str, str | None] = asyncio.run(parse_product_details(product_url))
     if result:
         logger.info(f"Product Details: {result}")
