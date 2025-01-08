@@ -1,0 +1,73 @@
+{
+  "search_metadata": {
+    "id": "search_6d97LXP4moru8LK2dk03EOrl",
+    "status": "Success",
+    "created_at": "2025-01-07T21:53:56Z",
+    "request_time_taken": 3.56,
+    "parsing_time_taken": 0.01,
+    "total_time_taken": 3.57,
+    "request_url": "https://www.google.com/shopping/product/16127099509847096080/reviews?prds=rnum:3,rate:5&gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&ie=UTF-8",
+    "html_url": "https://www.searchapi.io/api/v1/searches/search_6d97LXP4moru8LK2dk03EOrl.html",
+    "json_url": "https://www.searchapi.io/api/v1/searches/search_6d97LXP4moru8LK2dk03EOrl"
+  },
+  "search_parameters": {
+    "engine": "google_product_reviews",
+    "product_id": "16127099509847096080",
+    "location": "United States",
+    "location_used": "United States",
+    "google_domain": "google.com",
+    "hl": "en",
+    "gl": "us",
+    "rating": "5",
+    "num": "3"
+  },
+  "search_information": {
+    "detected_location": "United States"
+  },
+  "product": {
+    "product_id": "16127099509847096080",
+    "title": "Apple AirPods Pro (2nd Generation) with MagSafe Charging Case (USB-C)(56,139)",
+    "link": "https://www.google.com/shopping/product/16127099509847096080?ie=UTF-8&gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rsk:PC_13143994692656166675",
+    "rating": 4.7,
+    "reviews": 56139,
+    "reviews_histogram": {
+      "1": 2268,
+      "2": 510,
+      "3": 976,
+      "4": 4358,
+      "5": 48027
+    }
+  },
+  "review_results": {
+    "reviews": [
+      {
+        "username": "Ubel",
+        "source": "bestbuy.com",
+        "title": "[Rewarded Review] If you own an iPhone, these are a no-brainer!",
+        "date": "July 10, 2024",
+        "rating": 5,
+        "text": "I recently switch to iPhone from Android and decided to replace my Sony WF-1000XM4 buds with these. I was pretty happy with the sound quality of the Sonys, especially on Android where I could use the LDAC codec, but I never found their bulky design comfortable in my ears, even after trying about a half a dozen aftermarket tips.\n\nThese are a night and day difference when it comes to comfort. Right out of the box, with the stock tips, they just fit easily, without me having to twist and turn and adjust the angle of them, or keep my head perfectly level and not talk or chew while wearing them so that they don't fall out.\n\nSound quality wise, testing with lossless FLAC/ALAC audio file playback, I think I still prefer the sound of the Sony's on LDAC slightly (a bit more crispness on the high end). However, when connecting them via AAC (the only option on iOS really), I'd say they are pretty evenly matched. I don't think sound quality difference will be that big of a deciding factor for anyone, if they compare these two, they're both pretty great for bluetooth audio,\n\nI didn't think I'd care for the Spatial Audio stuff at all, and I don't really like it much for music personally, but its pretty cool watching surround sound shows/movies on my Apple devices and actually hearing 3D audio placement.\n\nThe noise cancelling on both this and the Sonys are pretty great - both do an amazing job of removing constant background noises and a decent job of cutting down the volume of other noises. I feel like the AirPods seem a bit more effective overall though because of the fact that the fit is so much more secure in my ears.\n\nOne of the biggest difference I've noticed between the two is that the audio passthrough modes are very different. With Apples transparency mode, it really does almost sound like you're not even wearing them at all - I love being able to listen to music while still hearing around me naturally. With Sony's, it just feels like someone is mixing in a recording of ambient noise into the song you're listening to, very harsh and artificial and hissy in comparison, so I never used that feature.\n\nBattery life has been respectable, I rarely every find myself using the buds until they die, and the case only needs charges once a week or so, even with my pretty frequent usage.\n\nLast but not least, by far my favorite feature of these earbuds that no one really talks about is the physical mute option! When on calls, you can just single squeeze the right buds stem to mute/unmute you, and it makes the noises to let you know which state you toggled. I can't express how much easier this makes my workdays, and I never want to be on a call without them. Plus, the transparency mode makes me feel less deaf when I'm talking on the phone with both buds in, so I don't feel the need to always take one bud out when I'm on the phone, like with the Sony's."
+      },
+      {
+        "username": "jessie.k",
+        "source": "influenster.com",
+        "date": "October 2, 2024",
+        "rating": 5,
+        "text": "As someone who commutes a lot and needs to stay focused during the day, the noise cancellation on these has been a game changer for me. The 2x improvement over the previous model is extremely noticeable, as i can now hear dramatically less background noise when I'm trying to concentrate. Hooking them up to my phone with Bluetooth was simple! Just hold down the button on the back of the case while your phone is searching for a device. What I wasn't expecting was that upon hooking them up to my phone with Bluetooth, without even being on a call yet, the noise cancellation was activated.. I never realized how loud the world was before I had these. But they didn't make everything so silent that you are not completely aware of your surroundings, thanks to transparency mode which you can easily switch in or out of. It's useful when I'm walking through a busy city street or while I'm at home with my kids so that I can hear any nearby conversations, traffic noises, announcements, or people speaking to you, without having to constantly take the earbuds out! I don't feel isolated from my environment this way. Needless to say, the audio quality while in call, or listening to music is flawless. It's been a while since I've been able to actually hear the other caller or music with such clarity, and the caller could hear me perfectly too thanks to the personalized spatial audio and volume adjustments that really tailored the experience to my preferences. I love how immersed I feel in my music and podcasts. The comfortable silicone tips also help keep the AirPods securely in my ears while doing chores at home or during workouts. I will admit that at first I wasn't sure if they would actually stay in my ear the whole time without slipping out, because regardless of which size tip I put in (they include 3 different sized silicone tips), it just felt like it wasn't going to hold, but to my surprise it held quite well without me having to constantly push it back in. As for the battery life, I can get up to 6 hours of use with the noise cancellation feature on, versus the 4.5 hours of the previous model. And the MagSafe charging case extends that to a total of 24 hours, so I rarely have to worry about running out of battery. As a frequent earbud user, the upgrades in these 2nd generation AirPods Pro have been nothing short of amazing! The noise cancellation, transparency, and audio customization features make them a pleasure to use in all the settings of my busy life. Please don't hesitate to consider getting a refurbished product from Bestbuy! The Geek Squad certified refurbished condition ensures that you're getting a high quality product at a better value. And they arrived in excellent condition too! Overall, I'd highly recommend these earbuds to anyone that's in the market for a premium wireless audio experience."
+      },
+      {
+        "username": "BestBuyOG225",
+        "source": "bestbuy.com",
+        "title": "[Rewarded Review] Apple AirPods Pro 2",
+        "date": "December 29, 2024",
+        "rating": 5,
+        "text": "The Apple AirPods Pro 2 (second generation) are a remarkable evolution of the already impressive original AirPods Pro, delivering enhanced sound quality, improved noise cancellation, and new features that elevate the user experience to new heights. Whether you're an audiophile, a commuter, or someone who simply wants a reliable pair of wireless earbuds, the AirPods Pro 2 have a lot to offer.\n\nDesign and Comfort\n\nVisually, the AirPods Pro 2 resemble their predecessors but with subtle refinements. The compact, lightweight design is comfortable for long listening sessions, and Apple has made improvements to the ear tips, now including XS size for better fit and noise isolation. The silicone tips are soft yet secure, ensuring they stay in place even during vigorous movement.\n\nThe overall design still boasts the signature in-ear style that provides excellent passive noise isolation. These earbuds are rated IPX4 for water resistance, meaning they’ll hold up well during workouts or light rain. The improved size options help create a snug fit, which is key to both comfort and the effectiveness of noise cancellation.\n\nActive Noise Cancellation and Transparency Mode\n\nOne of the standout features of the AirPods Pro 2 is the improved Active Noise Cancellation (ANC). Apple claims the new version offers up to 2x better noise cancellation than the first generation, and it’s easy to see (or rather, hear) the difference. Whether you’re on a noisy subway, in a crowded cafe, or traveling by plane, the AirPods Pro 2 block out background noise more effectively, allowing you to immerse yourself in your music or podcasts.\n\nTransparency mode, which lets outside sound filter through, is also more natural and nuanced, giving you better awareness of your surroundings without sacrificing the clarity of your audio. The ability to switch seamlessly between ANC and Transparency mode with the touch of a button is a convenience that adds to the versatility of the AirPods Pro 2.\n\nSound Quality\n\nApple has improved the audio experience with the AirPods Pro 2, with a new custom driver and amplifier, resulting in a richer, fuller sound profile. The bass is punchier, the mids are clearer, and the treble shines with more detail, making these earbuds suitable for a wide variety of music genres. The improved dynamic range also makes podcasts and audiobooks sound more crisp.\n\nSpatial audio with dynamic head tracking is another key feature, offering a more immersive listening experience, especially with compatible content. The soundstage is wide, with sounds coming from different directions to enhance the feeling of being in a concert hall or a movie theater.\n\nApple has also introduced Adaptive Transparency, which adjusts the level of ambient noise around you based on your environment. If you're walking down a street and a loud truck passes by, it won’t drown out your music—making the overall experience safer and more enjoyable.\n\nBattery Life\n\nBattery life is impressive, offering up to 6 hours of listening time with noise cancellation on, and 30 hours of total battery life with the charging case. The charging case itself has also been updated, now featuring a built-in speaker that can help you locate it via the Find My app, and it supports MagSafe, wireless charging, and Lightning charging. Additionally, the new case includes a lanyard loop, providing extra convenience for portability.\n\nTouch Controls and Haptic Feedback\n\nApple has refined the touch controls on the AirPods Pro 2. You can now adjust the volume directly on the stem of the earbud by swiping up or down, which is a much-needed and appreciated feature. Additionally, the AirPods Pro 2 come with haptic feedback that provides a tactile sensation when adjusting settings or switching between ANC and Transparency mode. These small improvements make interacting with the earbuds feel more intuitive.\n\nApple Ecosystem Integration\n\nAs with all Apple products, the AirPods Pro 2 integrate seamlessly into the Apple ecosystem. The connection is instant when pairing with an iPhone, iPad, or Mac, and the transition between devices is effortless. The automatic switching feature, which lets the AirPods Pro 2 seamlessly switch between devices like your iPhone and MacBook, works exceptionally well.\n\nAdditionally, the new “Find My” integration helps locate the AirPods if they’re lost or misplaced, while the new case speaker can also play a sound to help you find them more easily.\n\nConclusion: The Best AirPods Yet!\n\nThe Apple AirPods Pro 2 offer a comprehensive upgrade over the first generation, with enhanced sound quality, stronger noise cancellation, longer battery life, and more intuitive controls. The AirPods Pro 2 are an excellent choice for Apple users who prioritize comfort, sound, and seamless integration with their devices. While they may be on the pricier side, the performance, features, and convenience they offer make them worth the investment for those who want the best true wireless earbuds Apple has to offer.\n\n**Pros:**\n- Excellent sound quality with deep bass and clear mids/highs\n- Improved ANC and Transparency modes\n- Seamless integration with Apple devices\n- Long battery life and a highly functional charging case\n- Comfortable fit with multiple ear tip sizes\n- New touch controls and haptic feedback\n\n**Cons:**\n- Expensive compared to some other wireless earbuds\n- No support for multi-point Bluetooth connections\n- Limited to the Apple ecosystem for some advanced features"
+      }
+    ]
+  },
+  "pagination": {
+    "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?ie=UTF-8&gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=cid:16127099509847096080,cs:1,pid:8327715312244391204,rate:5,rnum:3,rpt:EngKdgp0MCwwLjk2ODk4ODU5NzM5MzAzNTg5LCJhOjAwMDAwMDAwMDAwMDFjMDMiLCJhOjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLDEsIjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLCI1NzY2NjE2NTYyOTY0OTkzNDEzMV9DUCI,rsk:PC_13143994692656166675,sgro:or",
+    "prds": "cid:16127099509847096080,cs:1,pid:8327715312244391204,rate:5,rnum:3,rpt:EngKdgp0MCwwLjk2ODk4ODU5NzM5MzAzNTg5LCJhOjAwMDAwMDAwMDAwMDFjMDMiLCJhOjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLDEsIjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLCI1NzY2NjE2NTYyOTY0OTkzNDEzMV9DUCI,rsk:PC_13143994692656166675,sgro:or",
+    "next_page_token": "EngKdgp0MCwwLjk2ODk4ODU5NzM5MzAzNTg5LCJhOjAwMDAwMDAwMDAwMDFjMDMiLCJhOjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLDEsIjIwMTQ1MzE3MjQ3NDEwMzY3NzAiLCI1NzY2NjE2NTYyOTY0OTkzNDEzMV9DUCI"
+  }
+}

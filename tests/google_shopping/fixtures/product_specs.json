@@ -1,0 +1,240 @@
+{
+  "search_metadata": {
+    "id": "search_dmxzD17vdE2uMp3ZbklRw056",
+    "status": "Success",
+    "created_at": "2025-01-07T19:17:32Z",
+    "request_time_taken": 5.92,
+    "parsing_time_taken": 0,
+    "total_time_taken": 5.92,
+    "request_url": "https://www.google.com/shopping/product/16127099509847096080/specs?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&ie=UTF-8",
+    "html_url": "https://www.searchapi.io/api/v1/searches/search_dmxzD17vdE2uMp3ZbklRw056.html",
+    "json_url": "https://www.searchapi.io/api/v1/searches/search_dmxzD17vdE2uMp3ZbklRw056"
+  },
+  "search_parameters": {
+    "engine": "google_product_specs",
+    "product_id": "16127099509847096080",
+    "location": "United States",
+    "location_used": "United States",
+    "google_domain": "google.com",
+    "hl": "en",
+    "gl": "us"
+  },
+  "search_information": {
+    "detected_location": "United States"
+  },
+  "product": {
+    "product_id": "16127099509847096080",
+    "title": "Apple AirPods Pro (2nd Generation) with MagSafe Charging Case (USB-C)(56,139)",
+    "link": "https://www.google.com/shopping/product/16127099509847096080?hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&gl=us&prds=pid:8327715312244391204,rsk:PC_13143994692656166675",
+    "rating": 4.5,
+    "reviews": 56139,
+    "extensions": [
+      "Bluetooth",
+      "Noise Canceling",
+      "With Microphone",
+      "White",
+      "With Charging Case",
+      "With Touch Controls",
+      "In-ear",
+      "Sports",
+      "Mobile Phone",
+      "Siri"
+    ],
+    "description": "Apple-designed H2 chip, the force behind AirPods Pro, pushes advanced audio performance even further. From smarter noise cancellation to superior three-dimensional sound and battery life, it improves on the best features of AirPods Pro in a big way. Low distortion, custom-built driver and amplifier delivers crisp, clear high notes and deep, rich bass in stunning definition. Every sound is more vivid than ever. Adaptive Audio dynamically blends Transparency mode and Active Noise Cancellation to deliver the best listening experience for you in any environment. Up to 2x more Active Noise Cancellation than the previous generation AirPods Pro, so you’ll hear dramatically less noise during your commute and when you need to focus. Transparency mode lets outside sound in, so you can hear what's going on around you. Conversation Awareness lowers media volume and enhances voices of people in front of you, all while reducing background noise to make it easier for you to engage with people nearby when wearing AirPods Pro. Personalized Volume automatically fine-tunes the best media experience for you in the moment. Personalized Spatial Audio surrounds you in sound tuned just for you. It works with dynamic head tracking to immerse you deeper in music and movies. Four pairs of silicone tips are included to fit a wider range of ears, with an extra-small size. The tips create an acoustic seal to help keep out noise and secure AirPods Pro in place. Touch control lets you swipe the stem to adjust volume. Press the stem once to answer, mute, or unmute yourself on calls, press it twice to end a call, or hold it to switch between listening modes."
+  },
+  "specifications": [
+    {
+      "category": "General",
+      "attributes": [
+        {
+          "name": "Product Type",
+          "value": "True wireless earphones - Bluetooth - wireless"
+        },
+        {
+          "name": "Generation",
+          "value": "2nd generation"
+        },
+        {
+          "name": "Compatibility",
+          "value": "iPhone, iPad, iPod, Mac"
+        },
+        {
+          "name": "Additional Functions",
+          "value": "Wireless audio sharing, transparency mode, conversation awareness, personalized volume, adaptive audio"
+        },
+        {
+          "name": "Dimensions & Weight Details",
+          "value": "Charging case: 2.4 in x 0.9 in x 1.8 in / 1.8 oz"
+        },
+        {
+          "name": "Width",
+          "value": "0.9 in"
+        },
+        {
+          "name": "Depth",
+          "value": "0.9 in"
+        },
+        {
+          "name": "Height",
+          "value": "1.2 in"
+        },
+        {
+          "name": "Weight",
+          "value": "0.19 oz"
+        },
+        {
+          "name": "Recommended Use",
+          "value": "Portable electronics"
+        },
+        {
+          "name": "Protection",
+          "value": "Dust-resistant, sweat-resistant, IP54, water-resistant"
+        }
+      ]
+    },
+    {
+      "category": "Audio Output",
+      "attributes": [
+        {
+          "name": "Headphones Form Factor",
+          "value": "In-ear"
+        },
+        {
+          "name": "Connectivity Technology",
+          "value": "Wireless"
+        },
+        {
+          "name": "Wireless Technology",
+          "value": "Bluetooth"
+        },
+        {
+          "name": "Bluetooth Version",
+          "value": "Bluetooth 5.3"
+        },
+        {
+          "name": "Sound Output Mode",
+          "value": "Stereo"
+        },
+        {
+          "name": "Sound Effects",
+          "value": "Adaptive EQ"
+        },
+        {
+          "name": "Active Noise Canceling",
+          "value": "Yes"
+        },
+        {
+          "name": "Features",
+          "value": "Apple H2 chip, vent system for pressure equalization, MagSafe charging case with Apple U1 chip, Personalized Spatial Audio with dynamic head tracking, high dynamic range amplifier, high-excursion Apple driver"
+        }
+      ]
+    },
+    {
+      "category": "Microphone",
+      "attributes": [
+        {
+          "name": "Form Factor",
+          "value": "Built-in"
+        },
+        {
+          "name": "Microphone Operation Mode",
+          "value": "Dual beamforming"
+        }
+      ]
+    },
+    {
+      "category": "Remote Control",
+      "attributes": [
+        {
+          "name": "Controls",
+          "value": "Mute, volume, answer/end, play/pause, next/previous track, voice assistant, ANC/transparency"
+        }
+      ]
+    },
+    {
+      "category": "Tracking",
+      "attributes": [
+        {
+          "name": "Sensors",
+          "value": "Motion-detecting accelerometer, speech-detecting accelerometer, skin-detecting sensors, touch control"
+        }
+      ]
+    },
+    {
+      "category": "Internet of Things (IoT)",
+      "attributes": [
+        {
+          "name": "Internet of Things (IoT) Compatible",
+          "value": "Yes"
+        },
+        {
+          "name": "Communications Type",
+          "value": "Product-to-product"
+        },
+        {
+          "name": "Communications Technology",
+          "value": "Bluetooth 5.3"
+        },
+        {
+          "name": "Intelligent Assistant",
+          "value": "Siri"
+        },
+        {
+          "name": "Voice Controlled",
+          "value": "Indirect"
+        }
+      ]
+    },
+    {
+      "category": "Miscellaneous",
+      "attributes": [
+        {
+          "name": "Included Accessories",
+          "value": "4 pairs of silicone ear tips (extra small, small, medium, large), MagSafe charging case with speaker and lanyard loop, USB-C charge cable"
+        },
+        {
+          "name": "Cable Details",
+          "value": "USB-C charge cable"
+        },
+        {
+          "name": "Compliant Standards",
+          "value": "BFR-free, PVC-free, Beryllium-free, Mercury-free"
+        }
+      ]
+    },
+    {
+      "category": "Power",
+      "attributes": [
+        {
+          "name": "Auto On/Off",
+          "value": "Yes"
+        },
+        {
+          "name": "Battery",
+          "value": "Headphone battery rechargeable - wireless charging"
+        },
+        {
+          "name": "Wireless Charging Standards",
+          "value": "Qi"
+        },
+        {
+          "name": "Run Time (Up To)",
+          "value": "6 hour(s)"
+        },
+        {
+          "name": "Run Time Details",
+          "value": "Continuous playback (active noise-cancelling on): up to 6 hours ¦ Continuous playback (personalized spatial audio, head tracking on): up to 5.5 hours ¦ Continuous talk: up to 4.5 hours ¦ Continuous playback (active noise-cancelling on) (with included charging case): up to 30 hours ¦ Continuous talk (with included charging case): up to 24 hours"
+        }
+      ]
+    },
+    {
+      "category": "Manufacturer Warranty",
+      "attributes": [
+        {
+          "name": "Service & Support",
+          "value": "Limited warranty - 1 year"
+        }
+      ]
+    }
+  ]
+}

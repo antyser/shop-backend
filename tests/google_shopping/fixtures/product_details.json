@@ -1,0 +1,456 @@
+{
+  "search_metadata": {
+    "id": "search_VdXG2jzvrlqTzAQa2eYoaOb8",
+    "status": "Success",
+    "created_at": "2025-01-07T21:26:33Z",
+    "request_time_taken": 0.98,
+    "parsing_time_taken": 0.02,
+    "total_time_taken": 1,
+    "request_url": "https://www.google.com/shopping/product/16127099509847096080?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&ie=UTF-8",
+    "html_url": "https://www.searchapi.io/api/v1/searches/search_VdXG2jzvrlqTzAQa2eYoaOb8.html",
+    "json_url": "https://www.searchapi.io/api/v1/searches/search_VdXG2jzvrlqTzAQa2eYoaOb8"
+  },
+  "search_parameters": {
+    "engine": "google_product",
+    "product_id": "16127099509847096080",
+    "location": "United States",
+    "location_used": "United States",
+    "google_domain": "google.com",
+    "hl": "en",
+    "gl": "us"
+  },
+  "search_information": {
+    "detected_location": "United States"
+  },
+  "product": {
+    "product_id": "16127099509847096080",
+    "title": "Apple AirPods Pro (2nd Generation) with MagSafe Charging Case (USB-C)",
+    "reviews": 56139,
+    "rating": 4.7,
+    "reviews_histogram": {
+      "1": 2268,
+      "2": 510,
+      "3": 976,
+      "4": 4358,
+      "5": 48027
+    },
+    "highlights": ["Desktop PCs", "Peripherals", "Audio/Visual"],
+    "description": "Apple-designed H2 chip, the force behind AirPods Pro, pushes advanced audio performance even further. From smarter noise cancellation to superior three-dimensional sound and battery life, it improves on the best features of AirPods Pro in a big way. Low distortion, custom-built driver and amplifier delivers crisp, clear high notes and deep, rich bass in stunning definition. Every sound is more vivid than ever. Adaptive Audio dynamically blends Transparency mode and Active Noise Cancellation to deliver the best listening experience for you in any environment. Up to 2x more Active Noise Cancellation than the previous generation AirPods Pro, so you’ll hear dramatically less noise during your commute and when you need to focus. Transparency mode lets outside sound in, so you can hear what's going on around you. Conversation Awareness lowers media volume and enhances voices of people in front of you, all while reducing background noise to make it easier for you to engage with people nearby when wearing AirPods Pro. Personalized Volume automatically fine-tunes the best media experience for you in the moment. Personalized Spatial Audio surrounds you in sound tuned just for you. It works with dynamic head tracking to immerse you deeper in music and movies. Four pairs of silicone tips are included to fit a wider range of ears, with an extra-small size. The tips create an acoustic seal to help keep out noise and secure AirPods Pro in place. Touch control lets you swipe the stem to adjust volume. Press the stem once to answer, mute, or unmute yourself on calls, press it twice to end a call, or hold it to switch between listening modes.",
+    "variations": {
+      "current": {
+        "title": "White",
+        "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQMLuGo22nFSey1iT3NCMVQBjOejpTEobM57V9Utze1sl5JNh7phJPVsNP_PGGiugzvoU0AwhlcX44yOH71BJojFI1YLpTAKmxlvy5rGqNpR67juvzWYA&usqp=CAY"
+      },
+      "options": [
+        {
+          "product_id": "9233812052860419425",
+          "title": "A+",
+          "link": "https://www.google.com/shopping/product/9233812052860419425?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=opd:8327715312244391204,rsk:PC_13143994692656166675&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQlIUHCDwoAQ",
+          "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQMLuGo22nFSey1iT3NCMVQBjOejpTEobM57V9Utze1sl5JNh7phJPVsNP_PGGiugzvoU0AwhlcX44yOH71BJojFI1YLpTAKmxlvy5rGqNpR67juvzWYA&usqp=CAY"
+        },
+        {
+          "product_id": "5639543203965216009",
+          "title": "Usb C White",
+          "link": "https://www.google.com/shopping/product/5639543203965216009?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=opd:8327715312244391204,rsk:PC_13143994692656166675&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQlIUHCD0oAg",
+          "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQdYs8UkcaO3q2cAwMfpDY2DYNUgWGRsW_CIQVL7TUzkkQz1U8j9JVy6XShKGkYy8abHncv9Gs76VRRTD6SpEg7_jU5zMBUHX3IJ32-_540Z3uZNu6Nq5M&usqp=CAY"
+        }
+      ]
+    },
+    "extensions": [
+      "Bluetooth",
+      "Noise Canceling",
+      "With Microphone",
+      "White",
+      "With Charging Case",
+      "With Touch Controls",
+      "In-ear",
+      "Sports",
+      "Mobile Phone",
+      "Siri"
+    ],
+    "images": [
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRUAZtaNl3GGhjWQElS1K3k1W0OKpgElhNHsvVNm_gsafGq9hNa-jgSyWc2lKKFmlGJCe8GFWQIKeFG4EdF_LGT2zNflE55&usqp=CAY",
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR4BxWrnKZGCGa7q8-V_QQzdE3go9ky6ffW-OTRxV793zFYl1X5dwdGCI0-CAdP0DV5x0kcoMbm934IrSqkgNgvtWeX0FTqPA&usqp=CAY",
+      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQS3N0ZVneRVwbansBSxEZVLL6jc4tqGe76DfW_7pUrJUiZGxVN65JYbbwCxzHRHOvwa09CpnMPo-ihV7r32308QftbErO0&usqp=CAY",
+      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSCfnfOwwDeiPV4eg72Ugq8KL7d7erNeBiiS3WQfUnuT6AHsgrMH21IrpnPm3n9F_e2nNGBddL9QgIantUlF9AhLv02HcMcNg&usqp=CAY",
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRPL1LE3KNxfKrtmVaJDpaZm5CqIq7ak42eb75btYXR6d9apMg&usqp=CAY"
+    ]
+  },
+  "offers": [
+    {
+      "position": 1,
+      "link": "https://www.amazon.com/Apple-AirPods-Pro-Generation-Wireless/dp/B0DHWTDQD4?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A17MC6HOH9AVE6",
+      "price": "$278.00",
+      "extracted_price": 278,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$21.55",
+      "extracted_tax_price": 21.55,
+      "total_price": "$299.55",
+      "extracted_total_price": 299.55,
+      "merchant": {
+        "name": "Amazon.com - Seller"
+      }
+    },
+    {
+      "position": 2,
+      "link": "https://www.bjs.com/product/apple-airpods-pro-2nd-generation-with-magsafe-case-usb-c---white/3000000000004763751?fulfillment=shipping",
+      "price": "$199.99",
+      "extracted_price": 199.99,
+      "original_price": "$249.99",
+      "extracted_original_price": 249.99,
+      "delivery_price": "$7.43",
+      "extracted_delivery_price": 7.43,
+      "tax_price": "$38.89",
+      "extracted_tax_price": 38.89,
+      "total_price": "$246.31",
+      "extracted_total_price": 246.31,
+      "merchant": {
+        "name": "BJ's Wholesale Club",
+        "badge": "Top Quality Store"
+      },
+      "tag": "LOW PRICE"
+    },
+    {
+      "position": 3,
+      "link": "https://www.bhphotovideo.com/c/product/1787391-REG/apple_mtjv3am_a_airpods_pro_with_wireless.html?kw=APAPP2GUSBC&ap=y&smp=Y&BI=E7249&srsltid=AfmBOoo3bPebQcHtKYZl5RGd14s3QBVHX6Iy4sODdNGZPuOfjorW6GW9_gc",
+      "price": "$219.00",
+      "extracted_price": 219,
+      "original_price": "$249.00",
+      "extracted_original_price": 249,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$16.97",
+      "extracted_tax_price": 16.97,
+      "total_price": "$235.97",
+      "extracted_total_price": 235.97,
+      "merchant": {
+        "name": "B&H Photo-Video-Audio",
+        "badge": "Top Quality Store"
+      },
+      "tag": "LOW PRICE"
+    },
+    {
+      "position": 4,
+      "link": "https://www.samsclub.com/p/airpod-pro-2g-usbc-usb-c/P03024080?itemNumber=984182598",
+      "price": "$199.00",
+      "extracted_price": 199,
+      "delivery_price": "$66.30",
+      "extracted_delivery_price": 66.3,
+      "tax_price": "$26.53",
+      "extracted_tax_price": 26.53,
+      "total_price": "$291.83",
+      "extracted_total_price": 291.83,
+      "merchant": {
+        "name": "Sam's Club"
+      },
+      "tag": "LOW PRICE"
+    },
+    {
+      "position": 5,
+      "link": "https://www.ebay.com/itm/405434886790?chn=ps&mkevt=1&mkcid=28&google_free_listing_action=view_item",
+      "price": "$100.00",
+      "extracted_price": 100,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$7.75",
+      "extracted_tax_price": 7.75,
+      "total_price": "$107.75",
+      "extracted_total_price": 107.75,
+      "merchant": {
+        "name": "eBay"
+      }
+    },
+    {
+      "position": 6,
+      "link": "https://www.adorama.com/acmtjv3ama.html?refby=inc-google-shop-o",
+      "price": "$239.99",
+      "extracted_price": 239.99,
+      "original_price": "$274.99",
+      "extracted_original_price": 274.99,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$18.60",
+      "extracted_tax_price": 18.6,
+      "total_price": "$258.59",
+      "extracted_total_price": 258.59,
+      "merchant": {
+        "name": "Adorama",
+        "badge": "Top Quality Store"
+      },
+      "tag": "SALE"
+    },
+    {
+      "position": 7,
+      "link": "https://www.bonanza.com/listings/AirPods-Pro-2nd-generation-with-MagSafe-Charging-Case-USB-C-/1699783262?goog_pla=1",
+      "price": "$89.00",
+      "extracted_price": 89,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$6.90",
+      "extracted_tax_price": 6.9,
+      "total_price": "$95.90",
+      "extracted_total_price": 95.9,
+      "merchant": {
+        "name": "Bonanza"
+      }
+    },
+    {
+      "position": 8,
+      "link": "https://www.quill.com/apple-airpods-pro-2nd-generation-magsafe-charging-case-usbc-white-mtjv3ll-a/cbs/55459352.html?effort_code=369&sfcp=1&srsltid=AfmBOop-K2zHYEugQrkkjt4-O2xcCiDJSxGmiUIsItHXLGeq-3ni3dTm2Oc",
+      "price": "$268.99",
+      "extracted_price": 268.99,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$20.85",
+      "extracted_tax_price": 20.85,
+      "total_price": "$289.84",
+      "extracted_total_price": 289.84,
+      "merchant": {
+        "name": "Quill",
+        "badge": "Top Quality Store"
+      }
+    },
+    {
+      "position": 9,
+      "link": "https://www.joyswag.com/electronics/apple-airpods-pro-with-magsafe-charging-2nd-generation.html?utm_source=googleShopping&utm_medium=cpc&utm_campaign=googleShopping-wizi&srsltid=AfmBOoqo2ZnzTRyilynDJjaMypJ3seKGIIty_jsdsRdHPuc9tEzsUPVLkvA",
+      "price": "$140.00",
+      "extracted_price": 140,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$10.85",
+      "extracted_tax_price": 10.85,
+      "total_price": "$150.85",
+      "extracted_total_price": 150.85,
+      "merchant": {
+        "name": "JoySwag"
+      },
+      "tag": "LOW PRICE"
+    },
+    {
+      "position": 10,
+      "link": "https://stock4less.com/products/apple-airpods-pro-with-wireless-magsafe-charging-case-2nd-generation?variant=48187832205615&currency=USD&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&srsltid=AfmBOorFLAHTeyISKT_7RFTcz3ri_85pKFCzpShNM3f9CjGLs-20VZh1_nw",
+      "price": "$199.00",
+      "extracted_price": 199,
+      "delivery_price": "$0.00",
+      "extracted_delivery_price": 0,
+      "tax_price": "$15.42",
+      "extracted_tax_price": 15.42,
+      "total_price": "$214.42",
+      "extracted_total_price": 214.42,
+      "merchant": {
+        "name": "Stock4Less.com"
+      },
+      "promo_code": "Apply BACKSCH5",
+      "tag": "LOW PRICE"
+    }
+  ],
+  "offers_link": "https://www.google.com/shopping/product/16127099509847096080/offers?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=eto:5631938014242904596_0;9416636747162633232_0;17296777811056783555_0,pid:8327715312244391204,rsk:PC_13143994692656166675&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQoLAGCLMB",
+  "typical_prices": {
+    "low_price": "$230",
+    "extracted_low_price": 230,
+    "high_price": "$250",
+    "extracted_high_price": 250,
+    "popular_choice": "Amazon.com - Seller",
+    "popular_choice_link": "https://www.amazon.com/Apple-AirPods-Pro-Generation-Wireless/dp/B0DHWTDQD4?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A17MC6HOH9AVE6",
+    "popular_choice_price": "$278.00 at",
+    "extracted_popular_choice_price": 278
+  },
+  "review_results": {
+    "reviews": [
+      {
+        "username": "Ubel",
+        "source": "bestbuy.com",
+        "title": "[Rewarded Review] If you own an iPhone, these are a no-brainer!",
+        "date": "July 10, 2024",
+        "rating": 5,
+        "text": "I recently switch to iPhone from Android and decided to replace my Sony WF-1000XM4 buds with these. I was pretty happy with the sound quality of the Sonys, especially on Android where I could use the LDAC codec, but I never found their bulky design comfortable in my ears, even after trying about a half a dozen aftermarket tips.\n\nThese are a night and day difference when it comes to comfort. Right out of the box, with the stock tips, they just fit easily, without me having to twist and turn and adjust the angle of them, or keep my head perfectly level and not talk or chew while wearing them so that they don't fall out.\n\nSound quality wise, testing with lossless FLAC/ALAC audio file playback, I think I still prefer the sound of the Sony's on LDAC slightly (a bit more crispness on the high end). However, when connecting them via AAC (the only option on iOS really), I'd say they are pretty evenly matched. I don't think sound quality difference will be that big of a deciding factor for anyone, if they compare these two, they're both pretty great for bluetooth audio,\n\nI didn't think I'd care for the Spatial Audio stuff at all, and I don't really like it much for music personally, but its pretty cool watching surround sound shows/movies on my Apple devices and actually hearing 3D audio placement.\n\nThe noise cancelling on both this and the Sonys are pretty great - both do an amazing job of removing constant background noises and a decent job of cutting down the volume of other noises. I feel like the AirPods seem a bit more effective overall though because of the fact that the fit is so much more secure in my ears.\n\nOne of the biggest difference I've noticed between the two is that the audio passthrough modes are very different. With Apples transparency mode, it really does almost sound like you're not even wearing them at all - I love being able to listen to music while still hearing around me naturally. With Sony's, it just feels like someone is mixing in a recording of ambient noise into the song you're listening to, very harsh and artificial and hissy in comparison, so I never used that feature.\n\nBattery life has been respectable, I rarely every find myself using the buds until they die, and the case only needs charges once a week or so, even with my pretty frequent usage.\n\nLast but not least, by far my favorite feature of these earbuds that no one really talks about is the physical mute option! When on calls, you can just single squeeze the right buds stem to mute/unmute you, and it makes the noises to let you know which state you toggled. I can't express how much easier this makes my workdays, and I never want to be on a call without them. Plus, the transparency mode makes me feel less deaf when I'm talking on the phone with both buds in, so I don't feel the need to always take one bud out when I'm on the phone, like with the Sony's."
+      }
+    ],
+    "reviews_link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rsk:PC_13143994692656166675&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQqSQIaQ",
+    "filters": [
+      {
+        "title": "Effective noise reduction",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:3479",
+        "description": "View 7956 reviews about Effective noise reduction. 96% of the reviews are positive.",
+        "reviews": 7956
+      },
+      {
+        "title": "Good sound quality",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:2645",
+        "description": "View 5783 reviews about Good sound quality. 97% of the reviews are positive.",
+        "reviews": 5783
+      },
+      {
+        "title": "Long battery life",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:17",
+        "description": "View 1758 reviews about Long battery life. 90% of the reviews are positive.",
+        "reviews": 1758
+      },
+      {
+        "title": "Comfortable",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:7",
+        "description": "View 1524 reviews about Comfortable. 86% of the reviews are positive.",
+        "reviews": 1524
+      },
+      {
+        "title": "Fit/security",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=asp:725,pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675",
+        "description": "View 1413 reviews about Fit/security. 60% of the reviews are positive.",
+        "reviews": 1413
+      },
+      {
+        "title": "Easy to set up",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:46",
+        "description": "View 1218 reviews about Easy to set up. 96% of the reviews are positive.",
+        "reviews": 1218
+      },
+      {
+        "title": "Easy to use",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:84",
+        "description": "View 867 reviews about Easy to use. 89% of the reviews are positive.",
+        "reviews": 867
+      },
+      {
+        "title": "Quality build",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:105",
+        "description": "View 785 reviews about Quality build. 92% of the reviews are positive.",
+        "reviews": 785
+      },
+      {
+        "title": "Attractive",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:445",
+        "description": "View 505 reviews about Attractive. 95% of the reviews are positive.",
+        "reviews": 505
+      },
+      {
+        "title": "Good call quality",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:4679",
+        "description": "View 355 reviews about Good call quality. 82% of the reviews are positive.",
+        "reviews": 355
+      },
+      {
+        "title": "Good bass",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:2619",
+        "description": "View 357 reviews about Good bass. 85% of the reviews are positive.",
+        "reviews": 357
+      },
+      {
+        "title": "Bluetooth connectivity",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=asp:691,pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675",
+        "description": "View 374 reviews about Bluetooth connectivity. 50% of the reviews are negative.",
+        "reviews": 374
+      },
+      {
+        "title": "Charges quickly",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:446",
+        "description": "View 313 reviews about Charges quickly. 98% of the reviews are positive.",
+        "reviews": 313
+      },
+      {
+        "title": "Microphone quality",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=asp:254,pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675",
+        "description": "View 107 reviews about Microphone quality. 55% of the reviews are positive.",
+        "reviews": 107
+      },
+      {
+        "title": "Good water resistance",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675,tag:3762",
+        "description": "View 67 reviews about Good water resistance. 77% of the reviews are positive.",
+        "reviews": 67
+      },
+      {
+        "title": "Fit",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=asp:220,pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675",
+        "description": "View 3 reviews about Fit. 100% of the reviews are positive.",
+        "reviews": 3
+      },
+      {
+        "title": "Craftsmanship",
+        "link": "https://www.google.com/shopping/product/16127099509847096080/reviews?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=asp:87,pid:8327715312244391204,rnum:20,rsk:PC_13143994692656166675",
+        "description": "View 2 reviews about Craftsmanship. 100% of the reviews are positive.",
+        "reviews": 2
+      }
+    ]
+  },
+  "specifications": [
+    {
+      "category": "General",
+      "attributes": [
+        {
+          "name": "Product Type",
+          "value": "True wireless earphones - Bluetooth - wireless"
+        },
+        {
+          "name": "Generation",
+          "value": "2nd generation"
+        },
+        {
+          "name": "Compatibility",
+          "value": "iPhone, iPad, iPod, Mac"
+        },
+        {
+          "name": "Additional Functions",
+          "value": "Wireless audio sharing, transparency mode, conversation awareness, personalized volume, adaptive audio"
+        },
+        {
+          "name": "Dimensions & Weight Details",
+          "value": "Charging case: 2.4 in x 0.9 in x 1.8 in / 1.8 oz"
+        }
+      ]
+    }
+  ],
+  "specifications_link": "https://www.google.com/shopping/product/16127099509847096080/specs?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=pid:8327715312244391204,rj:1,rsk:PC_13143994692656166675",
+  "related_products": [
+    {
+      "product_id": "6883422599141817139",
+      "title": "Apple AirPods Pro (2nd Generation)",
+      "link": "https://www.google.com/shopping/product/6883422599141817139?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=epd:1152569646755142694,oid:1152569646755142694,pid:16786925038105300097,rsk:PC_13143994692656166675&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQrhIIvQE",
+      "price": "$208.99",
+      "extracted_price": 208.99,
+      "rating": 4.5,
+      "reviews": 56139,
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSiQjbQMDGXQwDnCZItNDcOAjFeAIKvoaTyuYdVYuZaEKX6P5nikpwPmCvXig9PbRW74HVFik3ghJrmOm7yhk8tGDWZOLU43uKUGxIqymoeGFppIXWimilitQ&usqp=CAY"
+    },
+    {
+      "product_id": "3199686608647267125",
+      "title": "Apple AirPods Pro - White",
+      "link": "https://www.google.com/shopping/product/3199686608647267125?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=epd:14390019618644760352,oid:14390019618644760352,pid:16804610589592208344,rsk:PC_7827190084446473420&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQrhIIwQE",
+      "price": "$100.00",
+      "extracted_price": 100,
+      "rating": 4.5,
+      "reviews": 55038,
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT8FtJnMhuiZz7SR5MNU-ObKg49_vWpYXB2lV8JyGuWrhr4zPYtbRRcCz4d3SZaR5de18Xp3QvK_odIrlXszScvQ-BojghEMkU7GeAD3o57jj1CGJMCEWU3&usqp=CAY"
+    },
+    {
+      "product_id": "4864642392415901477",
+      "title": "Apple AirPods with Charging ...",
+      "link": "https://www.google.com/shopping/product/4864642392415901477?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=epd:17352279335835578057,oid:17352279335835578057,pid:9736736475358869769,rsk:PC_1160117980419669046&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQrhIIxQE",
+      "price": "$102.90",
+      "extracted_price": 102.9,
+      "rating": 4.5,
+      "reviews": 16365,
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSepaIRpFCxwhGjxJbvV_yAQCayGhBSqodMECaocB7wprc6UwGcwY3cX8gDWFvK1vGkZTpaYJ_mG0BEQYdsB2VSt0ZxyTh6somD66MtkeyK3g14YdBlVk2_ug&usqp=CAY"
+    },
+    {
+      "product_id": "17922010797816703768",
+      "title": "Apple AirPods (3rd generation ...",
+      "link": "https://www.google.com/shopping/product/17922010797816703768?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=epd:14543814771622872380,oid:14543814771622872380,pid:18301651114165197214,rsk:PC_7862002618356310199&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQrhIIyQE",
+      "price": "$229.54",
+      "extracted_price": 229.54,
+      "rating": 4.5,
+      "reviews": 40253,
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSHXWp294a5U7AeQnNDpYpj2OTbSUXtiWE-bVnXEmTx9RJwF4crejKXbaz0GPUolEU0PvFlWof-WpkfYXbhzeAqnReyqfY6nO4f_u9PfuOmq3TlZ4WlnSPT&usqp=CAY"
+    },
+    {
+      "product_id": "3386258271741246756",
+      "title": "Apple AirPods 4",
+      "link": "https://www.google.com/shopping/product/3386258271741246756?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw&prds=epd:1691144183474496189,oid:1691144183474496189,pid:9079330990613735194,rsk:PC_16859286622074175999&sa=X&ved=0ahUKEwjOgMyxxuSKAxUhJEQIHT1QDYcQrhIIzQE",
+      "price": "$168.04",
+      "extracted_price": 168.04,
+      "rating": 4.5,
+      "reviews": 2458,
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTkx4yGskmKDh0Pi5BHTNmrpzNS4Lsn3BdLVlXU9MRaIwjzd7VPe_mLp40EMFZoSGBREZmUyb0CmToXt9caQlcSFx7kbDAAB4I4uYBoiiUy&usqp=CAY"
+    }
+  ]
+}

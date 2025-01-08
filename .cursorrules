@@ -10,6 +10,7 @@
   - Favor named exports for routes and utility functions.
   - Use the Receive an Object, Return an Object (RORO) pattern.
   - Use loguru logger instead of print.
+  - Use Poetry for package management
   
   Python/FastAPI
   - Use def for pure functions and async def for asynchronous operations.
@@ -34,6 +35,7 @@
   - Pydantic v2
   - Async database libraries like asyncpg or aiomysql
   - SQLAlchemy 2.0 (if using ORM features)
+  - Pytest
   
   FastAPI-Specific Guidelines
   - Use functional components (plain functions) and Pydantic models for input validation and response schemas.

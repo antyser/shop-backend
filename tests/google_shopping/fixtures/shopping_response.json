@@ -1,0 +1,690 @@
+{
+  "search_metadata": {
+    "id": "search_d1g3L6weL3bSd0yoZkpaP2rB",
+    "status": "Success",
+    "created_at": "2025-01-07T21:49:29Z",
+    "request_time_taken": 7.48,
+    "parsing_time_taken": 0.26,
+    "total_time_taken": 7.74,
+    "request_url": "https://www.google.com/search?q=airpods+pro+2nd+generation+between+200+and+300&oq=airpods+pro+2nd+generation+between+200+and+300&gl=us&hl=en&udm=28&shoprs=CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYBSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAFYiaogYAI&start=0&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+    "html_url": "https://www.searchapi.io/api/v1/searches/search_d1g3L6weL3bSd0yoZkpaP2rB.html",
+    "json_url": "https://www.searchapi.io/api/v1/searches/search_d1g3L6weL3bSd0yoZkpaP2rB"
+  },
+  "search_parameters": {
+    "engine": "google_shopping",
+    "q": "airpods pro 2nd generation",
+    "location": "United States",
+    "location_used": "United States",
+    "google_domain": "google.com",
+    "hl": "en",
+    "gl": "us",
+    "page": "1",
+    "price_min": "200",
+    "price_max": "300"
+  },
+  "search_information": {
+    "query_displayed": "airpods pro 2nd generation between 200 and 300",
+    "detected_location": "United States"
+  },
+  "filters": [
+    {
+      "options": [
+        {
+          "text": "On sale",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAESBEoCGAEYBioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyEwgGEgdPbiBzYWxlGAIiBEoCGAFYiaogYAI"
+        },
+        {
+          "text": "Nearby",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYAyoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyDAgDEgZOZWFyYnkYAliJqiBgAg"
+        },
+        {
+          "text": "Used",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYCioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyCAgKEgRVc2VkWImqIGAC"
+        },
+        {
+          "text": "Small business",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAESAmoAGBYqGmFpcnBvZHMgcHJvIDJuZCBnZW5lcmF0aW9uMisIBRIJMjAwIC0gMzAwGAIiFhIUCQAAAACE16dBEQAAAACj4bFBGAEqAhgBMhwIFhIOU21hbGwgYnVzaW5lc3MiAmoAKgQQARgBYAI"
+        }
+      ]
+    },
+    {
+      "type": "Sort by",
+      "options": [
+        {
+          "text": "Price: low to high",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYFyoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyHAgXEhJQcmljZTogbG93IHRvIGhpZ2gqBBABGAFgAogBAQ"
+        },
+        {
+          "text": "Price: high to low",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYFyoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyHAgXEhJQcmljZTogaGlnaCB0byBsb3cqBBABGAFgAogBAg"
+        }
+      ]
+    },
+    {
+      "type": "Connectivity",
+      "options": [
+        {
+          "text": "Wireless",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyGAgBEghXaXJlbGVzczoKCKmaOxCrmjswAFiJqiBgAg"
+        },
+        {
+          "text": "Wired",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyFQgBEgVXaXJlZDoKCKmaOxCqmjswAFiJqiBgAg"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "options": [
+        {
+          "text": "Noise Canceling Headphones",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYCSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyHggJEhpOb2lzZSBDYW5jZWxpbmcgSGVhZHBob25lc2AC"
+        },
+        {
+          "text": "Earbuds",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYCSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyCwgJEgdFYXJidWRzYAI"
+        },
+        {
+          "text": "Power Adapters & Chargers",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYCSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyHQgJEhlQb3dlciBBZGFwdGVycyAmIENoYXJnZXJzYAI"
+        },
+        {
+          "text": "Speakers, Headphones & Headsets",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYCSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyIwgJEh9TcGVha2VycywgSGVhZHBob25lcyAmIEhlYWRzZXRzYAI"
+        }
+      ]
+    },
+    {
+      "type": "Stores",
+      "options": [
+        {
+          "text": "Target",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYAioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyCggCEgZUYXJnZXRYiaogYAI"
+        },
+        {
+          "text": "Walmart",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYAioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyCwgCEgdXYWxtYXJ0WImqIGAC"
+        },
+        {
+          "text": "Best Buy",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYAioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyDAgCEghCZXN0IEJ1eViJqiBgAg"
+        },
+        {
+          "text": "eBay",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYAioaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyCAgCEgRlQmF5WImqIGAC"
+        }
+      ]
+    },
+    {
+      "type": "Features",
+      "options": [
+        {
+          "text": "Noise Canceling",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyHwgBEg9Ob2lzZSBDYW5jZWxpbmc6Cgjt6zoQ7us6MANYiaogYAI"
+        },
+        {
+          "text": "Waterproof",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyGggBEgpXYXRlcnByb29mOgoI2Ow6ENnsOjADWImqIGAC"
+        }
+      ]
+    },
+    {
+      "type": "Color",
+      "options": [
+        {
+          "text": "Black",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyFQgBEgVCbGFjazoKCM7uZhDR7mYwAFiJqiBgAg"
+        },
+        {
+          "text": "White",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAEYASoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyFQgBEgVXaGl0ZToKCM7uZhDS7mYwAFiJqiBgAg"
+        }
+      ]
+    },
+    {
+      "type": "Free shipping",
+      "options": [
+        {
+          "text": "Free shipping",
+          "shoprs": "CAESFhIUCQAAAACE16dBEQAAAACj4bFBGAESBFICEAEYGSoaYWlycG9kcyBwcm8gMm5kIGdlbmVyYXRpb24yKwgFEgkyMDAgLSAzMDAYAiIWEhQJAAAAAITXp0ERAAAAAKPhsUEYASoCGAEyFwgZEg1GcmVlIHNoaXBwaW5nIgRSAhABYAI"
+        }
+      ]
+    }
+  ],
+  "shopping_results": [
+    {
+      "position": 1,
+      "product_id": "4891805616949897996",
+      "title": "Apple AirPods Pro",
+      "product_link": "https://www.google.com/shopping/product/4891805616949897996?gl=us&hl=en",
+      "offers": "& more",
+      "offers_link": "https://www.google.com/shopping/product/4891805616949897996/offers?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$249.99",
+      "extracted_price": 249.99,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Target",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSMEqKVpUR2RtEAuW0gcMw7U3FFtaQ6T9wpNnfAp4qby8MqfPE"
+    },
+    {
+      "position": 2,
+      "product_id": "16127099509847096080",
+      "title": "Apple AirPods Pro (2nd Generation)",
+      "product_link": "https://www.google.com/shopping/product/16127099509847096080?gl=us&hl=en",
+      "offers": "& more",
+      "offers_link": "https://www.google.com/shopping/product/16127099509847096080/offers?gl=us&hl=en&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$278.00",
+      "extracted_price": 278,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Amazon.com - Seller",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTrQxXF9qAYxP-S7IPDtqmAPd1_hUgdJi6l4OFTwuGOUJaQqsgJ-EIRWBVKwlet_hGM4kPrqJ_h"
+    },
+    {
+      "position": 3,
+      "prds": "1203214528118330319",
+      "title": "Apple Brand New AirPods Pro (2nd Generation) - New Electronics | Size: xs",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:1203214528118330319",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:1203214528118330319&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$244.08",
+      "extracted_price": 244.08,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS1Ssm7HQVOTp9DDMmZ3FSQoN_viAvgMe4So8l8C2AWx32cEKMnm4H5rRw-Kb4"
+    },
+    {
+      "position": 4,
+      "prds": "14044288625059018653",
+      "title": "Apple - Airpods Pro (2nd Generation) - White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:14044288625059018653",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:14044288625059018653&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$219.99",
+      "extracted_price": 219.99,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTn67u-7kQi810zZdd3z-dia0LViWKvSXj_auYfrJVx5aqQEm47YVghweEqwsNihAZWyw3zmjzFfRM"
+    },
+    {
+      "position": 5,
+      "prds": "9264724711851409861",
+      "title": "Airpods Pro 2nd generation",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:9264724711851409861",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:9264724711851409861&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$229.00",
+      "extracted_price": 229,
+      "seller": "Cell Phone Repair TX",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRSyxHjen61fEbH873V8tbj9fA_TOgEh65pJPfiMRysrNxEi8wol6AXeFn_qw"
+    },
+    {
+      "position": 6,
+      "prds": "6779526963941977748",
+      "title": "AirPods Pro 2nd Gen w/Magsafe Charging Case",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:6779526963941977748",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:6779526963941977748&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$219.00",
+      "extracted_price": 219,
+      "original_price": "$249",
+      "extracted_original_price": 249,
+      "rating": 4.7,
+      "reviews": 56000,
+      "tag": "12% OFF",
+      "seller": "Mojo Cameras and Computers",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSOp2g4CBNrzr5Ng7ja3jwFfZVU0vMmk2wl_gN7j_nkcZawY5Iy"
+    },
+    {
+      "position": 7,
+      "prds": "1782349309009399168",
+      "title": "Apple Airpods Pro 2Nd Generation Bundle",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:1782349309009399168",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:1782349309009399168&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$250.00",
+      "extracted_price": 250,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Shop.com",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTOETHA2cPw13HUva9KORw-X2P3KDbrwuSHRxoFIkA15GLN4vLi"
+    },
+    {
+      "position": 8,
+      "prds": "6121147667792607278",
+      "title": "Apple BRAND NEW AirPod Pros 2nd Gen - New Electronics",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:6121147667792607278",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:6121147667792607278&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$210.00",
+      "extracted_price": 210,
+      "rating": 4.5,
+      "reviews": 55000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRNbAvyu9krxCqb80wwL-potw7s0TJ2kkoM3cOmyKNK0CcfVc1puOq-L_9DtQ"
+    },
+    {
+      "position": 9,
+      "prds": "595821094474042182",
+      "title": "Apple Airpod Pro 2nd Generation Wireless Earbud With Usb Charging",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:595821094474042182",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:595821094474042182&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$280.00",
+      "extracted_price": 280,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQiB6OzxUlGgb9KW3JQsUDbQLTrvlZhgHWQrCPmfGESjW6EKKj-_qQBDlvyGBVkXE0A0bvU2fNq"
+    },
+    {
+      "position": 10,
+      "prds": "10587177155132290261",
+      "title": "Apple Airpods Pro 2nd Generation With Magsafe Sealed (usb‐c)",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:10587177155132290261",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:10587177155132290261&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$229.99",
+      "extracted_price": 229.99,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS4sloFGqqglsUbz4bb22rBrMRkJFcTreac_GS79seNJLAM27qmp_B-6xBqzv8"
+    },
+    {
+      "position": 11,
+      "prds": "14896786819216741986",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: White | Size: xs",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:14896786819216741986",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:14896786819216741986&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$230.00",
+      "extracted_price": 230,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcT8Ueupqc5Sa9shAErTzuWBFyY5EPhiwGkvttJ0h3l-RTAN5X-u6D5XjWl95w"
+    },
+    {
+      "position": 12,
+      "prds": "2121608588664112069",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:2121608588664112069",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:2121608588664112069&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 312,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQKdidYpZZ0Zoq7wC1CrNKpN2RPHP14s5_8kDu2B80QckI7GoVs-OP_He8IwcvrFkrSri3TRBiHhQ"
+    },
+    {
+      "position": 13,
+      "prds": "13330889913620852235",
+      "title": "Airpods Pro 2nd Generation",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:13330889913620852235",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:13330889913620852235&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSlOW-vOlAVYAyBHC3fwSpYzZXd7xNOJDRPvhdFdDR8mOMre1ppqz7bQtZqAxpSR98AwGAmTnj0"
+    },
+    {
+      "position": 14,
+      "prds": "7574014036865057701",
+      "title": "airpod pro 2nd generation-white",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:7574014036865057701",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:7574014036865057701&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQBhpOYZL1IqC9pDFEpLXNply4PeS7MYRxXiMdNgGdyYAYxzBLqu38b_uZxWwzosQq5_78Mm2I5ig"
+    },
+    {
+      "position": 15,
+      "prds": "4753403932477939324",
+      "title": "Apple Airpod Pros 2nd Generation",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:4753403932477939324",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:4753403932477939324&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$250.00",
+      "extracted_price": 250,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTSX9wvC14cOXE5qaYHRpkEU-4jb7dAdo7YwyCW4hmZnm0USp7aSsoVfWNe4ToXzHvvNvFU8bN1"
+    },
+    {
+      "position": 16,
+      "prds": "1077747310240490684",
+      "title": "Apple Airpods Pros 2nd Generation Wireless Earbuds With Charging Case",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:1077747310240490684",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:1077747310240490684&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$220.00",
+      "extracted_price": 220,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQIMRH6njJNgjetSfNzn17NWcmozrcXdvqqJRWDEBh9xsjiVCOU8LlwqWjGu54JMyngLCDzgcHJyg"
+    },
+    {
+      "position": 17,
+      "prds": "3688595048450071269",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: White | Size: s",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:3688595048450071269",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:3688595048450071269&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$250.00",
+      "extracted_price": 250,
+      "rating": 4.7,
+      "reviews": 312,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS60gqVMMEOQwUXAQI4zVWo-N4ETOjBVroPKNynCzpdkYqIqPAXwkI8F8nOLA4"
+    },
+    {
+      "position": 18,
+      "prds": "18240379951109339490",
+      "title": "Airpods Pro 2nd Generation Sealed",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:18240379951109339490",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:18240379951109339490&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$215.00",
+      "extracted_price": 215,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRGEQr8Vlwd32HzXl5NFCSict29pJn4SM-lvyGoBeAEuHedXUVXPDM6sR73Ag"
+    },
+    {
+      "position": 19,
+      "prds": "4269272368178245601",
+      "title": "Apple NEW AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:4269272368178245601",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:4269272368178245601&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$261.63",
+      "extracted_price": 261.63,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS8CdbLTw_Q4XiNocWS8vVmAmliaTkXS1UVp_Vv0eiolP5NkJ5yVp4Ux6CQpg"
+    },
+    {
+      "position": 20,
+      "prds": "18271389765869907130",
+      "title": "Apple AirPods Pro (2nd Generation) - New Electronics",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:18271389765869907130",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:18271389765869907130&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$249.00",
+      "extracted_price": 249,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRQuZfGPjU2bzjA-3R0Y4FEiz4seSgHyqYVzqjjv_el9J_ASLcfLFEAy9sp_w7LWnOtW7KqpU6E2A"
+    },
+    {
+      "position": 21,
+      "prds": "8726957366810719538",
+      "title": "Apple AirPods Pro 2nd Generation - New Electronics | Color: Silver",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:8726957366810719538",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:8726957366810719538&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "original_price": "$225",
+      "extracted_original_price": 225,
+      "rating": 4.8,
+      "reviews": 854,
+      "tag": "11% OFF",
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSOwrusvjR26_jMpeYmHs8ElHZQ5NM2gfwsNdk2plCIQqQA2gLI4LOTCyC6zlLCEndoOVdpK65t"
+    },
+    {
+      "position": 22,
+      "prds": "14903010882499055478",
+      "title": "Apple Airpods Pro 2nd Generation With Magsafe Wireless Charging Case -",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:14903010882499055478",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:14903010882499055478&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRlvTwI6uLSdXuKt09tCUHC1O2wJE-DRHLPvm-dE8bQoxceL1P4pXsjl9HWZCcNpeBWqeP5H50"
+    },
+    {
+      "position": 23,
+      "prds": "14926562183221567510",
+      "title": "Apple Airpods Pro (2nd Generation) Wireless Ear Buds With Usb-c",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:14926562183221567510",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:14926562183221567510&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$209.99",
+      "extracted_price": 209.99,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQMsTw6DoggV_f0B8lr48nf5uv48vGwxIBtgylXFoPv5z6cSnIAWEBE2RRAZiw"
+    },
+    {
+      "position": 24,
+      "prds": "7106618087886618657",
+      "title": "Apple Airpods Pro 2nd Generation Sealed Authentic",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:7106618087886618657",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:7106618087886618657&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$250.00",
+      "extracted_price": 250,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ65d8qF-9TiTnZR2yGiAWngAEJa6rahwHOdM0gmgNJp6kF_8aVvvDU8rA8G_6VhPfIA5SqZrxy"
+    },
+    {
+      "position": 25,
+      "prds": "477622749368934290",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case In White - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:477622749368934290",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:477622749368934290&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$232.00",
+      "extracted_price": 232,
+      "original_price": "$245",
+      "extracted_original_price": 245,
+      "rating": 4.7,
+      "reviews": 56000,
+      "tag": "5% OFF",
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTP_IMZhqoO1C3ljjDA3Q6FX3oKehkb6VaQjyZU15oanxwpGq0WVNx-DuozWtQ8ZnZoozAZWabd"
+    },
+    {
+      "position": 26,
+      "prds": "1449194730995623943",
+      "title": "Apple Airpods Pro 2nd Gen. A2968 Mtjv3am/a Wireless Ear Buds W/ Usb-c",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:1449194730995623943",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:1449194730995623943&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$249.00",
+      "extracted_price": 249,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQfGk16KEXqC0entfh-EqHAZ-QZQV59kgaPGyA6bJuYKFE_LmyU_ceWI0QdGKY"
+    },
+    {
+      "position": 27,
+      "prds": "3155408513745515513",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: Beige",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:3155408513745515513",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:3155408513745515513&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcS4DpXWL8NHXdMQCxlBtqp7BHKs6QSLTMsqm4GzuiANTn_EUoy7baqaTzts3To"
+    },
+    {
+      "position": 28,
+      "prds": "14013155778195407134",
+      "title": "Apple Air Pods Pro 2nd Generation Usb C - New Electronics",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:14013155778195407134",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:14013155778195407134&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$220.00",
+      "extracted_price": 220,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSrVUvT4Cj65GWwuRjzHEtddQPUTzKq2SaoqyfPCA6m6ybGr84M0-dODq0CC81Wzjh9Cro5L2T2"
+    },
+    {
+      "position": 29,
+      "prds": "9123699960288890796",
+      "title": "Apple Airpods Pro 2nd Gen",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:9123699960288890796",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:9123699960288890796&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "condition": "Pre-owned",
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS-c56sCebr-BrJuoIonX1WLagyRYfiMkWpAa-KKfANcdrvnX78GKcDSVNXoQ"
+    },
+    {
+      "position": 30,
+      "prds": "13475231821950624171",
+      "title": "Apple AirPods Pro 2nd Generation - New Electronics | Color: White | Size: s",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:13475231821950624171",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:13475231821950624171&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$209.00",
+      "extracted_price": 209,
+      "original_price": "$220",
+      "extracted_original_price": 220,
+      "rating": 4.7,
+      "reviews": 124000,
+      "tag": "5% OFF",
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR6EYD7jYwTLxVePf6wfqhrqZXPDlRCe7vzb8ET7f_JEX1rUBwOlO3u22t3QQ"
+    },
+    {
+      "position": 31,
+      "prds": "11036778879232176311",
+      "title": "Apple AirPods Pro 2nd Generation - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:11036778879232176311",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:11036778879232176311&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$230.00",
+      "extracted_price": 230,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQHG9oTYxoJwsGK142UnIkVQ5F3D6bzhDu6ihZlnT5hAddlOotOuRFJZOa_MWU"
+    },
+    {
+      "position": 32,
+      "prds": "4579255242435246623",
+      "title": "Apple Airpods Pro 2nd Generation A2698 - With/ Lightning Cord (in",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:4579255242435246623",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:4579255242435246623&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQFebN0QiDNg5eAmea8tblITGzbtjz0l88Uf3f-J_Iqh7qdmBOgKAWHqfjw6g"
+    },
+    {
+      "position": 33,
+      "prds": "5901794224903443824",
+      "title": "Apple AirPods Pro 2nd Generation With Charging Case - New Electronics | Color: Pink",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:5901794224903443824",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:5901794224903443824&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRrFaV1i41GFgAHEYtQ4t7fvQlyNpdyPjGhuh51p0wQwXA_OFhSTqRq2WnRlg"
+    },
+    {
+      "position": 34,
+      "prds": "12056398176324057433",
+      "title": "Apple AirPods Pro 2nd Generation - New Electronics | Color: Orange",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:12056398176324057433",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:12056398176324057433&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "original_price": "$240",
+      "extracted_original_price": 240,
+      "rating": 4.7,
+      "reviews": 56000,
+      "tag": "16% OFF",
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcThq-Ho_LWuDVxBY6-DvJFMh0pC5w1vhmFWBTxImE3TNOVn9KsK6y3agN_-ogTQc8gb9PxTQnSk"
+    },
+    {
+      "position": 35,
+      "prds": "11819969273559400245",
+      "title": "Apple AirPods PRO 2ND GENERATION SEALED - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:11819969273559400245",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:11819969273559400245&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$225.00",
+      "extracted_price": 225,
+      "rating": 4.7,
+      "reviews": 56000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRQQBRIdycsNLj7Fje3024YZD4eMz3idU8u7l4fO3h8ccQHMSrZe8VxvvlGAQ"
+    },
+    {
+      "position": 36,
+      "prds": "12502348359281240947",
+      "title": "Apple Airpods Pro 2nd Generation With Magsafe Wireless Charging Case",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:12502348359281240947",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:12502348359281240947&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 56000,
+      "condition": "Pre-owned",
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSxwz38EO_7LhvOQEojF4x57q2N4bBiXnbz9igrkyvzR8UDrLhjYQLd3YmO2w"
+    },
+    {
+      "position": 37,
+      "prds": "11977390196131582655",
+      "title": "Apple AirPod Pros 2nd Generation - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:11977390196131582655",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:11977390196131582655&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$230.00",
+      "extracted_price": 230,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSjA_1Oxeu8tchiwOIamk48UK1BJ7uJTWMkZClNRWTQ4vrR_CFsmasDba_Ey6so3Cn1ZknSfzA"
+    },
+    {
+      "position": 38,
+      "prds": "1886779936195005188",
+      "title": "Apple Airpods Pro 2nd Generation Sealed",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:1886779936195005188",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:1886779936195005188&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$225.00",
+      "extracted_price": 225,
+      "rating": 4.7,
+      "reviews": 124000,
+      "condition": "Pre-owned",
+      "seller": "eBay",
+      "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTJ60FL0SuGGOC8i5JPD4Ej975Kj-vlNG_QkDlfEmEkFc-IauKcsmjDc94sP5w"
+    },
+    {
+      "position": 39,
+      "prds": "3545700640322969566",
+      "title": "Apple AirPods Pro’s (2nd Generation) - New Electronics | Color: White | Size: s",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:3545700640322969566",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:3545700640322969566&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$200.00",
+      "extracted_price": 200,
+      "rating": 4.7,
+      "reviews": 62000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQ7OWTNTVwJE803YtweRWZAbzBm8iATt4FnjuEr-3zuHU75p7PQ1HIvyPHHew"
+    },
+    {
+      "position": 40,
+      "prds": "3273965615403751216",
+      "title": "Apple AirPods 2nd Pro W/mag Safe Charging - New Electronics | Color: White",
+      "product_link": "https://www.google.com/shopping/product/1?gl=us&hl=en&prds=pid:3273965615403751216",
+      "offers_link": "https://www.google.com/shopping/product/1/offers?gl=us&hl=en&prds=pid:3273965615403751216&uule=w+CAIQICINVW5pdGVkIFN0YXRlcw",
+      "price": "$250.00",
+      "extracted_price": 250,
+      "rating": 4.7,
+      "reviews": 124000,
+      "seller": "Mercari",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSVLxsqABF-KaKkIL3WBSPk14Jmhix4DAJ3f4VcD5_2Xo-Xuud36X9l3pmDBg"
+    }
+  ]
+}
