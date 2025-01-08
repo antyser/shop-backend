@@ -1,23 +1,42 @@
-[tool.poetry]
+[tool.pdm.dev-dependencies]
+dev = [
+    "black<25.0.0,>=24.2.0",
+    "ruff<1.0.0,>=0.3.0",
+    "mypy<2.0.0,>=1.8.0",
+    "pre-commit<4.0.0,>=3.6.0",
+    "types-requests<3.0.0.0,>=2.32.0.20241016",
+]
+
+[tool.pdm.build]
+includes = []
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+authors = [
+    {name = "Jun Liu", email = "antyser@gmail.com"},
+]
+requires-python = "<4.0,>=3.12"
+dependencies = [
+    "agentql<2.0.0,>=1.6.2",
+    "loguru<1.0.0,>=0.7.3",
+    "python-dotenv<2.0.0,>=1.0.1",
+]
 name = "shop-backend"
 version = "0.1.0"
 description = ""
-authors = ["Jun Liu <antyser@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-agentql = "^1.6.2"
-dotenv = "^0.0.5"
-loguru = "^0.7.3"
-python-dotenv = "^1.0.1"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.2.0"
-ruff = "^0.3.0"
-mypy = "^1.8.0"
-pre-commit = "^3.6.0"
-types-requests = "^2.32.0.20241016"
+[dependency-groups]
+dev = [
+    "black<25.0.0,>=24.2.0",
+    "ruff<1.0.0,>=0.3.0",
+    "mypy<2.0.0,>=1.8.0",
+    "pre-commit<4.0.0,>=3.6.0",
+    "types-requests<3.0.0.0,>=2.32.0.20241016",
+]
 
 [tool.black]
 line-length = 150
@@ -51,7 +70,3 @@ warn_return_any = true
 warn_unreachable = true
 strict_optional = true
 disable_error_code = ["import-untyped"]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"

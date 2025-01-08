@@ -15,9 +15,13 @@ A Python backend service using FastAPI.
    curl https://pyenv.run | bash
    ```
 
-2. Install [Poetry](https://python-poetry.org/docs/#installation):
+2. Install [uv](https://github.com/astral-sh/uv):
    ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
+   # macOS
+   brew install uv
+   
+   # Linux/macOS (alternative)
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
 3. Add to your shell configuration (~/.bashrc, ~/.zshrc, etc.):
@@ -26,9 +30,6 @@ A Python backend service using FastAPI.
    export PYENV_ROOT="$HOME/.pyenv"
    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
    eval "$(pyenv init -)"
-   
-   # poetry configuration (if not automatically added)
-   export PATH="$HOME/.local/bin:$PATH"
    ```
 
 ### Project Setup
@@ -43,60 +44,60 @@ A Python backend service using FastAPI.
    pyenv local 3.12.5
    ```
 
-3. Configure Poetry to create virtual environment in project directory:
+3. Create and activate virtual environment:
    ```bash
-   poetry config virtualenvs.in-project true
+   python -m venv .venv
+   source .venv/bin/activate  # On Unix/macOS
+   # or
+   .venv\Scripts\activate  # On Windows
    ```
 
-4. Initialize Poetry project (skip if pyproject.toml exists):
+4. Install dependencies:
    ```bash
-   poetry init
-   ```
-
-5. Install dependencies:
-   ```bash
-   poetry install
+   # Install all dependencies (including dev)
+   uv pip install -e ".[dev]"
+   
+   # Install only production dependencies
+   uv pip install -e .
    ```
 
 ### Common Commands
 
 - Activate virtual environment:
   ```bash
-  poetry shell
+  source .venv/bin/activate  # On Unix/macOS
+  # or
+  .venv\Scripts\activate  # On Windows
   ```
 
 - Add new dependencies:
   ```bash
-  poetry add package-name
+  # Add to pyproject.toml manually, then:
+  uv pip install -e .
   ```
 
 - Add development dependencies:
   ```bash
-  poetry add --group dev package-name
+  # Add to pyproject.toml under [project.optional-dependencies].dev, then:
+  uv pip install -e ".[dev]"
   ```
 
 - Update dependencies:
   ```bash
-  poetry update
+  uv pip install --upgrade -e ".[dev]"
   ```
 
 - Show installed packages:
   ```bash
-  poetry show
-  ```
-
-- Run a command in virtual environment:
-  ```bash
-  poetry run python your_script.py
+  uv pip list
   ```
 
 ### Project Structure
 ```
 shop-backend/
 ├── .python-version     # Created by pyenv (contains: 3.12.5)
-├── .venv/             # Virtual environment (created by Poetry)
-├── pyproject.toml     # Poetry project configuration and dependencies
-├── poetry.lock        # Lock file for dependencies
+├── .venv/             # Virtual environment
+├── pyproject.toml     # Project configuration and dependencies
 └── src/               # Source code
     └── shop_backend/  # Main package directory
 ```
@@ -118,18 +119,14 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 ```
 
-### Poetry Issues
+### Virtual Environment Issues
 
 If you need to recreate the virtual environment:
 ```bash
-poetry env remove python
-poetry install
-```
-
-To debug Poetry environment:
-```bash
-poetry env info
-poetry debug info
+rm -rf .venv
+python -m venv .venv
+source .venv/bin/activate
+uv pip install -e ".[dev]"
 ```
 
 ### Python Version Issues
@@ -141,14 +138,14 @@ exec "$SHELL"  # Restart your shell
 
 ## Development Guidelines
 
-1. Always use `poetry shell` or `poetry run` to run commands
-2. Keep `pyproject.toml` and `poetry.lock` in version control
-3. Update dependencies through Poetry commands only
+1. Always activate the virtual environment before working
+2. Keep `pyproject.toml` in version control
+3. Update dependencies by modifying `pyproject.toml` and running `uv pip install -e ".[dev]"`
 4. Keep Python version consistent across team members using pyenv
 5. Use pre-commit hooks for code quality:
    ```bash
    # Install pre-commit hooks
-   poetry shell
+   source .venv/bin/activate
    pre-commit install
    
    # Run pre-commit hooks manually
@@ -167,14 +164,14 @@ These tools are automatically run on each commit through pre-commit hooks. You c
 
 ```bash
 # Format code with Black
-poetry run black .
+black .
 
 # Lint with Ruff
-poetry run ruff check .
-poetry run ruff check . --fix  # Auto-fix issues
+ruff check .
+ruff check . --fix  # Auto-fix issues
 
 # Type check with Mypy
-poetry run mypy .
+mypy .
 ```
 
 ## License
