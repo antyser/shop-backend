@@ -1,44 +1,39 @@
-import os
-from decimal import Decimal
-from typing import Any, Dict, List, Optional
+from typing import Any
 
-import requests
-from dotenv import load_dotenv
-from loguru import logger
 from pydantic import BaseModel, ConfigDict, Field
 
 
 # Common Base Models
 class SearchMetadata(BaseModel):
-    id: Optional[str] = None
-    status: Optional[str] = None
-    created_at: Optional[str] = None
-    request_time_taken: Optional[float] = None
-    parsing_time_taken: Optional[float] = None
-    total_time_taken: Optional[float] = None
-    request_url: Optional[str] = None
-    html_url: Optional[str] = None
-    json_url: Optional[str] = None
+    id: str | None = None
+    status: str | None = None
+    created_at: str | None = None
+    request_time_taken: float | None = None
+    parsing_time_taken: float | None = None
+    total_time_taken: float | None = None
+    request_url: str | None = None
+    html_url: str | None = None
+    json_url: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class SearchParameters(BaseModel):
-    engine: Optional[str] = None
-    q: Optional[str] = None
-    product_id: Optional[str] = None
-    location: Optional[str] = None
-    location_used: Optional[str] = None
-    google_domain: Optional[str] = None
-    hl: Optional[str] = None
-    gl: Optional[str] = None
+    engine: str | None = None
+    q: str | None = None
+    product_id: str | None = None
+    location: str | None = None
+    location_used: str | None = None
+    google_domain: str | None = None
+    hl: str | None = None
+    gl: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class SearchInformation(BaseModel):
-    detected_location: Optional[str] = None
-    total_results: Optional[int] = None
-    time_taken_displayed: Optional[float] = None
-    query_displayed: Optional[str] = None
+    detected_location: str | None = None
+    total_results: int | None = None
+    time_taken_displayed: float | None = None
+    query_displayed: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
@@ -54,21 +49,21 @@ class ShoppingSearchParameters(BaseModel):
 
 
 class ShoppingResult(BaseModel):
-    position: Optional[int] = None
-    title: Optional[str] = None
-    link: Optional[str] = None
-    product_id: Optional[str] = None
-    price: Optional[str] = None
-    extracted_price: Optional[float] = None
-    currency: Optional[str] = None
-    merchant: Optional[Dict[str, str]] = None
-    thumbnail: Optional[str] = None
-    rating: Optional[float] = None
-    reviews: Optional[int] = None
-    extensions: Optional[List[str]] = None
-    tag: Optional[str] = None
-    delivery: Optional[str] = None
-    prds: Optional[str] = None
+    position: int | None = None
+    title: str | None = None
+    link: str | None = None
+    product_id: str | None = None
+    price: str | None = None
+    extracted_price: float | None = None
+    currency: str | None = None
+    merchant: dict[str, str] | None = None
+    thumbnail: str | None = None
+    rating: float | None = None
+    reviews: int | None = None
+    extensions: list[str] | None = None
+    tag: str | None = None
+    delivery: str | None = None
+    prds: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
@@ -81,18 +76,17 @@ class BaseGoogleResponse(BaseModel):
         from_attributes=True,  # Allow ORM model parsing
         ser_json_timedelta="iso8601",  # Consistent datetime serialization
         validate_assignment=True,  # Validate during assignment
-        reorder_fields=False,  # Preserve field order
     )
 
 
 class GoogleShoppingResponse(BaseGoogleResponse):
-    search_metadata: Optional[SearchMetadata] = None
-    search_parameters: Optional[SearchParameters] = None
-    search_information: Optional[SearchInformation] = None
-    shopping_results: Optional[List[ShoppingResult]] = None
-    pagination: Optional[Dict[str, str]] = None
-    serpapi_pagination: Optional[Dict[str, Any]] = None
-    filters: Optional[List[Dict[str, Any]]] = None
+    search_metadata: SearchMetadata | None = None
+    search_parameters: SearchParameters | None = None
+    search_information: SearchInformation | None = None
+    shopping_results: list[ShoppingResult] | None = None
+    pagination: dict[str, str] | None = None
+    serpapi_pagination: dict[str, Any] | None = None
+    filters: list[dict[str, Any]] | None = None
 
 
 # Product Offers Models
@@ -107,39 +101,37 @@ class OfferSearchParameters(BaseModel):
 
 
 class Merchant(BaseModel):
-    name: Optional[str] = None
-    badge: Optional[str] = None
+    name: str | None = None
+    badge: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class Offer(BaseModel):
-    position: Optional[int] = None
-    link: Optional[str] = None
-    price: Optional[str] = None
-    extracted_price: Optional[float] = None
-    original_price: Optional[str] = None
-    extracted_original_price: Optional[float] = None
-    delivery_price: Optional[str] = None
-    tax_price: Optional[str] = None
-    extracted_tax_price: Optional[float] = None
-    total_price: Optional[str] = None
-    extracted_total_price: Optional[float] = None
-    merchant: Optional[Merchant] = None
-    promo_code: Optional[str] = None
-    tag: Optional[str] = None
-    extracted_delivery_price: Optional[float] = None
+    position: int | None = None
+    link: str | None = None
+    price: str | None = None
+    extracted_price: float | None = None
+    original_price: str | None = None
+    extracted_original_price: float | None = None
+    delivery_price: str | None = None
+    tax_price: str | None = None
+    extracted_tax_price: float | None = None
+    total_price: str | None = None
+    extracted_total_price: float | None = None
+    merchant: Merchant | None = None
+    promo_code: str | None = None
+    tag: str | None = None
+    extracted_delivery_price: float | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class GoogleProductOffersResponse(BaseGoogleResponse):
-    search_metadata: Optional[SearchMetadata] = None
-    search_parameters: Optional[SearchParameters] = None
-    search_information: Optional[SearchInformation] = None
-    offers: Optional[List[Offer]] = None
-    offers_link: Optional[str] = None
-    error: Optional[str] = Field(
-        None, description="Error message when no results are found"
-    )
+    search_metadata: SearchMetadata | None = None
+    search_parameters: SearchParameters | None = None
+    search_information: SearchInformation | None = None
+    offers: list[Offer] | None = None
+    offers_link: str | None = None
+    error: str | None = Field(None, description="Error message when no results are found")
 
 
 # Product Reviews Models
@@ -155,41 +147,39 @@ class ReviewSearchParameters(BaseModel):
 
 
 class Review(BaseModel):
-    username: Optional[str] = None
-    source: Optional[str] = None
-    title: Optional[str] = None
-    date: Optional[str] = None
-    rating: Optional[int] = None
-    text: Optional[str] = None
-    likes: Optional[int] = None
-    helpful_votes: Optional[int] = None
+    username: str | None = None
+    source: str | None = None
+    title: str | None = None
+    date: str | None = None
+    rating: int | None = None
+    text: str | None = None
+    likes: int | None = None
+    helpful_votes: int | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class ReviewFilter(BaseModel):
-    title: Optional[str] = None
-    link: Optional[str] = None
-    description: Optional[str] = None
-    reviews: Optional[int] = None
-    positive_percentage: Optional[int] = None
+    title: str | None = None
+    link: str | None = None
+    description: str | None = None
+    reviews: int | None = None
+    positive_percentage: int | None = None
 
 
 class ReviewResults(BaseModel):
-    reviews: Optional[List[Review]] = None
-    reviews_link: Optional[str] = None
-    filters: Optional[List[ReviewFilter]] = None
-    next_page_token: Optional[str] = None
+    reviews: list[Review] | None = None
+    reviews_link: str | None = None
+    filters: list[ReviewFilter] | None = None
+    next_page_token: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class GoogleProductReviewsResponse(BaseGoogleResponse):
-    search_metadata: Optional[SearchMetadata] = None
-    search_parameters: Optional[SearchParameters] = None
-    search_information: Optional[SearchInformation] = None
-    review_results: Optional[ReviewResults] = None
-    pagination: Optional[Dict[str, Any]] = Field(
-        None, description="Pagination information"
-    )
+    search_metadata: SearchMetadata | None = None
+    search_parameters: SearchParameters | None = None
+    search_information: SearchInformation | None = None
+    review_results: ReviewResults | None = None
+    pagination: dict[str, Any] | None = Field(None, description="Pagination information")
 
 
 # Product Specifications Models
@@ -204,28 +194,27 @@ class SpecSearchParameters(BaseModel):
 
 
 class SpecificationAttribute(BaseModel):
-    name: Optional[str] = None
-    value: Optional[str] = None
+    name: str | None = None
+    value: str | None = None
 
 
 class Specification(BaseModel):
-    category: Optional[str] = None
-    attributes: Optional[List[SpecificationAttribute]] = None
+    category: str | None = None
+    attributes: list[SpecificationAttribute] | None = None
 
 
 class GoogleProductSpecsResponse(BaseGoogleResponse):
-    search_metadata: Optional[SearchMetadata] = None
-    search_parameters: Optional[SearchParameters] = None
-    search_information: Optional[SearchInformation] = None
-    specifications: Optional[List[Specification]] = None
-    specifications_link: Optional[str] = None
-    product: Optional[Dict[str, Any]] = Field(None, description="Product information")
+    search_metadata: SearchMetadata | None = None
+    search_parameters: SearchParameters | None = None
+    search_information: SearchInformation | None = None
+    specifications: list[Specification] | None = None
+    specifications_link: str | None = None
+    product: dict[str, Any] | None = Field(None, description="Product information")
 
     model_config = ConfigDict(
         extra="allow",
         populate_by_name=True,
         from_attributes=True,
-        reorder_fields=False,  # Preserve field order
     )
 
 
@@ -241,65 +230,65 @@ class ProductSearchParameters(BaseModel):
 
 
 class ProductVariation(BaseModel):
-    product_id: Optional[str] = None
-    title: Optional[str] = None
-    link: Optional[str] = None
-    image: Optional[str] = None
+    product_id: str | None = None
+    title: str | None = None
+    link: str | None = None
+    image: str | None = None
 
 
 class Variations(BaseModel):
-    current: Optional[Dict[str, str]] = None
-    options: Optional[List[ProductVariation]] = None
+    current: dict[str, str] | None = None
+    options: list[ProductVariation] | None = None
 
 
 class TypicalPrices(BaseModel):
-    low_price: Optional[str] = None
-    extracted_low_price: Optional[float] = None
-    high_price: Optional[str] = None
-    extracted_high_price: Optional[float] = None
-    popular_choice: Optional[str] = None
-    popular_choice_link: Optional[str] = None
-    popular_choice_price: Optional[str] = None
-    extracted_popular_choice_price: Optional[float] = None
+    low_price: str | None = None
+    extracted_low_price: float | None = None
+    high_price: str | None = None
+    extracted_high_price: float | None = None
+    popular_choice: str | None = None
+    popular_choice_link: str | None = None
+    popular_choice_price: str | None = None
+    extracted_popular_choice_price: float | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class Product(BaseModel):
-    product_id: Optional[str] = None
-    title: Optional[str] = None
-    description: Optional[str] = None
-    reviews: Optional[int] = None
-    rating: Optional[float] = None
-    reviews_histogram: Optional[Dict[str, int]] = None
-    highlights: Optional[List[str]] = None
-    variations: Optional[Variations] = None
-    extensions: Optional[List[str]] = None
-    images: Optional[List[str]] = None
+    product_id: str | None = None
+    title: str | None = None
+    description: str | None = None
+    reviews: int | None = None
+    rating: float | None = None
+    reviews_histogram: dict[str, int] | None = None
+    highlights: list[str] | None = None
+    variations: Variations | None = None
+    extensions: list[str] | None = None
+    images: list[str] | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class RelatedProduct(BaseModel):
-    product_id: Optional[str] = None
-    title: Optional[str] = None
-    link: Optional[str] = None
-    price: Optional[str] = None
-    extracted_price: Optional[float] = None
-    rating: Optional[float] = None
-    reviews: Optional[int] = None
-    thumbnail: Optional[str] = None
-    prds: Optional[str] = None
+    product_id: str | None = None
+    title: str | None = None
+    link: str | None = None
+    price: str | None = None
+    extracted_price: float | None = None
+    rating: float | None = None
+    reviews: int | None = None
+    thumbnail: str | None = None
+    prds: str | None = None
     model_config = ConfigDict(extra="allow")
 
 
 class GoogleProductResponse(BaseModel):
-    search_metadata: Optional[SearchMetadata] = None
-    search_parameters: Optional[SearchParameters] = None
-    search_information: Optional[SearchInformation] = None
-    product: Optional[Product] = None
-    offers: Optional[List[Offer]] = None
-    offers_link: Optional[str] = None
-    typical_prices: Optional[TypicalPrices] = None
-    review_results: Optional[ReviewResults] = None
-    specifications: Optional[List[Specification]] = None
-    specifications_link: Optional[str] = None
-    related_products: Optional[List[RelatedProduct]] = None
+    search_metadata: SearchMetadata | None = None
+    search_parameters: SearchParameters | None = None
+    search_information: SearchInformation | None = None
+    product: Product | None = None
+    offers: list[Offer] | None = None
+    offers_link: str | None = None
+    typical_prices: TypicalPrices | None = None
+    review_results: ReviewResults | None = None
+    specifications: list[Specification] | None = None
+    specifications_link: str | None = None
+    related_products: list[RelatedProduct] | None = None

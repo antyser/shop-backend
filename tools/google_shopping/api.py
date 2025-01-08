@@ -1,25 +1,34 @@
 import os
+
 import requests
 from dotenv import load_dotenv
 from loguru import logger
-from typing import Optional, List
-from models import GoogleShoppingResponse, GoogleProductResponse, GoogleProductSpecsResponse, GoogleProductOffersResponse
+
+from tools.google_shopping.models import (
+    GoogleProductOffersResponse,
+    GoogleProductResponse,
+    GoogleProductReviewsResponse,
+    GoogleProductSpecsResponse,
+    GoogleShoppingResponse,
+)
+
+
 def search_google_shopping(
     query: str,
     location: str = "United States",
     gl: str = "us",
     hl: str = "en",
     page: int = 1,
-    shoprs: Optional[str] = None,
-    price_min: Optional[float] = None,
-    price_max: Optional[float] = None,
-    condition: Optional[str] = None
+    shoprs: str | None = None,
+    price_min: float | None = None,
+    price_max: float | None = None,
+    condition: str | None = None,
 ) -> GoogleShoppingResponse:
     """
     Search Google Shopping using SearchAPI.io's new layout
     Documentation Reference:
         https://www.searchapi.io/docs/google-shopping-new
-    
+
     Args:
         query (str): Search query term
         location (str, optional): Location for search results. Defaults to "United States".
@@ -30,23 +39,24 @@ def search_google_shopping(
         price_min (float, optional): Minimum price filter
         price_max (float, optional): Maximum price filter
         condition (str, optional): Product condition filter ('new' or 'used')
-    
+
     Returns:
         GoogleShoppingResponse: Validated response containing shopping results
     """
     api_key = os.getenv("SEARCHAPI_API_KEY")
+    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
     url = "https://www.searchapi.io/api/v1/search"
-    
-    params = {
+
+    params: dict[str, str | int | float] = {
         "engine": "google_shopping",
         "q": query,
         "location": location,
         "gl": gl,
         "hl": hl,
         "page": page,
-        "api_key": api_key
+        "api_key": api_key,
     }
-    
+
     if shoprs:
         params["shoprs"] = shoprs
     if price_min:
@@ -61,14 +71,10 @@ def search_google_shopping(
         response.raise_for_status()
         return GoogleShoppingResponse(**response.json())
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Error searching Google Shopping: {str(e)}")
-    
-def get_google_product(
-    product_id: str,
-    location: str = "United States",
-    gl: str = "us",
-    hl: str = "en"
-) -> GoogleProductResponse:
+        raise Exception(f"Error searching Google Shopping: {str(e)}") from e
+
+
+def get_google_product(product_id: str, location: str = "United States", gl: str = "us", hl: str = "en") -> GoogleProductResponse:
     """
     Get detailed product information using SearchAPI.io's Google Product API
     Documentation Reference:
@@ -84,34 +90,35 @@ def get_google_product(
         * Specifications
         * Related products
         * Typical price ranges
-    
+
     Args:
         product_id (str): Google Shopping product ID
         location (str, optional): Location for search results. Defaults to "United States".
         gl (str, optional): Google location parameter. Defaults to "us".
         hl (str, optional): Interface language. Defaults to "en".
-    
+
     Returns:
         GoogleProductResponse: Validated Pydantic model containing complete product details
     """
     api_key = os.getenv("SEARCHAPI_API_KEY")
+    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
     url = "https://www.searchapi.io/api/v1/search"
-    
-    params = {
+
+    params: dict[str, str | int | float] = {
         "engine": "google_product",
         "product_id": product_id,
         "location": location,
         "gl": gl,
         "hl": hl,
-        "api_key": api_key
+        "api_key": api_key,
     }
-    
+
     try:
         response = requests.get(url, params=params)
         response.raise_for_status()
         return GoogleProductResponse(**response.json())
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Error fetching product details: {str(e)}")
+        raise Exception(f"Error fetching product details: {str(e)}") from e
 
 
 def get_product_specifications(
@@ -119,35 +126,36 @@ def get_product_specifications(
     location: str = "United States",
     gl: str = "us",
     hl: str = "en",
-    prds: Optional[str] = None
+    prds: str | None = None,
 ) -> GoogleProductSpecsResponse:
     """
     Get product specifications using SearchAPI.io's Google Product Specifications API
     Documentation Reference:
         https://www.searchapi.io/docs/google-product-specifications
-    
+
     Args:
         product_id (str): Google Shopping product ID
         location (str, optional): Location for search results. Defaults to "United States".
         gl (str, optional): Google location parameter. Defaults to "us".
         hl (str, optional): Interface language. Defaults to "en".
         prds (str, optional): Custom product filter parameter
-    
+
     Returns:
         GoogleProductSpecsResponse: Validated response containing product specifications
     """
     api_key = os.getenv("SEARCHAPI_API_KEY")
+    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
     url = "https://www.searchapi.io/api/v1/search"
-    
-    params = {
+
+    params: dict[str, str | int | float] = {
         "engine": "google_product_specs",
         "product_id": product_id,
         "location": location,
         "gl": gl,
         "hl": hl,
-        "api_key": api_key
+        "api_key": api_key,
     }
-    
+
     if prds:
         params["prds"] = prds
 
@@ -156,7 +164,8 @@ def get_product_specifications(
         response.raise_for_status()
         return GoogleProductSpecsResponse(**response.json())
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Error fetching product specifications: {str(e)}")
+        raise Exception(f"Error fetching product specifications: {str(e)}") from e
+
 
 def get_product_offers(
     product_id: str,
@@ -164,16 +173,16 @@ def get_product_offers(
     gl: str = "us",
     hl: str = "en",
     page: int = 1,
-    sort_by: Optional[str] = None,
-    durability: Optional[str] = None,
-    filters: Optional[List[str]] = None,
-    prds: Optional[str] = None
+    sort_by: str | None = None,
+    durability: str | None = None,
+    filters: list[str] | None = None,
+    prds: str | None = None,
 ) -> GoogleProductOffersResponse:
     """
     Get product offers using SearchAPI.io's Google Product Offers API
     Documentation Reference:
         https://www.searchapi.io/docs/google-product-offers
-    
+
     Args:
         product_id (str): Google Shopping product ID
         location (str, optional): Location for search results. Defaults to "United States".
@@ -184,23 +193,24 @@ def get_product_offers(
         durability (str, optional): Product condition filter ('new' or 'used')
         filters (List[str], optional): List of filters ('free_delivery', 'nearby', etc.)
         prds (str, optional): Custom product filter parameter
-    
+
     Returns:
         GoogleProductOffersResponse: Validated response containing product offers
     """
     api_key = os.getenv("SEARCHAPI_API_KEY")
+    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
     url = "https://www.searchapi.io/api/v1/search"
-    
-    params = {
+
+    params: dict[str, str | int | float] = {
         "engine": "google_product_offers",
         "product_id": product_id,
         "location": location,
         "gl": gl,
         "hl": hl,
         "page": page,
-        "api_key": api_key
+        "api_key": api_key,
     }
-    
+
     if sort_by and not prds:
         params["sort_by"] = sort_by
     if durability and not prds:
@@ -215,20 +225,21 @@ def get_product_offers(
         response.raise_for_status()
         return GoogleProductOffersResponse(**response.json())
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Error fetching product offers: {str(e)}")
+        raise Exception(f"Error fetching product offers: {str(e)}") from e
+
 
 def get_product_reviews(
     product_id: str,
     location: str = "United States",
     gl: str = "us",
     hl: str = "en",
-    rating: Optional[int] = None,
+    rating: int | None = None,
     num: int = 10,
-    next_page_token: Optional[str] = None
-) -> dict:
+    next_page_token: str | None = None,
+) -> GoogleProductReviewsResponse:
     """
     Get product reviews using SearchAPI.io
-    
+
     Args:
         product_id (str): Google Shopping product ID
         location (str, optional): Location for search results. Defaults to "United States".
@@ -237,23 +248,25 @@ def get_product_reviews(
         rating (int, optional): Filter by rating (1-5)
         num (int, optional): Number of reviews per page (1-100). Defaults to 10.
         next_page_token (str, optional): Token for pagination
-    
+
     Returns:
-        dict: Product reviews data
+        GoogleProductReviewsResponse: Product reviews data
     """
     api_key = os.getenv("SEARCHAPI_API_KEY")
+    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+
     url = "https://www.searchapi.io/api/v1/search"
-    
-    params = {
+
+    params: dict[str, str | int | float] = {
         "engine": "google_product_reviews",
         "product_id": product_id,
         "location": location,
         "gl": gl,
         "hl": hl,
         "num": num,
-        "api_key": api_key
+        "api_key": api_key,
     }
-    
+
     if rating:
         params["rating"] = rating
     if next_page_token:
@@ -262,9 +275,10 @@ def get_product_reviews(
     try:
         response = requests.get(url, params=params)
         response.raise_for_status()
-        return response.json()
+        return GoogleProductReviewsResponse(**response.json())
     except requests.exceptions.RequestException as e:
-        raise Exception(f"Error fetching product reviews: {str(e)}")
+        raise Exception(f"Error fetching product reviews: {str(e)}") from e
+
 
 # Example usage
 if __name__ == "__main__":
@@ -273,16 +287,12 @@ if __name__ == "__main__":
         # Example product ID and search query
         product_id = "16127099509847096080"  # AirPods Pro 2nd Gen
         search_query = "airpods pro 2nd generation"
-        
+
         # 1. Test Google Shopping Search
         logger.info("\n=== Testing Google Shopping Search ===")
-        search_results = search_google_shopping(
-            query=search_query,
-            price_min=200,
-            price_max=300
-        )
+        search_results = search_google_shopping(query=search_query, price_min=200, price_max=300)
         logger.info(f"Found {len(search_results.shopping_results or [])} products")
-        
+
         # Safely display first 3 results
         for result in (search_results.shopping_results or [])[:3]:
             logger.info(f"- {result.title or 'No title'}")
@@ -290,31 +300,36 @@ if __name__ == "__main__":
             # Safely access merchant name
             merchant_name = result.merchant.get("name", "Unknown Merchant") if result.merchant else "Unknown Merchant"
             logger.info(f"  Merchant: {merchant_name}")
-            
+
         logger.info("\n=== Testing Complete Product Details ===")
         product_details = get_google_product(product_id)
-        
+
         logger.info("Basic Information:")
-        logger.info(f"- Title: {product_details.product.title}")
-        logger.info(f"- Rating: {product_details.product.rating} ({product_details.product.reviews} reviews)")
-        logger.info(f"- Price Range: {product_details.typical_prices.low_price} - "
-                   f"{product_details.typical_prices.high_price}")
-        
-        if product_details.product.variations:
+        if product_details.product:
+            logger.info(f"- Title: {product_details.product.title}")
+            if product_details.product.rating is not None and product_details.product.reviews is not None:
+                logger.info(f"- Rating: {product_details.product.rating} " f"({product_details.product.reviews} reviews)")
+
+        if product_details.typical_prices:
+            logger.info(f"- Price Range: {product_details.typical_prices.low_price} - " f"{product_details.typical_prices.high_price}")
+
+        if product_details.product and product_details.product.variations and product_details.product.variations.options:
             logger.info("\nAvailable Variations:")
             for var in product_details.product.variations.options:
                 logger.info(f"- {var.title}")
-        
-        logger.info("\nHighlights:")
-        for highlight in product_details.product.highlights:
-            logger.info(f"- {highlight}")
-        
-        logger.info("\nRelated Products:")
-        for related in product_details.related_products[:3]:
-            logger.info(f"- {related.title}")
-            logger.info(f"  Price: {related.price}")
-            if related.rating:
-                logger.info(f"  Rating: {related.rating}★ ({related.reviews} reviews)")
-        
+
+        if product_details.product and product_details.product.highlights:
+            logger.info("\nHighlights:")
+            for highlight in product_details.product.highlights:
+                logger.info(f"- {highlight}")
+
+        if product_details.related_products:
+            logger.info("\nRelated Products:")
+            for related in product_details.related_products[:3]:
+                logger.info(f"- {related.title}")
+                logger.info(f"  Price: {related.price}")
+                if related.rating:
+                    logger.info(f"  Rating: {related.rating}★ ({related.reviews} reviews)")
+
     except Exception as e:
         logger.exception(f"Error: {e}")

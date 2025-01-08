@@ -1,5 +1,8 @@
+# type: ignore
+
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -15,66 +18,68 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 
 @pytest.fixture
-def shopping_response_data():
+def shopping_response_data() -> dict[str, Any]:
     with open(FIXTURES_DIR / "shopping_response.json") as f:
         return json.load(f)
 
 
 @pytest.fixture
-def product_offers_data():
+def product_offers_data() -> dict[str, Any]:
     with open(FIXTURES_DIR / "product_offers.json") as f:
         return json.load(f)
 
 
 @pytest.fixture
-def product_reviews_data():
+def product_reviews_data() -> dict[str, Any]:
     with open(FIXTURES_DIR / "product_reviews.json") as f:
         return json.load(f)
 
 
 @pytest.fixture
-def product_specs_data():
+def product_specs_data() -> dict[str, Any]:
     with open(FIXTURES_DIR / "product_specs.json") as f:
         return json.load(f)
 
 
 @pytest.fixture
-def product_details_data():
+def product_details_data() -> dict[str, Any]:
     with open(FIXTURES_DIR / "product_details.json") as f:
         return json.load(f)
 
 
-def test_shopping_response_serialization(shopping_response_data):
+def test_shopping_response_serialization(
+    shopping_response_data: dict[str, Any],
+) -> None:
     model = GoogleShoppingResponse(**shopping_response_data)
     model_dict = model.model_dump(exclude_none=True)
     assert model_dict == shopping_response_data
 
 
-def test_product_offers_serialization(product_offers_data):
+def test_product_offers_serialization(product_offers_data: dict[str, Any]) -> None:
     model = GoogleProductOffersResponse(**product_offers_data)
     model_dict = model.model_dump(exclude_none=True)
     assert model_dict == product_offers_data
 
 
-def test_product_reviews_serialization(product_reviews_data):
+def test_product_reviews_serialization(product_reviews_data: dict[str, Any]) -> None:
     model = GoogleProductReviewsResponse(**product_reviews_data)
     model_dict = model.model_dump(exclude_none=True)
     assert model_dict == product_reviews_data
 
 
-def test_product_specs_serialization(product_specs_data):
+def test_product_specs_serialization(product_specs_data: dict[str, Any]) -> None:
     model = GoogleProductSpecsResponse(**product_specs_data)
     model_dict = model.model_dump(exclude_none=True)
     assert model_dict == product_specs_data
 
 
-def test_product_details_serialization(product_details_data):
+def test_product_details_serialization(product_details_data: dict[str, Any]) -> None:
     model = GoogleProductResponse(**product_details_data)
     model_dict = model.model_dump(exclude_none=True)
     assert model_dict == product_details_data
 
 
-def test_shopping_response_validation():
+def test_shopping_response_validation() -> None:
     invalid_data = {
         "search_metadata": {
             "id": 123,  # Should be string
@@ -86,15 +91,16 @@ def test_shopping_response_validation():
         GoogleShoppingResponse(**invalid_data)
 
 
-def test_optional_fields():
+def test_optional_fields() -> None:
     minimal_data = {"search_metadata": {"id": "123"}}
 
     model = GoogleShoppingResponse(**minimal_data)
+    assert model.search_metadata is not None
     assert model.search_metadata.id == "123"
     assert model.shopping_results is None
 
 
-def test_nested_model_validation():
+def test_nested_model_validation() -> None:
     data = {
         "search_metadata": {"id": "123"},
         "shopping_results": [

@@ -145,6 +145,37 @@ exec "$SHELL"  # Restart your shell
 2. Keep `pyproject.toml` and `poetry.lock` in version control
 3. Update dependencies through Poetry commands only
 4. Keep Python version consistent across team members using pyenv
+5. Use pre-commit hooks for code quality:
+   ```bash
+   # Install pre-commit hooks
+   poetry shell
+   pre-commit install
+   
+   # Run pre-commit hooks manually
+   pre-commit run --all-files
+   ```
+
+### Code Quality Tools
+
+The project uses several tools to maintain code quality:
+
+- **Black**: Code formatter that ensures consistent code style
+- **Ruff**: Fast Python linter that combines multiple tools
+- **Mypy**: Static type checker for Python
+
+These tools are automatically run on each commit through pre-commit hooks. You can also run them manually:
+
+```bash
+# Format code with Black
+poetry run black .
+
+# Lint with Ruff
+poetry run ruff check .
+poetry run ruff check . --fix  # Auto-fix issues
+
+# Type check with Mypy
+poetry run mypy .
+```
 
 ## License
 
