@@ -5,10 +5,10 @@ from loguru import logger
 
 from tools.google_shopping.api import get_google_product, search_google_shopping
 from tools.parser.parse_product import parse_product_details
-from util import timer
+from util import atimer
 
 
-@timer
+@atimer
 async def research(url: str) -> dict[str, Any]:
     """
     Research a product by parsing its URL and fetching additional details from Google Shopping.
@@ -51,6 +51,8 @@ async def research(url: str) -> dict[str, Any]:
 
     # Search Google Shopping using the extracted product name
     logger.info(f"Searching Google Shopping for: {parsed_details['product_name']}")
+    if not parsed_details["product_name"]:
+        raise ValueError("Could not extract product name from URL")
     search_results = search_google_shopping(query=parsed_details["product_name"])
     logger.info(f"Search results: {search_results}")
 

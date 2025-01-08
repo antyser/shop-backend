@@ -10,7 +10,7 @@
   - Favor named exports for routes and utility functions.
   - Use the Receive an Object, Return an Object (RORO) pattern.
   - Use loguru logger instead of print.
-  - Use Poetry for package management
+  - Use uv for package management
   
   Python/FastAPI
   - Use def for pure functions and async def for asynchronous operations.
