@@ -10,11 +10,14 @@
   - Favor named exports for routes and utility functions.
   - Use the Receive an Object, Return an Object (RORO) pattern.
   - Use loguru logger instead of print.
-  - Use uv for package management
+  - Use uv for package management, when needs to install package, run `uv add ...`
+  - Always use absolute import
+  - Write doc string when create or update functions
+  - Each line is less than 40 tokens
   
   Python/FastAPI
   - Use def for pure functions and async def for asynchronous operations.
-  - Use type hints for all function signatures. Prefer Pydantic models over raw dictionaries for input validation.
+  - Use type hints for all function signatures. Prefer Pydantic models over raw dictionaries for input validation. Use Optional instead of | None.
   - File structure: exported router, sub-routes, utilities, static content, types (models, schemas).
   - Avoid unnecessary curly braces in conditional statements.
   - For single-line statements in conditionals, omit curly braces.

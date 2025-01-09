@@ -21,8 +21,15 @@ authors = [
 requires-python = "<4.0,>=3.12"
 dependencies = [
     "agentql<2.0.0,>=1.6.2",
+    "beautifulsoup4>=4.12.3",
+    "fake-headers>=1.0.2",
+    "httpx[http2]>=0.28.1",
+    "ipython>=8.31.0",
+    "jupyter>=1.1.1",
     "loguru<1.0.0,>=0.7.3",
+    "playwright-dompath>=0.0.1",
     "python-dotenv<2.0.0,>=1.0.1",
+    "requests>=2.32.3",
 ]
 name = "shop-backend"
 version = "0.1.0"
@@ -56,6 +63,16 @@ lint.select = [
     "UP",  # pyupgrade
 ]
 lint.ignore = []
+
+# Exclude files in tests/ directory from ruff checking
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "tests/**",
+]
 
 [tool.mypy]
 python_version = "3.12"
