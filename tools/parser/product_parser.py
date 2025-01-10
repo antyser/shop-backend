@@ -10,7 +10,8 @@ from loguru import logger
 from playwright.async_api import async_playwright
 from playwright_dompath.dompath_sync import xpath_path
 
-from tools.crawler.html import get_html_content
+from tools.crawler.html import fetch
+from tools.parser.models.product_metadata import ProductMetadata
 from tools.parser.product_metadata_parser import extract_product_metadata
 
 # Load environment variables from .env file
@@ -106,7 +107,7 @@ def get_title_from_html(html: str) -> str | None:
         return None
 
 
-def get_product_name(url: str) -> str | None:
+async def get_product_name(url: str) -> str | None:
     """Get the product name from the product page using multiple fallback methods:
     1. Try to extract from structured data (JSON-LD, microdata)
     2. Try to get from meta tags or title
@@ -119,7 +120,7 @@ def get_product_name(url: str) -> str | None:
         Optional[str]: Product name if found, None otherwise
     """
     # Get HTML content
-    html_content = get_html_content(url)
+    html_content = await fetch(url)
     if not html_content:
         return None
 
@@ -248,8 +249,49 @@ def _extract_variants(soup: BeautifulSoup, selector: str) -> list[dict[str, str]
     return variants if variants else None
 
 
+async def parse_product_page(url: str) -> ProductMetadata | None:
+    """
+    Parse product page and extract metadata
+
+    Args:
+        url: Product page URL
+
+    Returns:
+        ProductMetadata if successful, None otherwise
+    """
+    try:
+        # Fetch HTML content and await the result
+        html_content = await fetch(url)
+        if not html_content:
+            logger.error(f"Failed to fetch content from {url}")
+            return None
+
+        # Now html_content is str, not a coroutine
+        metadata = extract_product_metadata(html_content)
+        if not metadata:
+            logger.error(f"Failed to extract metadata from {url}")
+            return None
+
+        title = get_title_from_html(html_content)
+        if not title:
+            logger.error(f"Failed to extract title from {url}")
+            return None
+
+        # Create a new dict with all metadata fields and update title
+        metadata_dict = metadata.model_dump()
+        metadata_dict["name"] = title
+
+        return ProductMetadata(**metadata_dict)
+
+    except Exception as e:
+        logger.error(f"Error parsing product page: {e}")
+        return None
+
+
 # Example usage
 if __name__ == "__main__":
+    import asyncio
+
     load_dotenv()
     links = [
         "https://www.amazon.com/Biodance-Bio-Collagen-Tightening-Hydrating-Molecular/dp/B0B2RM68G2",
@@ -260,7 +302,11 @@ if __name__ == "__main__":
         "https://www.temu.com/golf-club-cover-head-cover-protective-cover-driver--wooden--cover-pusher-cover--edition-g-601099598085262.html",
         "https://www.nike.com/t/gato-mens-shoes-zRHXm1/HQ6019-001",
     ]
-    for link in links:
-        result = get_product_name(link)
-        if result:
-            logger.info(f"Product name: {result}")
+
+    async def fetch_and_log_product_names(links: list[str]) -> None:
+        for link in links:
+            result = await get_product_name(link)
+            if result:
+                logger.info(f"Product name: {result}")
+
+    asyncio.run(fetch_and_log_product_names(links))

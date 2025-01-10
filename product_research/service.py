@@ -45,7 +45,7 @@ async def research(url: str) -> dict[str, Any]:
     """
     # Extract product name using the new function
     logger.info(f"Extracting product name from URL: {url}")
-    product_name = get_product_name(url)
+    product_name = await get_product_name(url)
 
     if not product_name:
         raise ValueError("Could not extract product name from URL")
