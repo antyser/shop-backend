@@ -115,7 +115,7 @@ class Product(BaseModel):
     variations: list[ProductVariation] | None = Field(default_factory=list, description="Product variations")
     delivery: list[str] | None = None
     features: list[str] | None = None
-    format: str | None = None
+    format: list[dict[str, Any]] | None = None
     buybox_prices: BuyboxPrices | None = None
     parent_asin: str | None = None
     input_asin: str | None = None
@@ -227,6 +227,39 @@ class ProductResponse(BaseModel):
     products: list[Product]
 
 
+async def get_snapshot_data(snapshot_id: str) -> list[dict[str, Any]] | None:
+    """
+    Retrieve snapshot data from Bright Data API
+
+    Args:
+        snapshot_id: ID of the snapshot to retrieve
+        token: Bright Data API token
+
+    Returns:
+        List of product data dictionaries or None if failed
+    """
+    token = os.getenv("BRIGHT_DATA_TOKEN")
+    if not token:
+        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    snapshot_url = "https://api.brightdata.com/datasets/v3/snapshot" f"/{snapshot_id}?format=json"
+
+    async with httpx.AsyncClient() as client:
+        try:
+            snapshot_response = await client.get(snapshot_url, headers=headers)
+            snapshot_response.raise_for_status()
+
+            raw_data: list[dict[str, Any]] = snapshot_response.json()
+            if raw_data and len(raw_data) > 0:
+                return raw_data
+            return None
+
+        except Exception as e:
+            logger.error(f"Failed to get snapshot data: {str(e)}")
+            return None
+
+
 async def scrape_amazon_product(urls: list[str]) -> ProductResponse | None:
     """
     Scrape Amazon product data using Bright Data API
@@ -258,7 +291,7 @@ async def scrape_amazon_product(urls: list[str]) -> ProductResponse | None:
             # Wait for scraping to complete
             wait_time = 0
             while wait_time < MAX_WAIT_TIME:
-                status = await get_snapshot_status(snapshot_id, token)
+                status = await get_snapshot_status(snapshot_id)
 
                 if not status:
                     raise ValueError("Failed to get snapshot status")
@@ -279,44 +312,28 @@ async def scrape_amazon_product(urls: list[str]) -> ProductResponse | None:
                 raise TimeoutError("Scraping timed out")
 
             # Get snapshot data
-            snapshot_url = "https://api.brightdata.com/datasets/v3/snapshot" f"/{snapshot_id}?format=json"
-
-            snapshot_response = await client.get(snapshot_url, headers=headers)
-            snapshot_response.raise_for_status()
-
-            raw_data = snapshot_response.json()
-            if raw_data and len(raw_data) > 0:
+            raw_data = await get_snapshot_data(snapshot_id)
+            if raw_data:
                 return ProductResponse(products=raw_data)
 
             return None
 
     except Exception as e:
-        logger.error(f"Error occurred: {str(e)}, trigger_response: {trigger_response.text}")
+        logger.error(f"Error occurred: {str(e)}")
         return None
 
 
 if __name__ == "__main__":
-
-    async def main() -> None:
-        """
-        Main function to demonstrate scraping Amazon products
-        """
-        urls = [
-            "https://www.amazon.com/Dimmable-Equivalent-No-Flicker-Chandelier-BAOMING/dp/B089M1BH1K",
-        ]
-
-        try:
-            logger.info(f"Starting scraping for {len(urls)} products")
-            response = await scrape_amazon_product(urls)
-
-            if response and response.products:
-                for idx, product in enumerate(response.products, 1):
-                    logger.info(f"Product {idx}: {product.title} - " f"${product.final_price}")
-            else:
-                logger.error("No products were scraped")
-
-        except Exception as e:
-            logger.error(f"Failed to scrape products: {str(e)}")
-
     load_dotenv()
-    asyncio.run(main())
+    # resp = asyncio.run(get_snapshot_data('s_m61bwhkj1sallaiyw'))
+    # print(resp)
+    urls = [
+        "https://www.amazon.com/AI-Engineering-Building-Applications-Foundation/dp/1098166302/",
+    ]
+    logger.info(f"Starting scraping for {len(urls)} products")
+    response = asyncio.run(scrape_amazon_product(urls))
+    if response and response.products:
+        for idx, product in enumerate(response.products, 1):
+            logger.info(f"Product {idx}: {product.title} - " f"${product.final_price}")
+    else:
+        logger.error("No products were scraped")

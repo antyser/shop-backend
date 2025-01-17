@@ -22,6 +22,7 @@ requires-python = "<4.0,>=3.12"
 dependencies = [
     "agentql<2.0.0,>=1.6.2",
     "beautifulsoup4>=4.12.3",
+    "brotli>=1.1.0",
     "chardet>=5.2.0",
     "datasets>=3.2.0",
     "fake-headers>=1.0.2",
@@ -32,8 +33,10 @@ dependencies = [
     "loguru<1.0.0,>=0.7.3",
     "markdownify>=0.14.1",
     "playwright-dompath>=0.0.1",
+    "pydantic-ai>=0.0.19",
     "python-dotenv<2.0.0,>=1.0.1",
     "requests>=2.32.3",
+    "streamlit>=1.41.1",
     "supabase>=2.11.0",
     "unstructured>=0.16.12",
 ]

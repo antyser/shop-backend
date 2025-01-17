@@ -1,3 +1,5 @@
+import os
+
 import httpx
 from loguru import logger
 from pydantic import BaseModel
@@ -29,17 +31,20 @@ class SnapshotInfo(BaseModel):
     created: str | None = None
 
 
-async def get_snapshot_status(snapshot_id: str, token: str) -> SnapshotStatus | None:
+async def get_snapshot_status(snapshot_id: str) -> SnapshotStatus | None:
     """
     Get status of a specific snapshot
 
     Args:
         snapshot_id: ID of the snapshot to check
-        token: Bright Data API token
 
     Returns:
         SnapshotStatus object or None if failed
     """
+    token = os.getenv("BRIGHT_DATA_TOKEN")
+    if not token:
+        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+
     try:
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
@@ -53,18 +58,21 @@ async def get_snapshot_status(snapshot_id: str, token: str) -> SnapshotStatus | 
         return None
 
 
-async def list_snapshots(dataset_id: str, token: str, status: str = "ready") -> list[SnapshotInfo] | None:
+async def list_snapshots(dataset_id: str, status: str = "ready") -> list[SnapshotInfo] | None:
     """
     List all snapshots for a dataset
 
     Args:
         dataset_id: ID of the dataset
-        token: Bright Data API token
         status: Filter snapshots by status
 
     Returns:
         List of SnapshotInfo objects or None if failed
     """
+    token = os.getenv("BRIGHT_DATA_TOKEN")
+    if not token:
+        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+
     try:
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 

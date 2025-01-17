@@ -3,6 +3,7 @@ import os
 from enum import Enum
 from pathlib import Path
 
+import chardet
 import httpx
 from fake_headers import Headers
 from loguru import logger
@@ -44,9 +45,24 @@ def save_debug_files(url: str, html: str, markdown: str | None) -> None:
     logger.info(f"Debug files saved for {url}")
 
 
+def autodetect(content: bytes) -> str:
+    """
+    Detect character encoding of content using chardet
+
+    Args:
+        content: Bytes to analyze
+
+    Returns:
+        Detected encoding or 'utf-8' as fallback
+    """
+    result = chardet.detect(content)
+    return result.get("encoding") or "utf-8"
+
+
 async def fetch_direct(url: str) -> str | None:
     """
     Fetch content directly using httpx with HTTP/2 support
+    and automatic encoding detection
 
     Args:
         url: Target URL to fetch
@@ -56,15 +72,23 @@ async def fetch_direct(url: str) -> str | None:
     """
     try:
         headers = Headers(browser="chrome", os="windows", headers=True).generate()
+        headers["Accept-Encoding"] = "br"
 
-        async with httpx.AsyncClient(http2=True, timeout=10.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(
+            http2=True,
+            timeout=10.0,
+            follow_redirects=True,
+            default_encoding=autodetect,  # Use autodetect function
+        ) as client:
             response = await client.get(url, headers=headers)
             response.raise_for_status()
 
             logger.debug(f"Response headers: {response.headers}")
-            logger.info(f"Response encoding: {response.encoding}")
+            logger.debug(f"Content-Type: {response.headers.get('Content-Type')}")
+            logger.debug(f"Detected encoding: {response.encoding}")
 
-            return str(response.text)
+            content = str(response.text)
+            return content
 
     except httpx.HTTPError as e:
         logger.error(f"Direct request failed: {e}")
@@ -239,3 +263,7 @@ async def fetch_batch(
         logger.info(f"Completed batch {i//max_concurrent + 1}, " f"processed {len(results)}/{len(urls)} URLs")
 
     return results
+
+
+if __name__ == "__main__":
+    asyncio.run(fetch_batch(["https://us.sengled.com/?srsltid=AfmBOooZN01Nn7DFngmVx5Pjt86DLG37GbGskjiqZdlXc9Y9Y3o_4oy7"]))
