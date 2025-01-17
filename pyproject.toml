@@ -13,6 +13,9 @@ includes = []
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
+[tool.logfire]
+pydantic_plugin_record = "all"
+
 
 [project]
 authors = [
@@ -33,7 +36,7 @@ dependencies = [
     "loguru<1.0.0,>=0.7.3",
     "markdownify>=0.14.1",
     "playwright-dompath>=0.0.1",
-    "pydantic-ai>=0.0.19",
+    "pydantic-ai[logfire]>=0.0.19",
     "python-dotenv<2.0.0,>=1.0.1",
     "requests>=2.32.3",
     "streamlit>=1.41.1",

@@ -9,6 +9,8 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent, RunContext
 from scraper.bright_data.google_search import google_search
 
+logfire.configure(send_to_logfire="if-token-present")
+
 
 @dataclass
 class ProductResearchDeps:

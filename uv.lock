@@ -2481,6 +2481,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/60/d7/0a27fa7cc8156464b9de8e1172534eb2cad1ab6b6a00c2823e3d5a321c30/pydantic_ai-0.0.19-py3-none-any.whl", hash = "sha256:4cd53e779f00ee29bb628094075ddc52128669cfee49a49c1b8c5d9ac90fc4c0", size = 9795 },
 ]
 
+[package.optional-dependencies]
+logfire = [
+    { name = "logfire" },
+]
+
 [[package]]
 name = "pydantic-ai-slim"
 version = "0.0.19"
@@ -3109,7 +3114,7 @@ dependencies = [
     { name = "loguru" },
     { name = "markdownify" },
     { name = "playwright-dompath" },
-    { name = "pydantic-ai" },
+    { name = "pydantic-ai", extra = ["logfire"] },
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "streamlit" },
@@ -3141,7 +3146,7 @@ requires-dist = [
     { name = "loguru", specifier = ">=0.7.3,<1.0.0" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "playwright-dompath", specifier = ">=0.0.1" },
-    { name = "pydantic-ai", specifier = ">=0.0.19" },
+    { name = "pydantic-ai", extras = ["logfire"], specifier = ">=0.0.19" },
     { name = "python-dotenv", specifier = ">=1.0.1,<2.0.0" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "streamlit", specifier = ">=1.41.1" },
