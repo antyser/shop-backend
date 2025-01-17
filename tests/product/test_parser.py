@@ -5,8 +5,8 @@ from pathlib import Path
 
 from loguru import logger
 
-from src.product.parser import parse_amazon_product
-from src.scraper.bright_data.amazon import Product as AmazonProduct
+from product.parser import parse_amazon_product
+from scraper.bright_data.amazon import Product as AmazonProduct
 
 
 def test_parse_amazon_product():
