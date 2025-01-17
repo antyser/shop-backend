@@ -4,7 +4,6 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 from loguru import logger
-
 from tools.crawler.html import OutputFormat, fetch_batch
 from tools.google.models import OxyGoogleSearchResponse
 

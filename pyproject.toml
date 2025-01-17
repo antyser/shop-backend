@@ -79,17 +79,3 @@ exclude = [
     "dist",
     "tests/**",
 ]
-
-[tool.mypy]
-python_version = "3.12"
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_return_any = true
-warn_unreachable = true
-strict_optional = true
-disable_error_code = ["import-untyped"]
