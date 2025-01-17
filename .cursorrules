@@ -39,6 +39,9 @@
   - Async database libraries like asyncpg or aiomysql
   - SQLAlchemy 2.0 (if using ORM features)
   - Pytest
+
+  Pydantic-Specific
+  - Use model_dump instead of dict()
   
   FastAPI-Specific Guidelines
   - Use functional components (plain functions) and Pydantic models for input validation and response schemas.

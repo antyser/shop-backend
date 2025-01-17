@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 from loguru import logger
 from playwright.async_api import async_playwright
 from playwright_dompath.dompath_sync import xpath_path
-
 from tools.crawler.html import fetch
 from tools.parser.models.product_metadata import ProductMetadata
 from tools.parser.product_metadata_parser import extract_product_metadata
