@@ -4,11 +4,10 @@ from typing import Any
 
 from dotenv import load_dotenv
 from loguru import logger
+from product.model import Identifiers, Product, Ratings
 from pydantic import BaseModel
-
-from src.product.model import Identifiers, Product, Ratings
-from src.scraper.bright_data.amazon import Product as AmazonProduct
-from src.scraper.bright_data.amazon import scrape_amazon_product
+from scraper.bright_data.amazon import Product as AmazonProduct
+from scraper.bright_data.amazon import scrape_amazon_product
 
 
 class ProductDetail(BaseModel):
