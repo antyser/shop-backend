@@ -8,8 +8,7 @@ from product.service import get_product
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent, RunContext
 from scraper.bright_data.google_search import google_search
-
-logfire.configure(send_to_logfire="if-token-present")
+from scraper.searchapi.google_shopping import GoogleProductResponse, search_product_details
 
 
 @dataclass
@@ -91,20 +90,39 @@ async def fetch_product_metadata(ctx: RunContext[ProductResearchDeps]) -> Produc
 
 
 @research_agent.tool  # type: ignore
-async def search_product_reviews(ctx: RunContext[ProductResearchDeps]) -> list[str] | None:
-    """Search for product reviews using Google search
+async def search_product_reviews(ctx: RunContext[ProductResearchDeps]) -> dict | None:
+    """Search for product reviews using Google search and product details
 
     Returns:
-        List of review content snippets or None if search fails
+        Dict containing review content and product details or None if search fails
     """
-    # Use product name from metadata if available
     search_term = ctx.deps.product_metadata["name"] if ctx.deps.product_metadata else ctx.deps.query
-    search_query = f"{search_term} reviews"
 
     try:
-        result = await google_search(query=search_query, scrape_content=True)
-        contents = [content.content for content in result.organic if content.content]
-        return contents
+        # Run both searches in parallel
+        search_tasks = await asyncio.gather(
+            google_search(query=f"{search_term} reviews", scrape_content=True), search_product_details(search_term), return_exceptions=True
+        )
+
+        # Extract results, handling any exceptions
+        google_result, product_details = search_tasks
+
+        # Initialize response dict
+        response: dict[str, list[str] | GoogleProductResponse | None] = {"google_reviews": [], "product_details": None}
+
+        # Handle Google search results
+        if isinstance(google_result, Exception) or not hasattr(google_result, "organic"):
+            logfire.error(f"Google search failed: {str(google_result)}")
+        else:
+            response["google_reviews"] = [content.content for content in google_result.organic if content.content]
+
+        # Handle product details
+        if isinstance(product_details, Exception):
+            logfire.error(f"Product details search failed: {str(product_details)}")
+        else:
+            response["product_details"] = product_details
+
+        return response
 
     except Exception as e:
         logfire.error(f"Failed to search reviews: {str(e)}")
