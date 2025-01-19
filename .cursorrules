@@ -14,6 +14,7 @@
   - Always use absolute import
   - Write doc string when create or update functions
   - Each line is less than 40 tokens
+  - write the main script under if main, no need to create a main() function
   
   Python/FastAPI
   - Use def for pure functions and async def for asynchronous operations.

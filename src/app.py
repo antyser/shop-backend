@@ -2,6 +2,7 @@ import asyncio
 
 import streamlit as st
 from agents.product_research_agent import ProductReviewAnalysis, analyze_product
+from logfire_init import init_logfire
 from loguru import logger
 
 
@@ -73,6 +74,7 @@ async def get_product_analysis(query: str) -> ProductReviewAnalysis | None:
 
 
 def main() -> None:
+    init_logfire()
     """Main Streamlit application"""
     st.set_page_config(page_title="Product Research Assistant", page_icon="🔍", layout="wide")
 
