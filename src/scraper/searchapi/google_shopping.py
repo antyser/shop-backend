@@ -369,7 +369,6 @@ async def search_product_details(
 if __name__ == "__main__":
     load_dotenv()
     init_logfire()
-
     try:
         product = asyncio.run(search_product_details("PS5 Digital Edition"))
         if product and product.product:
