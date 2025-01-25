@@ -1,5 +1,6 @@
 import asyncio
 import os
+import re
 from enum import Enum
 from pathlib import Path
 
@@ -8,6 +9,7 @@ import httpx
 from fake_headers import Headers
 from loguru import logger
 from markdownify import markdownify as md
+from scraper.youtube.transcript import aget_transcript
 
 
 class OutputFormat(str, Enum):
@@ -218,13 +220,33 @@ def html_to_markdown(html_content: str) -> str | None:
             newline_style="SPACES",
         )
 
-        logger.info(f"Conversion complete. Markdown length: {len(markdown_content)}")
+        # --- Space and newline cleanup ---
+        markdown_content = re.sub(r" {2,}", " ", markdown_content)  # Replace multiple spaces with single space
+        markdown_content = re.sub(r"^\s+|\s+$", "", markdown_content, flags=re.MULTILINE)  # Remove leading/trailing spaces from each line
+        markdown_content = re.sub(r"\n{3,}", "\n\n", markdown_content)  # Replace 3+ newlines with 2 newlines
 
         return markdown_content if markdown_content else None
 
     except Exception as e:
         logger.error(f"Failed to convert HTML to markdown: {str(e)}", exc_info=True)
         return None
+
+
+def extract_youtube_id(url: str) -> str | None:
+    """
+    Extracts the YouTube video ID from a given URL.
+
+    Args:
+        url: The YouTube URL.
+
+    Returns:
+        The video ID if found, otherwise None.
+    """
+    if "youtube.com/watch?v=" in url:
+        return url.split("v=")[-1].split("&")[0]
+    elif "youtu.be/" in url:
+        return url.split("/")[-1]
+    return None
 
 
 async def fetch_batch(
@@ -252,13 +274,29 @@ async def fetch_batch(
     # Process URLs in batches to limit concurrency
     for i in range(0, len(urls), max_concurrent):
         batch = urls[i : i + max_concurrent]
-        tasks = [fetch(url, output_format, save_debug, use_external_crawler) for url in batch]
+        tasks = []
+
+        for url in batch:
+            youtube_id = extract_youtube_id(url)
+            if youtube_id:
+                # Call transcript function for YouTube links
+                tasks.append(aget_transcript(youtube_id))
+            else:
+                # Fetch HTML content for non-YouTube links
+                tasks.append(fetch(url, output_format, save_debug, use_external_crawler))
 
         # Wait for batch completion
         batch_results = await asyncio.gather(*tasks)
 
         # Map results to URLs
-        results.update(dict(zip(batch, batch_results, strict=False)))
+        for url, result in zip(batch, batch_results, strict=False):
+            if isinstance(result, tuple):
+                # Handle transcript result
+                transcript, _ = result
+                results[url] = transcript.get(youtube_id)
+            else:
+                # Handle HTML content result
+                results[url] = result
 
         logger.info(f"Completed batch {i//max_concurrent + 1}, " f"processed {len(results)}/{len(urls)} URLs")
 

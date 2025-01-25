@@ -2,7 +2,7 @@ import json
 
 from bs4 import BeautifulSoup
 from loguru import logger
-from scraper.parser.models.product_metadata import ProductMetadata
+from scraper.archived_parser.models.product_metadata import ProductMetadata
 
 
 def extract_json_ld(soup: BeautifulSoup) -> ProductMetadata | None:

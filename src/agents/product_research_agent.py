@@ -40,7 +40,7 @@ class ProductReviewAnalysis(BaseModel):
 
 
 research_agent = Agent(
-    model="google-gla:gemini-1.5-flash",
+    model="google-gla:gemini-2.0-flash-exp",
     deps_type=ProductResearchDeps,
     result_type=ProductReviewAnalysis,
     system_prompt=(
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     logfire.configure()
 
     # Test with Amazon URL
-    url = "https://www.amazon.com/dp/B0CHX3QBCH"
+    url = "https://www.amazon.com/Insta360-Standard-Bundle-Waterproof-Stabilization/dp/B0DBQBMQH2"
     result = asyncio.run(analyze_product(url))
     print("Amazon URL Test:")
     print(result)

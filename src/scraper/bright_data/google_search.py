@@ -133,6 +133,16 @@ class PeopleAlsoAsk(BaseModel):
         extra = "ignore"
 
 
+class Video(BaseModel):
+    """Video search result"""
+
+    link: str
+    image: str
+    image_url: str
+    rank: int
+    global_rank: int
+
+
 class GoogleSearchResult(BaseModel):
     """Complete Google search result"""
 
@@ -142,6 +152,7 @@ class GoogleSearchResult(BaseModel):
     organic: list[OrganicResult]
     related: list[RelatedSearch] | None = None
     people_also_ask: list[PeopleAlsoAsk] | None = None
+    videos: list[Video] | None = None
 
     class Config:
         json_encoders = {datetime: lambda v: v.isoformat()}
