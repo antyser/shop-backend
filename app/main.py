@@ -42,10 +42,18 @@ logfire.instrument_fastapi(app)
 
 
 if __name__ == "__main__":
+    import sys
+    from pathlib import Path
+
     import uvicorn
 
+    # Add project root to Python path
+    project_root = str(Path(__file__).parent.parent)
+    if project_root not in sys.path:
+        sys.path.append(project_root)
+
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,
