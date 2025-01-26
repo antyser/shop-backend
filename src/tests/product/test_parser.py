@@ -3,8 +3,6 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from loguru import logger
-
 from product.parser import parse_amazon_product
 from scraper.bright_data.amazon import Product as AmazonProduct
 
@@ -14,7 +12,7 @@ def test_parse_amazon_product():
 
     # Load test data
     test_data_path = Path("tests/product/data/amazon_product.json")
-    with open(test_data_path, "r") as f:
+    with open(test_data_path) as f:
         raw_data = json.load(f)
 
     # Create AmazonProduct instance

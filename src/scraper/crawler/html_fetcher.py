@@ -6,6 +6,7 @@ from pathlib import Path
 
 import chardet
 import httpx
+from bs4 import BeautifulSoup
 from fake_headers import Headers
 from loguru import logger
 from markdownify import markdownify as md
@@ -188,7 +189,7 @@ async def fetch(
 
 def html_to_markdown(html_content: str) -> str | None:
     """
-    Convert HTML content to markdown format using markdownify
+    Convert HTML content from body tag to markdown format
 
     Args:
         html_content: Raw HTML string to convert
@@ -207,9 +208,17 @@ def html_to_markdown(html_content: str) -> str | None:
         logger.info("Starting HTML to markdown conversion")
         logger.debug(f"HTML content length: {len(html_content)}")
 
-        # Convert HTML to markdown using markdownify
+        # Extract body content using BeautifulSoup
+        soup = BeautifulSoup(html_content, "html.parser")
+        body = soup.find("body")
+
+        if not body:
+            logger.warning("No body tag found in HTML content")
+            return None
+
+        # Convert body HTML to markdown using markdownify
         markdown_content = md(
-            html_content,
+            str(body),
             heading_style="ATX",  # Use # style headings
             bullets="*",  # Use * for unordered lists
             strip=["img"],  # Remove img tags
@@ -221,14 +230,14 @@ def html_to_markdown(html_content: str) -> str | None:
         )
 
         # --- Space and newline cleanup ---
-        markdown_content = re.sub(r" {2,}", " ", markdown_content)  # Replace multiple spaces with single space
-        markdown_content = re.sub(r"^\s+|\s+$", "", markdown_content, flags=re.MULTILINE)  # Remove leading/trailing spaces from each line
-        markdown_content = re.sub(r"\n{3,}", "\n\n", markdown_content)  # Replace 3+ newlines with 2 newlines
+        markdown_content = re.sub(r" {2,}", " ", markdown_content)  # Replace multiple spaces
+        markdown_content = re.sub(r"^\s+|\s+$", "", markdown_content, flags=re.MULTILINE)  # Remove leading/trailing spaces
+        markdown_content = re.sub(r"\n{3,}", "\n\n", markdown_content)  # Replace 3+ newlines
 
         return markdown_content if markdown_content else None
 
     except Exception as e:
-        logger.error(f"Failed to convert HTML to markdown: {str(e)}", exc_info=True)
+        logger.error(f"Error converting HTML to markdown: {str(e)}")
         return None
 
 

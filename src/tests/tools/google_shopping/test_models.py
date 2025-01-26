@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-
 from tools.google_shopping.models import (
     GoogleProductOffersResponse,
     GoogleProductResponse,

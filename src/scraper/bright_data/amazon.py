@@ -142,8 +142,10 @@ class Product(BaseModel):
     other_sellers_prices: list[dict[str, Any]] | None = Field(default_factory=list, description="Prices from other sellers")
     downloadable_videos: list[str] | None = None
     timestamp: datetime | None = None
+    input: dict[str, str] = Field(default_factory=dict, description="Input data used for the request")
+    final_price_high: float | None = Field(default=None, description="Higher range of final price if available")
 
-    @model_validator(mode="before")  # type: ignore
+    @model_validator(mode="before")
     def check_unknown_fields(cls, values: dict[str, Any]) -> dict[str, Any]:
         """
         Check for fields in raw JSON that aren't defined in the model
@@ -166,7 +168,7 @@ class Product(BaseModel):
 
         return values
 
-    @field_validator("discount", mode="before")  # type: ignore
+    @field_validator("discount", mode="before")
     def parse_discount(cls, v: Any) -> float | None:
         """
         Parse discount from percentage string to float
@@ -196,7 +198,7 @@ class Product(BaseModel):
 
         return None
 
-    @field_validator("product_details", mode="before")  # type: ignore
+    @field_validator("product_details", mode="before")
     def validate_product_details(cls, v: Any) -> list[dict[str, Any]]:
         """
         Validate product details and ensure no None values
