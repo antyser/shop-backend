@@ -1,9 +1,8 @@
-import os
-
 import httpx
 from loguru import logger
 from pydantic import ValidationError
 
+from app.config import get_settings
 from app.scraper.oxylabs.amazon.models import OxyAmazonProductResponse
 
 
@@ -24,9 +23,9 @@ async def fetch_amazon_product(asin: str) -> OxyAmazonProductResponse:
         HTTPError: If API request fails
         ValueError: If credentials are missing
     """
-    # Get credentials from env vars if not provided
-    username = os.getenv("OXYLABS_USERNAME")
-    password = os.getenv("OXYLABS_PASSWORD")
+    settings = get_settings()
+    username = settings.OXYLABS_USERNAME
+    password = settings.OXYLABS_PASSWORD
 
     if not username or not password:
         raise ValueError("Oxylabs credentials required. Set OXYLABS_USERNAME and " "OXYLABS_PASSWORD env vars or pass directly.")

@@ -1,9 +1,8 @@
-import os
-
-import requests
+import httpx
 from dotenv import load_dotenv
 from loguru import logger
 
+from app.config import get_settings
 from app.scraper.oxylabs.google_shopping.models import (
     GoogleProductOffersResponse,
     GoogleProductResponse,
@@ -43,8 +42,11 @@ def search_google_shopping(
     Returns:
         GoogleShoppingResponse: Validated response containing shopping results
     """
-    api_key = os.getenv("SEARCHAPI_API_KEY")
-    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
+    if not api_key:
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
+
     url = "https://www.searchapi.io/api/v1/search"
 
     params: dict[str, str | int | float] = {
@@ -67,10 +69,10 @@ def search_google_shopping(
         params["condition"] = condition
 
     try:
-        response = requests.get(url, params=params)
+        response = httpx.get(url, params=params)
         response.raise_for_status()
         return GoogleShoppingResponse(**response.json())
-    except requests.exceptions.RequestException as e:
+    except httpx.RequestError as e:
         raise Exception(f"Error searching Google Shopping: {str(e)}") from e
 
 
@@ -100,8 +102,11 @@ def get_google_product(product_id: str, location: str = "United States", gl: str
     Returns:
         GoogleProductResponse: Validated Pydantic model containing complete product details
     """
-    api_key = os.getenv("SEARCHAPI_API_KEY")
-    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
+    if not api_key:
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
+
     url = "https://www.searchapi.io/api/v1/search"
 
     params: dict[str, str | int | float] = {
@@ -114,10 +119,10 @@ def get_google_product(product_id: str, location: str = "United States", gl: str
     }
 
     try:
-        response = requests.get(url, params=params)
+        response = httpx.get(url, params=params)
         response.raise_for_status()
         return GoogleProductResponse(**response.json())
-    except requests.exceptions.RequestException as e:
+    except httpx.RequestError as e:
         raise Exception(f"Error fetching product details: {str(e)}") from e
 
 
@@ -143,8 +148,11 @@ def get_product_specifications(
     Returns:
         GoogleProductSpecsResponse: Validated response containing product specifications
     """
-    api_key = os.getenv("SEARCHAPI_API_KEY")
-    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
+    if not api_key:
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
+
     url = "https://www.searchapi.io/api/v1/search"
 
     params: dict[str, str | int | float] = {
@@ -160,10 +168,10 @@ def get_product_specifications(
         params["prds"] = prds
 
     try:
-        response = requests.get(url, params=params)
+        response = httpx.get(url, params=params)
         response.raise_for_status()
         return GoogleProductSpecsResponse(**response.json())
-    except requests.exceptions.RequestException as e:
+    except httpx.RequestError as e:
         raise Exception(f"Error fetching product specifications: {str(e)}") from e
 
 
@@ -197,8 +205,11 @@ def get_product_offers(
     Returns:
         GoogleProductOffersResponse: Validated response containing product offers
     """
-    api_key = os.getenv("SEARCHAPI_API_KEY")
-    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
+    if not api_key:
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
+
     url = "https://www.searchapi.io/api/v1/search"
 
     params: dict[str, str | int | float] = {
@@ -221,10 +232,10 @@ def get_product_offers(
         params["prds"] = prds
 
     try:
-        response = requests.get(url, params=params)
+        response = httpx.get(url, params=params)
         response.raise_for_status()
         return GoogleProductOffersResponse(**response.json())
-    except requests.exceptions.RequestException as e:
+    except httpx.RequestError as e:
         raise Exception(f"Error fetching product offers: {str(e)}") from e
 
 
@@ -252,8 +263,10 @@ def get_product_reviews(
     Returns:
         GoogleProductReviewsResponse: Product reviews data
     """
-    api_key = os.getenv("SEARCHAPI_API_KEY")
-    assert api_key is not None, "SEARCHAPI_API_KEY is not set"
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
+    if not api_key:
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
 
     url = "https://www.searchapi.io/api/v1/search"
 
@@ -273,10 +286,10 @@ def get_product_reviews(
         params["next_page_token"] = next_page_token
 
     try:
-        response = requests.get(url, params=params)
+        response = httpx.get(url, params=params)
         response.raise_for_status()
         return GoogleProductReviewsResponse(**response.json())
-    except requests.exceptions.RequestException as e:
+    except httpx.RequestError as e:
         raise Exception(f"Error fetching product reviews: {str(e)}") from e
 
 

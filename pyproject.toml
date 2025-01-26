@@ -41,6 +41,7 @@ dependencies = [
     "pydantic-settings>=2.7.1",
     "python-dotenv<2.0.0,>=1.0.1",
     "requests>=2.32.3",
+    "sentry-sdk>=2.20.0",
     "streamlit>=1.41.1",
     "supabase>=2.11.0",
     "types-requests>=2.32.0.20241016",

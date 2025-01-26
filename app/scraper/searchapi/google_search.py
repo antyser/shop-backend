@@ -1,6 +1,5 @@
 import asyncio
 import json
-import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -10,6 +9,7 @@ from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel, Field, model_validator
 
+from app.config import get_settings
 from app.scraper.crawler.html_fetcher import fetch_batch
 
 
@@ -617,9 +617,10 @@ async def search_google(
     """
     url = "https://www.searchapi.io/api/v1/search"
 
-    api_key = os.getenv("SEARCHAPI_API_KEY")
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
     if not api_key:
-        raise ValueError("SEARCHAPI_API_KEY not found in environment")
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
 
     params = {
         "engine": "google",
