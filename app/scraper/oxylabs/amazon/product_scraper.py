@@ -2,6 +2,7 @@ import os
 
 import httpx
 from loguru import logger
+from pydantic import ValidationError
 
 from app.scraper.oxylabs.amazon.models import OxyAmazonProductResponse
 
@@ -46,6 +47,9 @@ async def fetch_amazon_product(asin: str) -> OxyAmazonProductResponse:
     except httpx.HTTPError as e:
         logger.error(f"HTTP error fetching product {asin}: {str(e)}, response: {response.text}")
         raise
+    except ValidationError as e:
+        logger.error(f"Validation error: {e.errors()}")
+        raise
     except Exception as e:
         logger.error(f"Error fetching product {asin}: {str(e)}")
         raise
@@ -60,7 +64,7 @@ if __name__ == "__main__":
 
     try:
         # Example ASIN for CeraVe Hydrating Facial Cleanser
-        response = asyncio.run(fetch_amazon_product("B01MSSDEPK"))
+        response = asyncio.run(fetch_amazon_product("B07SH6HN2X"))
 
         # Access and print some product details
         product = response.results[0].content

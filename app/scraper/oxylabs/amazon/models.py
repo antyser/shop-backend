@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from loguru import logger
+from pydantic import BaseModel, Field, model_validator
 
 
 class DeliveryDate(BaseModel):
@@ -117,7 +118,7 @@ class AmazonProductContent(BaseModel):
     price_initial: float | None = None
     pricing_count: int | None = None
     developer_info: list[dict] | None = Field(default_factory=list)
-    featured_merchant: dict | None = None
+    featured_merchant: list[dict] | None = Field(default_factory=list)
     is_prime_eligible: bool | None = None
     parse_status_code: int | None = None
     discount_percentage: int | None = None
@@ -193,3 +194,26 @@ class OxyAmazonProductResponse(BaseModel):
 
     results: list[QueryResult]
     job: QueryJob | None = None
+
+    @model_validator(mode="before")
+    def check_unknown_fields(cls, values: dict[str, Any]) -> dict[str, Any]:
+        """
+        Check for fields in raw JSON that aren't defined in the model
+
+        Args:
+            values: Raw dictionary of values
+
+        Returns:
+            Dict[str, Any]: Validated values
+        """
+        model_fields = cls.model_fields.keys()
+        unknown_fields = set(values.keys()) - set(model_fields)
+
+        if unknown_fields:
+            logger.warning("Found fields in JSON not defined in Product model: " f"{', '.join(unknown_fields)}")
+
+            # Log the values of unknown fields for analysis
+            for field in unknown_fields:
+                logger.warning(f"Unknown field '{field}' has value: {values[field]}")
+
+        return values

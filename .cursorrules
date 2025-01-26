@@ -43,7 +43,9 @@
 
   Pydantic-Specific
   - Use model_dump instead of dict()
-  
+  - When loading a pydantic model, always handle ValidationError and log the errors
+      except ValidationError as e:
+        logger.error(f"Validation error: {e.errors()}")
   FastAPI-Specific Guidelines
   - Use functional components (plain functions) and Pydantic models for input validation and response schemas.
   - Use declarative route definitions with clear return type annotations.
