@@ -3,11 +3,12 @@ Main application module for the Shop Backend API
 """
 
 import logfire
-from config import get_settings
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from scraper.router import router as scraper_router
+
+from app.config import get_settings
+from app.scraper.router import router as scraper_router
 
 settings = get_settings()
 

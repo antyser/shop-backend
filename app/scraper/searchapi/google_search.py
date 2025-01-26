@@ -9,7 +9,8 @@ import httpx
 from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel, Field, model_validator
-from scraper.crawler.html_fetcher import fetch_batch
+
+from app.scraper.crawler.html_fetcher import fetch_batch
 
 
 class SearchMetadata(BaseModel):
@@ -553,7 +554,7 @@ class GoogleSearchResponse(BaseModel):
     class Config:
         extra = "ignore"
 
-    @model_validator(mode="before")  # type: ignore
+    @model_validator(mode="before")
     def check_unknown_fields(cls, values: dict[str, Any]) -> dict[str, Any]:
         """
         Check for fields in raw JSON that aren't defined in the model
@@ -576,7 +577,7 @@ class GoogleSearchResponse(BaseModel):
 
         return values
 
-    @model_validator(mode="before")  # type: ignore
+    @model_validator(mode="before")
     def filter_none_values(cls, values: dict[str, Any]) -> dict[str, Any]:
         """Filter out None values from related_questions list"""
         if "related_questions" in values and values["related_questions"]:

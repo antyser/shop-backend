@@ -3,12 +3,16 @@ from dataclasses import dataclass
 from urllib.parse import urlparse
 
 import logfire
-from product.model import Product
-from product.service import get_product
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent, RunContext
-from scraper.bright_data.google_search import google_search
-from scraper.searchapi.google_shopping import GoogleProductResponse, search_product_details
+
+from app.product.model import Product
+from app.product.service import get_product
+from app.scraper.bright_data.google_search import google_search
+from app.scraper.searchapi.google_shopping import (
+    GoogleProductResponse,
+    search_product_details,
+)
 
 
 @dataclass
@@ -70,7 +74,7 @@ def sanitize_amazon_url(url: str) -> str:
     return f"https://{parsed.netloc}/{product_path}"
 
 
-@research_agent.tool  # type: ignore
+@research_agent.tool
 async def fetch_product_metadata(ctx: RunContext[ProductResearchDeps]) -> Product | None:
     """Fetch product metadata from Amazon URL
 
@@ -89,7 +93,7 @@ async def fetch_product_metadata(ctx: RunContext[ProductResearchDeps]) -> Produc
         return None
 
 
-@research_agent.tool  # type: ignore
+@research_agent.tool
 async def search_product_reviews(ctx: RunContext[ProductResearchDeps]) -> dict | None:
     """Search for product reviews using Google search and product details
 
@@ -114,13 +118,13 @@ async def search_product_reviews(ctx: RunContext[ProductResearchDeps]) -> dict |
         if isinstance(google_result, Exception) or not hasattr(google_result, "organic"):
             logfire.error(f"Google search failed: {str(google_result)}")
         else:
-            response["google_reviews"] = [content.content for content in google_result.organic if content.content]
+            response["google_reviews"] = [content.content for content in google_result.organic if content.content]  # type: ignore
 
         # Handle product details
         if isinstance(product_details, Exception):
             logfire.error(f"Product details search failed: {str(product_details)}")
         else:
-            response["product_details"] = product_details
+            response["product_details"] = product_details  # type: ignore
 
         return response
 

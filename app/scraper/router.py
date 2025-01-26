@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from loguru import logger
-from scraper.models import (
+
+from app.scraper.models import (
     ScrapeProductRequest,
     ScrapeProductResponse,
     ScrapeRequest,
@@ -8,7 +9,7 @@ from scraper.models import (
     ScrapeSearchRequest,
     ScrapeSearchResponse,
 )
-from scraper.service import scrape_links, scrape_product, scrape_search
+from app.scraper.service import scrape_links, scrape_product, scrape_search
 
 router = APIRouter(tags=["scraper"])
 

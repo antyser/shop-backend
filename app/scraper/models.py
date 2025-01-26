@@ -5,8 +5,9 @@ Pydantic models for the scraper module
 from datetime import datetime
 
 from pydantic import BaseModel, HttpUrl
-from scraper.oxylabs.amazon.models import AmazonProductContent
-from scraper.searchapi.google_search import GoogleSearchResponse
+
+from app.scraper.oxylabs.amazon.models import AmazonProductContent
+from app.scraper.searchapi.google_search import GoogleSearchResponse
 
 
 class ScrapeRequest(BaseModel):
