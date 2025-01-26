@@ -91,3 +91,5 @@ uv run ruff check . --fix  # Auto-fix issues
 # Type check with Mypy
 uv run mypy .
 ```
+
+Follow bast Practices https://github.com/zhanymkanov/fastapi-best-practices

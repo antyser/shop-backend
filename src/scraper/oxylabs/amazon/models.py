@@ -99,6 +99,30 @@ class AmazonProductContent(BaseModel):
     price_shipping: float | None = 0
     price_strikethrough: float | None = None
     sns_discounts: list[str] | None = None
+    reviews: list[dict] | None = None
+    category: list[dict] | None = None
+    delivery: list[dict] | None = None
+    page_type: str | None = None
+    price_sns: int | None = None
+    store_url: str | None = None
+    variation: list[dict] | None = None
+    has_videos: bool | None = None
+    asin_in_url: str | None = None
+    parent_asin: str | None = None
+    price_upper: float | None = None
+    pricing_str: str | None = None
+    pricing_url: str | None = None
+    product_name: str | None = None
+    other_sellers: str | None = None
+    price_initial: float | None = None
+    pricing_count: int | None = None
+    developer_info: list[dict] | None = Field(default_factory=list)
+    featured_merchant: dict | None = None
+    is_prime_eligible: bool | None = None
+    parse_status_code: int | None = None
+    discount_percentage: int | None = None
+    answered_questions_count: int | None = None
+    frequently_bought_together: list[dict] | None = None
 
 
 class QueryContext(BaseModel):
@@ -132,6 +156,22 @@ class QueryJob(BaseModel):
     source: str | None = None
     status: str | None = None
     _links: list[QueryLinks] | None = None
+    limit: int | None = None
+    locale: str | None = None
+    pages: int | None = None
+    parsing_instructions: dict | None = None
+    browser_instructions: dict | None = None
+    render: bool | None = None
+    url: str | None = None
+    start_page: int | None = None
+    storage_type: str | None = None
+    storage_url: str | None = None
+    subdomain: str | None = None
+    content_encoding: str | None = None
+    user_agent_type: str | None = None
+    session_info: dict | None = None
+    statuses: list[str] | None = Field(default_factory=list)
+    client_notes: str | None = None
 
 
 class QueryResult(BaseModel):
@@ -144,6 +184,8 @@ class QueryResult(BaseModel):
     url: str | None = None
     job_id: str | None = None
     status_code: int | None = None
+    is_render_forced: bool | None = None
+    parser_type: str | None = None
 
 
 class OxyAmazonProductResponse(BaseModel):
