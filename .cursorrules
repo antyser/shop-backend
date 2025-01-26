@@ -11,7 +11,7 @@
   - Use the Receive an Object, Return an Object (RORO) pattern.
   - Use loguru logger instead of print.
   - Use uv for package management, when needs to install package, run `uv add ...`
-  - Always use absolute import
+  - Always use absolute import. The root directory is src import should be from package.file instead of src.package.file.
   - Write doc string when create or update functions
   - Each line is less than 40 tokens
   - write the main script under if main, no need to create a main() function
