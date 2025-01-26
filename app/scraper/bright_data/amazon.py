@@ -1,13 +1,12 @@
 import asyncio
-import os
 from datetime import datetime
 from typing import Any
 
 import httpx
-from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from app.config import get_settings
 from app.scraper.bright_data.management_api import get_snapshot_status
 
 DATASET_ID = "gd_l7q7dkf244hwjntr0"
@@ -235,14 +234,14 @@ async def get_snapshot_data(snapshot_id: str) -> list[dict[str, Any]] | None:
 
     Args:
         snapshot_id: ID of the snapshot to retrieve
-        token: Bright Data API token
 
     Returns:
         List of product data dictionaries or None if failed
     """
-    token = os.getenv("BRIGHT_DATA_TOKEN")
+    settings = get_settings()
+    token = settings.BRIGHT_DATA_TOKEN
     if not token:
-        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+        raise ValueError("BRIGHT_DATA_TOKEN not found in settings")
 
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     snapshot_url = "https://api.brightdata.com/datasets/v3/snapshot" f"/{snapshot_id}?format=json"
@@ -273,9 +272,10 @@ async def scrape_amazon_product(urls: list[str]) -> ProductResponse | None:
         ProductResponse object containing scraped data or None if failed
     """
     try:
-        token = os.getenv("BRIGHT_DATA_TOKEN")
+        settings = get_settings()
+        token = settings.BRIGHT_DATA_TOKEN
         if not token:
-            raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+            raise ValueError("BRIGHT_DATA_TOKEN not found in settings")
 
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
@@ -326,7 +326,6 @@ async def scrape_amazon_product(urls: list[str]) -> ProductResponse | None:
 
 
 if __name__ == "__main__":
-    load_dotenv()
     # resp = asyncio.run(get_snapshot_data('s_m61bwhkj1sallaiyw'))
     # print(resp)
     urls = [

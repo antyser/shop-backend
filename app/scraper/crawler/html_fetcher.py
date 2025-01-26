@@ -1,5 +1,4 @@
 import asyncio
-import os
 import re
 from enum import Enum
 from pathlib import Path
@@ -11,6 +10,7 @@ from fake_headers import Headers
 from loguru import logger
 from markdownify import markdownify as md
 
+from app.config import get_settings
 from app.scraper.youtube.transcript import aget_transcript
 
 
@@ -113,9 +113,14 @@ async def fetch_with_spider(url: str) -> str | None:
         HTML content if successful, None otherwise
     """
     try:
+        settings = get_settings()
+        spider_api_key = settings.SPIDER_API_KEY
+        if not spider_api_key:
+            raise ValueError("SPIDER_API_KEY not found in settings")
+
         headers = {
-            "Authorization": f'Bearer {os.getenv("SPIDER_API_KEY")}',
             "Content-Type": "application/json",
+            "Authorization": f"Bearer {spider_api_key}",
         }
 
         json_data = {"url": url}

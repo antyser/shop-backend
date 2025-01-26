@@ -36,6 +36,10 @@ class Settings(BaseSettings):
     # Gemini Settings
     GEMINI_API_KEY: str = Field(..., env="GEMINI_API_KEY")
 
+    # Supabase Settings
+    SUPABASE_URL: str = Field(..., env="SUPABASE_URL")
+    SUPABASE_KEY: str = Field(..., env="SUPABASE_KEY")
+
     # Scraping Settings
     MAX_CONCURRENT_REQUESTS: int = 10
     REQUEST_TIMEOUT: int = 30

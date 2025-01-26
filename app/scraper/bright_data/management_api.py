@@ -1,8 +1,8 @@
-import os
-
 import httpx
 from loguru import logger
 from pydantic import BaseModel
+
+from app.config import get_settings
 
 
 class SnapshotStatus(BaseModel):
@@ -41,9 +41,10 @@ async def get_snapshot_status(snapshot_id: str) -> SnapshotStatus | None:
     Returns:
         SnapshotStatus object or None if failed
     """
-    token = os.getenv("BRIGHT_DATA_TOKEN")
+    settings = get_settings()
+    token = settings.BRIGHT_DATA_TOKEN
     if not token:
-        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+        raise ValueError("BRIGHT_DATA_TOKEN not found in settings")
 
     try:
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
@@ -69,9 +70,10 @@ async def list_snapshots(dataset_id: str, status: str = "ready") -> list[Snapsho
     Returns:
         List of SnapshotInfo objects or None if failed
     """
-    token = os.getenv("BRIGHT_DATA_TOKEN")
+    settings = get_settings()
+    token = settings.BRIGHT_DATA_TOKEN
     if not token:
-        raise ValueError("BRIGHT_DATA_TOKEN not found in environment")
+        raise ValueError("BRIGHT_DATA_TOKEN not found in settings")
 
     try:
         headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}

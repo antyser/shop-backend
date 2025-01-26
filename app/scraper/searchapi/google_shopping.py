@@ -1,12 +1,11 @@
 import asyncio
-import os
 from decimal import Decimal
 
 import httpx
-from dotenv import load_dotenv
-from logfire_init import init_logfire
 from loguru import logger
 from pydantic import BaseModel, Field
+
+from app.config import get_settings
 
 
 class SearchMetadata(BaseModel):
@@ -116,11 +115,12 @@ async def search_products(
     Raises:
         httpx.HTTPError: If the API request fails
     """
-    url = "https://www.searchapi.io/api/v1/search"
-
-    api_key = os.getenv("SEARCHAPI_API_KEY")
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
     if not api_key:
-        raise ValueError("SEARCHAPI_API_KEY not found in environment")
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
+
+    url = "https://www.searchapi.io/api/v1/search"
 
     params = {"engine": "google_shopping", "q": query, "gl": country, "hl": language, "location": location, "api_key": api_key}
 
@@ -312,9 +312,10 @@ async def get_product_details(product_id: str, prds: str | None = None, language
     """
     url = "https://www.searchapi.io/api/v1/search"
 
-    api_key = os.getenv("SEARCHAPI_API_KEY")
+    settings = get_settings()
+    api_key = settings.SEARCHAPI_API_KEY
     if not api_key:
-        raise ValueError("SEARCHAPI_API_KEY not found in environment")
+        raise ValueError("SEARCHAPI_API_KEY not found in settings")
 
     params = {"engine": "google_product", "product_id": product_id, "gl": country, "hl": language, "api_key": api_key}
 
@@ -367,8 +368,6 @@ async def search_product_details(
 
 
 if __name__ == "__main__":
-    load_dotenv()
-    init_logfire()
     try:
         product = asyncio.run(search_product_details("PS5 Digital Edition"))
         if product and product.product:

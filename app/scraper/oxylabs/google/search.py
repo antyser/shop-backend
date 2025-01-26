@@ -1,41 +1,32 @@
-import os
 from typing import Any
 
+import httpx
 import requests
 from dotenv import load_dotenv
 from loguru import logger
 
+from app.config import get_settings
 from app.scraper.crawler.html_fetcher import OutputFormat, fetch_batch
 from app.scraper.oxylabs.google.models import OxyGoogleSearchResponse
 
 
-def search_google(query: str, **kwargs: dict[str, Any]) -> OxyGoogleSearchResponse | None:
-    """
-    Search Google using Oxylabs API
-
-    Args:
-        query: Search query string
-        **kwargs: Additional parameters for the search
-
-    Returns:
-        OxyGoogleSearchResponse if successful, None otherwise
-
-    Raises:
-        requests.RequestException: If the request fails
-    """
-    username = os.getenv("OXYLABS_USERNAME")
-    password = os.getenv("OXYLABS_PASSWORD")
+async def search_google(query: str) -> dict[str, Any] | None:
+    """Search Google using Oxylabs API"""
+    settings = get_settings()
+    username = settings.OXYLABS_USERNAME
+    password = settings.OXYLABS_PASSWORD
 
     if not username or not password:
-        logger.error("Missing Oxylabs credentials")
-        return None
+        raise ValueError("OXYLABS credentials not found in settings")
+
+    auth = httpx.BasicAuth(username, password)
 
     url = "https://realtime.oxylabs.io/v1/queries"
 
-    payload = {"source": "google_search", "domain": "com", "query": query, "parse": True, **kwargs}
+    payload = {"source": "google_search", "domain": "com", "query": query, "parse": True}
 
     try:
-        response = requests.post(url, json=payload, auth=(username, password), timeout=30.0)
+        response = requests.post(url, json=payload, auth=auth, timeout=30.0)
         response.raise_for_status()
 
         return OxyGoogleSearchResponse(**response.json())
@@ -83,7 +74,7 @@ async def main() -> None:
     response = search_google("iphone 16 pro review")
 
     if response:
-        crawled_results = await crawl_search_results(response, output_format=OutputFormat.MARKDOWN)
+        crawled_results = await crawl_search_results(response, output_format=OutputFormat.MARKDOWN)  # type: ignore
 
         for result in crawled_results:
             print(f"\nURL: {result['url']}")
