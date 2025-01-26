@@ -118,7 +118,7 @@ class AmazonProductContent(BaseModel):
     price_initial: float | None = None
     pricing_count: int | None = None
     developer_info: list[dict] | None = Field(default_factory=list)
-    featured_merchant: list[dict] | None = Field(default_factory=list)
+    featured_merchant: list[dict] | dict | None = None
     is_prime_eligible: bool | None = None
     parse_status_code: int | None = None
     discount_percentage: int | None = None
