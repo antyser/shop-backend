@@ -58,7 +58,7 @@
   Follow this example to setup fastapi directory:
   fastapi-project
 ├── alembic/
-├── src
+├── app
 │   ├── auth
 │   │   ├── router.py
 │   │   ├── models.py  # pydantic models
@@ -106,8 +106,8 @@
 ├── logging.ini
 └── alembic.ini
 Store all domain directories inside src folder
-src/ - highest level of an app, contains common models, configs, and constants, etc.
-src/main.py - root of the project, which inits the FastAPI app
+app/ - highest level of an app, contains common models, configs, and constants, etc.
+app/main.py - root of the project, which inits the FastAPI app
 Each package has its own router, models, db_models etc.
 router.py - is a core of each module with all the endpoints
 models.py - for pydantic models

@@ -1,6 +1,7 @@
 from product.model import Product
 from product.parser import parse_amazon_product
-from scraper.bright_data.amazon import scrape_amazon_product
+
+from app.scraper.bright_data.amazon import scrape_amazon_product
 
 
 def is_amazon_url(url: str) -> bool:

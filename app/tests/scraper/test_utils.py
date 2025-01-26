@@ -1,6 +1,6 @@
 import pytest
 
-from scraper.utils import extract_asin_and_slug, is_amazon_url
+from app.scraper.utils import extract_asin_and_slug, is_amazon_url
 
 
 @pytest.mark.parametrize(

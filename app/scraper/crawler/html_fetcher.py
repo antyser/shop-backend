@@ -10,7 +10,8 @@ from bs4 import BeautifulSoup
 from fake_headers import Headers
 from loguru import logger
 from markdownify import markdownify as md
-from scraper.youtube.transcript import aget_transcript
+
+from app.scraper.youtube.transcript import aget_transcript
 
 
 class OutputFormat(str, Enum):
@@ -299,13 +300,7 @@ async def fetch_batch(
 
         # Map results to URLs
         for url, result in zip(batch, batch_results, strict=False):
-            if isinstance(result, tuple):
-                # Handle transcript result
-                transcript, _ = result
-                results[url] = transcript.get(youtube_id)
-            else:
-                # Handle HTML content result
-                results[url] = result
+            results[url] = result
 
         logger.info(f"Completed batch {i//max_concurrent + 1}, " f"processed {len(results)}/{len(urls)} URLs")
 

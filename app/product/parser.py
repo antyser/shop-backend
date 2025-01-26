@@ -6,8 +6,9 @@ from dotenv import load_dotenv
 from loguru import logger
 from product.model import Identifiers, Product, Ratings
 from pydantic import BaseModel
-from scraper.bright_data.amazon import Product as AmazonProduct
-from scraper.bright_data.amazon import scrape_amazon_product
+
+from app.scraper.bright_data.amazon import Product as AmazonProduct
+from app.scraper.bright_data.amazon import scrape_amazon_product
 
 
 class ProductDetail(BaseModel):

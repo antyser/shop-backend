@@ -2,7 +2,8 @@ import os
 
 import httpx
 from loguru import logger
-from scraper.oxylabs.amazon.models import OxyAmazonProductResponse
+
+from app.scraper.oxylabs.amazon.models import OxyAmazonProductResponse
 
 
 async def fetch_amazon_product(asin: str) -> OxyAmazonProductResponse:

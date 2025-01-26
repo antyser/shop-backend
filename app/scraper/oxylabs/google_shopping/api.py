@@ -3,7 +3,8 @@ import os
 import requests
 from dotenv import load_dotenv
 from loguru import logger
-from tools.google_shopping.models import (
+
+from app.scraper.oxylabs.google_shopping.models import (
     GoogleProductOffersResponse,
     GoogleProductResponse,
     GoogleProductReviewsResponse,

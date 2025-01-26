@@ -1,11 +1,16 @@
 import asyncio
 
 from loguru import logger
-from scraper.crawler.html_fetcher import fetch_batch
-from scraper.models import ScrapeProductResponse, ScrapeResponse, ScrapeSearchResponse
-from scraper.oxylabs.amazon.product_scraper import fetch_amazon_product
-from scraper.searchapi.google_search import search_google
-from scraper.utils import extract_asin_and_slug, is_amazon_url
+
+from app.scraper.crawler.html_fetcher import fetch_batch
+from app.scraper.models import (
+    ScrapeProductResponse,
+    ScrapeResponse,
+    ScrapeSearchResponse,
+)
+from app.scraper.oxylabs.amazon.product_scraper import fetch_amazon_product
+from app.scraper.searchapi.google_search import search_google
+from app.scraper.utils import extract_asin_and_slug, is_amazon_url
 
 
 async def scrape_links(urls: list[str]) -> ScrapeResponse:

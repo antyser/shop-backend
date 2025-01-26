@@ -7,7 +7,8 @@ import aiohttp
 from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel
-from scraper.crawler.html_fetcher import fetch_batch
+
+from app.scraper.crawler.html_fetcher import fetch_batch
 
 # Load environment variables
 load_dotenv()

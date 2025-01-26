@@ -4,8 +4,9 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 from loguru import logger
-from scraper.crawler.html_fetcher import OutputFormat, fetch_batch
-from tools.google.models import OxyGoogleSearchResponse
+
+from app.scraper.crawler.html_fetcher import OutputFormat, fetch_batch
+from app.scraper.oxylabs.google.models import OxyGoogleSearchResponse
 
 
 def search_google(query: str, **kwargs: dict[str, Any]) -> OxyGoogleSearchResponse | None:

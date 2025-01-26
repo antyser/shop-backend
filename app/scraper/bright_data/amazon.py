@@ -7,7 +7,8 @@ import httpx
 from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel, Field, field_validator, model_validator
-from scraper.bright_data.management_api import get_snapshot_status
+
+from app.scraper.bright_data.management_api import get_snapshot_status
 
 DATASET_ID = "gd_l7q7dkf244hwjntr0"
 MAX_WAIT_TIME = 30
