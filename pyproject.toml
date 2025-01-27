@@ -33,7 +33,7 @@ dependencies = [
     "httpx[http2]==0.27.2",
     "ipython>=8.31.0",
     "jupyter>=1.1.1",
-    "logfire[fastapi,httpx]>=3.1.0",
+    "logfire[fastapi,httpx,system-metrics]>=3.1.0",
     "loguru<1.0.0,>=0.7.3",
     "markdownify>=0.14.1",
     "playwright-dompath>=0.0.1",

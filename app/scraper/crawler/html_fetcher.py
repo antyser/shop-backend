@@ -12,6 +12,7 @@ from markdownify import markdownify as md
 
 from app.config import get_settings
 from app.scraper.youtube.transcript import aget_transcript
+from app.utils.counter import crawler_counter
 
 
 class OutputFormat(str, Enum):
@@ -82,23 +83,28 @@ async def fetch_direct(url: str) -> str | None:
             http2=True,
             timeout=10.0,
             follow_redirects=True,
-            default_encoding=autodetect,  # Use autodetect function
+            default_encoding=autodetect,
         ) as client:
             response = await client.get(url, headers=headers)
             response.raise_for_status()
 
-            logger.debug(f"Response headers: {response.headers}")
-            logger.debug(f"Content-Type: {response.headers.get('Content-Type')}")
-            logger.debug(f"Detected encoding: {response.encoding}")
-
             content = str(response.text)
+            crawler_counter.add(1, {"type": "direct", "status": "success", "status_code": response.status_code})
             return content
 
+    except httpx.HTTPStatusError as e:
+        # HTTPStatusError always has a response
+        logger.error(f"Direct request failed with status {e.response.status_code}: {e}")
+        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "http", "status_code": e.response.status_code})
+        return None
     except httpx.HTTPError as e:
+        # Other HTTP errors may not have a response
         logger.error(f"Direct request failed: {e}")
+        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "http"})
         return None
     except Exception as e:
         logger.error(f"Direct request error: {e}", exc_info=True)
+        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "unknown"})
         return None
 
 
@@ -132,20 +138,25 @@ async def fetch_with_spider(url: str) -> str | None:
             result = response.json()
             if not result or not isinstance(result, list):
                 logger.error("Invalid Spider API response format")
+                crawler_counter.add(1, {"type": "spider", "status": "error", "error": "format"})
                 return None
 
             content = result[0].get("content")
             if not content:
                 logger.error("No content in Spider API response")
+                crawler_counter.add(1, {"type": "spider", "status": "error", "error": "empty"})
                 return None
 
+            crawler_counter.add(1, {"type": "spider", "status": "success"})
             return str(content)
 
     except httpx.HTTPError as e:
         logger.error(f"Spider API request failed: {e}")
+        crawler_counter.add(1, {"type": "spider", "status": "error", "error": "http"})
         return None
     except Exception as e:
         logger.error(f"Spider API error: {e}", exc_info=True)
+        crawler_counter.add(1, {"type": "spider", "status": "error", "error": "unknown"})
         return None
 
 
@@ -175,8 +186,6 @@ async def fetch(
         if not content:
             logger.error("No content received")
             return None
-
-        logger.info(f"Successfully decoded {len(content)} characters")
 
         if output_format == OutputFormat.MARKDOWN:
             markdown_content = html_to_markdown(content)

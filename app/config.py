@@ -7,6 +7,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Global application settings"""
 
+    ENVIRONMENT: str = Field(..., env="ENVIRONMENT")
+
     # API Settings
     API_V0_STR: str = "/v0"
     PROJECT_NAME: str = "Shop Backend API"

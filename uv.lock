@@ -1543,6 +1543,9 @@ fastapi = [
 httpx = [
     { name = "opentelemetry-instrumentation-httpx" },
 ]
+system-metrics = [
+    { name = "opentelemetry-instrumentation-system-metrics" },
+]
 
 [[package]]
 name = "logfire-api"
@@ -2110,6 +2113,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d5/9c/4a6b0af28d579690fbab7ffd0560802e4384cd56c8d637f99641f44a7291/opentelemetry_instrumentation_httpx-0.50b0.tar.gz", hash = "sha256:0072d1d39552449c08a45a7a0db0cd6af32c85205bd97267b2a272fc56a9b438", size = 17611 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/03/25/6a0edd3d161d5a15cf4538e32a1289f1f6fd7a52651afd32bb856ede4e99/opentelemetry_instrumentation_httpx-0.50b0-py3-none-any.whl", hash = "sha256:27acd41a9e70384d0978d58f492e5c16fc7a1b2363d5992b5bd0a27a3df7b68e", size = 13838 },
+]
+
+[[package]]
+name = "opentelemetry-instrumentation-system-metrics"
+version = "0.50b0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-instrumentation" },
+    { name = "psutil" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/82/8a/35c91af1dfcba12fb8052deee766355792a96d3aac740eb465bf9b20cbec/opentelemetry_instrumentation_system_metrics-0.50b0.tar.gz", hash = "sha256:1da218c6df465aac6ad3a5e4e657d7c298fc934783beae83e35ec71a2855cdf4", size = 13813 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b2/10/c9470a98c659b0069c39a944389afbff2d8fe94aa3b826a0a36442e695b5/opentelemetry_instrumentation_system_metrics-0.50b0-py3-none-any.whl", hash = "sha256:3457ea6dd0b4c5a0353df106ed8883eec94093a316448b71cf75b53d64b17596", size = 12055 },
 ]
 
 [[package]]
@@ -3225,7 +3242,7 @@ dependencies = [
     { name = "httpx", extra = ["http2"] },
     { name = "ipython" },
     { name = "jupyter" },
-    { name = "logfire", extra = ["fastapi", "httpx"] },
+    { name = "logfire", extra = ["fastapi", "httpx", "system-metrics"] },
     { name = "loguru" },
     { name = "markdownify" },
     { name = "playwright-dompath" },
@@ -3263,7 +3280,7 @@ requires-dist = [
     { name = "httpx", extras = ["http2"], specifier = "==0.27.2" },
     { name = "ipython", specifier = ">=8.31.0" },
     { name = "jupyter", specifier = ">=1.1.1" },
-    { name = "logfire", extras = ["fastapi", "httpx"], specifier = ">=3.1.0" },
+    { name = "logfire", extras = ["fastapi", "httpx", "system-metrics"], specifier = ">=3.1.0" },
     { name = "loguru", specifier = ">=0.7.3,<1.0.0" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "playwright-dompath", specifier = ">=0.0.1" },
