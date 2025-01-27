@@ -124,6 +124,9 @@ class AmazonProductContent(BaseModel):
     discount_percentage: int | None = None
     answered_questions_count: int | None = None
     frequently_bought_together: list[dict] | None = None
+    seller: str | None = None
+    in_stock: bool | None = None
+    shipping_available: bool | None = None
 
 
 class QueryContext(BaseModel):
@@ -194,6 +197,8 @@ class OxyAmazonProductResponse(BaseModel):
 
     results: list[QueryResult]
     job: QueryJob | None = None
+    status_code: int | None = None
+    status_message: str | None = None
 
     @model_validator(mode="before")
     def check_unknown_fields(cls, values: dict[str, Any]) -> dict[str, Any]:

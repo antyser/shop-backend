@@ -1,3 +1,5 @@
+from urllib.parse import unquote
+
 from fastapi import APIRouter, HTTPException, Query
 from loguru import logger
 
@@ -44,7 +46,9 @@ async def scrape_product_get(url: str = Query(..., description="Product URL to s
         ScrapeProductResponse containing product information and search results
     """
     try:
-        return await scrape_product(url)
+        # Decode URL parameter
+        decoded_url = unquote(url)
+        return await scrape_product(decoded_url)
     except HTTPException:
         raise
     except Exception as e:
@@ -87,4 +91,21 @@ async def scrape_search_post(request: ScrapeSearchRequest) -> ScrapeSearchRespon
         return await scrape_search(request.query)
     except Exception as e:
         logger.error(f"Error performing search: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e)) from e
+
+
+async def scrape_search_get(query: str = Query(..., description="Search query")) -> ScrapeSearchResponse:
+    """
+    Scrape search results (GET method)
+
+    Args:
+        query: Search query string
+
+    Returns:
+        ScrapeSearchResponse containing search results
+    """
+    try:
+        return await scrape_search(query)
+    except Exception as e:
+        logger.error(f"Error scraping search results: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e)) from e

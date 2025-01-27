@@ -66,6 +66,7 @@ class Specification(BaseModel):
 class WalmartProductContent(BaseModel):
     """Main product content information"""
 
+    title: str | None = None  # Derived from URL or specifications
     price: Price | None = None
     rating: Rating | None = None
     seller: Seller | None = None
@@ -74,6 +75,16 @@ class WalmartProductContent(BaseModel):
     fulfillment: Fulfillment | None = None
     specifications: list[Specification] | None = None
     parse_status_code: int | None = None
+
+    def get_title(self) -> str:
+        """Get product title from specifications or URL"""
+        if self.title:
+            return self.title
+        if self.specifications:
+            for spec in self.specifications:
+                if spec.key and spec.key.lower() == "title" and spec.value:
+                    return spec.value
+        return "Unknown Product"
 
 
 class QueryContext(BaseModel):

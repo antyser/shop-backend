@@ -1,0 +1,155 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 49.97,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 121,
+          "rating": 4.6
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Los Angeles",
+          "state": "CA",
+          "store_id": "3180",
+          "zip_code": "90001"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/personal-care/1005862",
+            "category_name": "Personal Care"
+          },
+          {
+            "url": "/cp/personal-care-by-brand/9157053",
+            "category_name": "Personal Care by Brand"
+          },
+          {
+            "url": "/cp/quip/4585847",
+            "category_name": "Quip"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": true,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Today, Free",
+          "delivery_information": ", Delivery, Today",
+          "shipping_information": ", Shipping, Arrives tomorrow, Order within 6 hr 11 min, Free"
+        },
+        "specifications": [
+          {
+            "key": "Features",
+            "value": "Compact Head"
+          },
+          {
+            "key": "Brand",
+            "value": "quip"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "0.94 lb"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "quip"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "2.50 x 3.70 x 10.10 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:33:03",
+      "updated_at": "2025-01-27 22:33:07",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/360-Oscillating-Toothbrush-Black-Black/5726850536",
+      "job_id": "7289772426148186113",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:33:03",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772426148186113",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/360-Oscillating-Toothbrush-Black-Black/5726850536"
+  }
+}

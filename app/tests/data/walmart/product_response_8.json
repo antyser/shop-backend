@@ -1,0 +1,159 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 118.0,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 1877,
+          "rating": 4.5
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Battle Creek",
+          "state": "MI",
+          "store_id": "2080",
+          "zip_code": "49015"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/baby/5427",
+            "category_name": "Baby"
+          },
+          {
+            "url": "/cp/feeding/133283",
+            "category_name": "Feeding"
+          },
+          {
+            "url": "/cp/evenflo-breast-pumps/3383512",
+            "category_name": "Evenflo Breast Pumps"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": true,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Tomorrow, Free",
+          "delivery_information": ", Delivery, Today",
+          "shipping_information": ", Shipping, Arrives tomorrow, Free"
+        },
+        "specifications": [
+          {
+            "key": "Features",
+            "value": "Realistic Suction, Lightweight"
+          },
+          {
+            "key": "Brand",
+            "value": "Evenflo Feeding"
+          },
+          {
+            "key": "Is BPA-Free",
+            "value": "Y"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "2.58 lb"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "Evenflo Feeding"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "5.55 x 10.35 x 8.60 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:33:23",
+      "updated_at": "2025-01-27 22:33:27",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Evenflo-Advanced-Double-Electric-Breast-Pump-with-Breastshields-and-Milk-Storage-Bottles-Clear/795240370",
+      "job_id": "7289772509451285505",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:33:23",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772509451285505",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Evenflo-Advanced-Double-Electric-Breast-Pump-with-Breastshields-and-Milk-Storage-Bottles-Clear/795240370"
+  }
+}

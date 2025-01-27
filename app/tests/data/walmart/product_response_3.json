@@ -1,0 +1,247 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 156.0,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 231,
+          "rating": 4.5
+        },
+        "seller": {
+          "id": "1E97C09DF9B8404DB1E9CC8C230EB330",
+          "name": "Luxe Weavers",
+          "official_name": "Persian Area Rugs LLC"
+        },
+        "location": {
+          "city": "Poughkeepsie",
+          "state": "NY",
+          "store_id": "1810",
+          "zip_code": "12601"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/home/4044",
+            "category_name": "Home"
+          },
+          {
+            "url": "/cp/decor/133012",
+            "category_name": "Decor"
+          },
+          {
+            "url": "/cp/rugs/110892",
+            "category_name": "Rugs"
+          },
+          {
+            "url": "/cp/area-rugs/6718514",
+            "category_name": "Area Rugs"
+          },
+          {
+            "url": "/cp/polypropylene-area-rugs/5413835",
+            "category_name": "Polypropylene Area Rugs"
+          }
+        ],
+        "fulfillment": {
+          "pickup": false,
+          "delivery": false,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Not available",
+          "delivery_information": ", Delivery, Not available",
+          "shipping_information": ", Shipping, Arrives Feb 3, Free"
+        },
+        "specifications": [
+          {
+            "key": "Brand",
+            "value": "Luxe Weavers"
+          },
+          {
+            "key": "Collection",
+            "value": "Euston"
+          },
+          {
+            "key": "Rug Size",
+            "value": "7'7\" x 9'9\""
+          },
+          {
+            "key": "Material",
+            "value": "Polypropylene"
+          },
+          {
+            "key": "Backing Material",
+            "value": "Jute"
+          },
+          {
+            "key": "Fabric Content",
+            "value": "100% Polypropylene"
+          },
+          {
+            "key": "Color",
+            "value": "Brown"
+          },
+          {
+            "key": "Pattern",
+            "value": "Abstract, Distressed"
+          },
+          {
+            "key": "Shape",
+            "value": "Rectangle; Rectangular"
+          },
+          {
+            "key": "Rug Construction",
+            "value": "Machine Made"
+          },
+          {
+            "key": "Rug Technique/Weave",
+            "value": "Loomed"
+          },
+          {
+            "key": "Pile Height",
+            "value": "0.50 in"
+          },
+          {
+            "key": "Pile Thickness",
+            "value": "Medium Pile"
+          },
+          {
+            "key": "Recommended Location",
+            "value": "Indoor"
+          },
+          {
+            "key": "Recommended Room",
+            "value": "Living Room, Bedroom, Dining Room, Kitchen"
+          },
+          {
+            "key": "Features",
+            "value": "Stain Resistant"
+          },
+          {
+            "key": "Cleaning, Care & Maintenance",
+            "value": "Vacuum without a beater bar or spot-clean with a mild carpet cleaner solution."
+          },
+          {
+            "key": "Age Group",
+            "value": "Adult, Child, Teen"
+          },
+          {
+            "key": "Gender",
+            "value": "Unisex"
+          },
+          {
+            "key": "Home Decor Style",
+            "value": "Contemporary"
+          },
+          {
+            "key": "Size",
+            "value": "8' x 10'"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "30 lb"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "Luxe Weavers"
+          },
+          {
+            "key": "Manufacturer Part Number",
+            "value": "7681 Brown 8x10"
+          },
+          {
+            "key": "Country of Origin - Textiles",
+            "value": "Imported"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "117.00 x 91.00 x 0.50 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:32:43",
+      "updated_at": "2025-01-27 22:33:02",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Luxe-Weavers-Modern-Area-Rug-Abstract-Pattern-Dark-Blue-Light-Blue-8-x-10/3615138636",
+      "job_id": "7289772340106251265",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:32:43",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772340106251265",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Luxe-Weavers-Modern-Area-Rug-Abstract-Pattern-Dark-Blue-Light-Blue-8-x-10/3615138636"
+  }
+}

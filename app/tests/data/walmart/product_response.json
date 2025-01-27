@@ -1,0 +1,163 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 8.12,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 653,
+          "rating": 4.6
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Sacramento",
+          "state": "CA",
+          "store_id": "3081",
+          "zip_code": "95829"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/beauty/1085666",
+            "category_name": "Beauty"
+          },
+          {
+            "url": "/cp/beauty-gift-ideas/1871486",
+            "category_name": "Beauty Gift Ideas"
+          },
+          {
+            "url": "/cp/fragrance-gift-ideas/6380400",
+            "category_name": "Fragrance Gift Ideas"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": true,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": false,
+          "pickup_information": ", Pickup, Today",
+          "delivery_information": ", Delivery, Today",
+          "shipping_information": ", Shipping, Arrives tomorrow"
+        },
+        "specifications": [
+          {
+            "key": "Body Spray Type",
+            "value": "Spray"
+          },
+          {
+            "key": "Gender",
+            "value": "Male"
+          },
+          {
+            "key": "Size",
+            "value": "2.5 oz"
+          },
+          {
+            "key": "Scent Family",
+            "value": "Floral"
+          },
+          {
+            "key": "Brand",
+            "value": "Adidas"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "Hfc Prestige International Us Llc"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "0.98 x 6.65 x 6.10 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:24:41",
+      "updated_at": "2025-01-27 22:24:46",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/LEoQqRmXKGAinjtx/710726462",
+      "job_id": "7289770318288131073",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:24:41",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289770318288131073",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/710726462"
+  }
+}

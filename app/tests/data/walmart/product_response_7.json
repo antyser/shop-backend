@@ -1,0 +1,235 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 179.0,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 4682,
+          "rating": 4.6
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Warren",
+          "state": "MI",
+          "store_id": "4424",
+          "zip_code": "48091"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/auto-tires/91083",
+            "category_name": "Auto & Tires"
+          },
+          {
+            "url": "/cp/tires-accessories/1077064",
+            "category_name": "Tires & Accessories"
+          },
+          {
+            "url": "/cp/tires-by-vehicle/8752379",
+            "category_name": "Tires by Vehicle"
+          },
+          {
+            "url": "/cp/automotive-tires/4838964",
+            "category_name": "Automotive Tires"
+          },
+          {
+            "url": "/cp/car-tires/1063465",
+            "category_name": "Car Tires"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": false,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Check nearby",
+          "delivery_information": ", Delivery, Not available",
+          "shipping_information": ", Shipping, Arrives Jan 29, Free"
+        },
+        "specifications": [
+          {
+            "key": "Tire Diameter",
+            "value": "20 in"
+          },
+          {
+            "key": "Tire Terrain",
+            "value": "All-Terrain"
+          },
+          {
+            "key": "Construction Type",
+            "value": "Radial"
+          },
+          {
+            "key": "Features",
+            "value": "Compatible With Multiple Cars, Inflatable, Fits Multiple Makes And models, DOT Approved, Wet or Dry, Durable Construction"
+          },
+          {
+            "key": "Tire Size",
+            "value": "275/60R20"
+          },
+          {
+            "key": "Brand",
+            "value": "Cooper"
+          },
+          {
+            "key": "Vehicle Type",
+            "value": "Light Truck, CUV"
+          },
+          {
+            "key": "Tire Width",
+            "value": "275 mm"
+          },
+          {
+            "key": "Tire Aspect Ratio",
+            "value": "60"
+          },
+          {
+            "key": "Wheel Diameter",
+            "value": "20 in"
+          },
+          {
+            "key": "Warranty Distance",
+            "value": "60000 miles"
+          },
+          {
+            "key": "Tire Season",
+            "value": "All-Season"
+          },
+          {
+            "key": "Tire Speed Rating",
+            "value": "T"
+          },
+          {
+            "key": "Tire Type",
+            "value": "Passenger Car Tires"
+          },
+          {
+            "key": "Tire Load Index",
+            "value": "115"
+          },
+          {
+            "key": "Uniform Tire Quality Grade (UTQG)",
+            "value": "620 A B"
+          },
+          {
+            "key": "Tire Traction Rating",
+            "value": "A"
+          },
+          {
+            "key": "Tire Treadwear Rating",
+            "value": "620"
+          },
+          {
+            "key": "Tread Depth",
+            "value": "12/32"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "43.93 lb"
+          },
+          {
+            "key": "Model",
+            "value": "246747"
+          },
+          {
+            "key": "Manufacturer Part Number",
+            "value": "171162017"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "Cooper"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:33:20",
+      "updated_at": "2025-01-27 22:33:22",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Cooper-Discoverer-All-Terrain-275-60R20-115T-All-Terrain-Tire/1090134873",
+      "job_id": "7289772494490180609",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:33:20",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772494490180609",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Cooper-Discoverer-All-Terrain-275-60R20-115T-All-Terrain-Tire/1090134873"
+  }
+}

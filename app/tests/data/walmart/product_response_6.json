@@ -1,0 +1,199 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 129.99,
+          "currency": "USD",
+          "price_strikethrough": 159.0
+        },
+        "rating": {
+          "count": 12100,
+          "rating": 4.4
+        },
+        "seller": {
+          "id": "F166094DD42646958FF20DEF0D57179B",
+          "name": "Devine Angel Finds LLC",
+          "official_name": "Devine Angel Finds LLC"
+        },
+        "location": {
+          "city": "Manchester",
+          "state": "NH",
+          "store_id": "1698",
+          "zip_code": "03102"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/home/4044",
+            "category_name": "Home"
+          },
+          {
+            "url": "/cp/appliances/90548",
+            "category_name": "Appliances"
+          },
+          {
+            "url": "/cp/kitchen-appliances/90546",
+            "category_name": "Kitchen Appliances"
+          },
+          {
+            "url": "/cp/coffee-shop/1115306",
+            "category_name": "Coffee Shop"
+          },
+          {
+            "url": "/cp/keurig-coffee-makers/3298657",
+            "category_name": "Keurig Coffee Makers"
+          }
+        ],
+        "fulfillment": {
+          "pickup": false,
+          "delivery": false,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Not available",
+          "delivery_information": ", Delivery, Not available",
+          "shipping_information": ", Shipping, Arrives Feb 4, $18.99"
+        },
+        "specifications": [
+          {
+            "key": "Brand",
+            "value": "Keurig"
+          },
+          {
+            "key": "Material",
+            "value": "Metal"
+          },
+          {
+            "key": "Color",
+            "value": "Gray"
+          },
+          {
+            "key": "Finish",
+            "value": "Brushed Stainless Steel"
+          },
+          {
+            "key": "Number of Preset Cup Sizes",
+            "value": "5"
+          },
+          {
+            "key": "Water Reservoir Capacity",
+            "value": "75 oz"
+          },
+          {
+            "key": "Compatible Form",
+            "value": "Pods"
+          },
+          {
+            "key": "Features",
+            "value": "Removable"
+          },
+          {
+            "key": "Items Included",
+            "value": "One water filter handle, and one filter"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "12.65 lb"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "keurig"
+          },
+          {
+            "key": "Manufacturer Part Number",
+            "value": "5000359833"
+          },
+          {
+            "key": "Model",
+            "value": "5000359833"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "12.70 x 9.90 x 13.10 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:33:13",
+      "updated_at": "2025-01-27 22:33:18",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Keurig-K-elite-Brewer-Slate/225142139",
+      "job_id": "7289772467281726465",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:33:13",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772467281726465",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Keurig-K-elite-Brewer-Slate/225142139"
+  }
+}
