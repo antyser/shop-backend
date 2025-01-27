@@ -1,7 +1,8 @@
 from datetime import datetime
+from bs4 import BeautifulSoup
 from typing import Any
 
-from loguru import logger
+
 from pydantic import BaseModel, Field, model_validator
 
 
@@ -73,7 +74,7 @@ class AmazonProductContent(BaseModel):
     """Main product content information"""
 
     url: str | None = None
-    asin: str  # Keep this required as it's the primary identifier
+    asin: str | None = None # Keep this required as it's the primary identifier
     page: int | None = None
     brand: str | None = None
     price: float | None = None
@@ -125,6 +126,32 @@ class AmazonProductContent(BaseModel):
     answered_questions_count: int | None = None
     frequently_bought_together: list[dict] | None = None
 
+def parse_amazon_product_page(html: str) -> "AmazonProductContent":
+    soup = BeautifulSoup(html, 'html.parser')
+    title_element = soup.find('span', id='productTitle')
+    title = title_element.text.strip() if title_element else None
+    price_whole_element = soup.find('span', class_='a-price-whole')
+    price_fraction_element = soup.find('span', class_='a-price-fraction')
+    price = (price_whole_element.text.strip() + "." + price_fraction_element.text.strip()) if price_whole_element and price_fraction_element else None
+    print(f"Extracted price string: {price}")
+    try:
+        if price:
+            price = price.replace(",", ".").replace("..", ".")
+            price = float(price)
+        else:
+            price = None
+    except ValueError:
+        price = None
+    print(f"Parsed price: {price}")
+    description_element = soup.find('div', id='productDescription')
+    description = description_element.text.strip() if description_element else None
+    image_elements = soup.find_all('img', class_='a-dynamic-image')
+    images = [img['src'] for img in image_elements] if image_elements else None
+    brand_element = soup.find('a', id='bylineInfo')
+    brand = brand_element.text.strip() if brand_element else None
+    asin_element = soup.find('input', attrs={'name': 'ASIN'})
+    asin = asin_element.get('value') if asin_element else None
+    return AmazonProductContent(asin=asin, title=title, price=price, description=description, images=images, brand=brand)
 
 class QueryContext(BaseModel):
     """Query context information"""
