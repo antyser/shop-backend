@@ -1,0 +1,167 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 179.99,
+          "currency": "USD",
+          "price_strikethrough": 368.0
+        },
+        "rating": {
+          "count": 6,
+          "rating": 5.0
+        },
+        "seller": {
+          "id": "3E9BE7C1EF8C493082B9D3D69D3E8FB8",
+          "name": "Nautilus Lifestyle",
+          "official_name": "Investcore LLC"
+        },
+        "location": {
+          "city": "Bellevue",
+          "state": "WA",
+          "store_id": "2516",
+          "zip_code": "98006"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/clothing/5438",
+            "category_name": "Clothing"
+          },
+          {
+            "url": "/cp/bags-accessories/1045799",
+            "category_name": "Bags & Accessories"
+          },
+          {
+            "url": "/cp/handbags/1045800",
+            "category_name": "Handbags"
+          },
+          {
+            "url": "/cp/designer-bags/7821647",
+            "category_name": "Designer Bags"
+          },
+          {
+            "url": "/cp/coach-bags/6212150",
+            "category_name": "Coach Bags"
+          }
+        ],
+        "fulfillment": {
+          "pickup": false,
+          "delivery": false,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Not available",
+          "delivery_information": ", Delivery, Not available",
+          "shipping_information": ", Shipping, Arrives Feb 4, Free"
+        },
+        "specifications": [
+          {
+            "key": "Gender",
+            "value": "Female"
+          },
+          {
+            "key": "Model",
+            "value": "Kristy"
+          },
+          {
+            "key": "Brand",
+            "value": "Coach"
+          },
+          {
+            "key": "Color Category",
+            "value": "Gold"
+          },
+          {
+            "key": "Fabric Content",
+            "value": "Canvas"
+          },
+          {
+            "key": "Fastener Type",
+            "value": "Snap"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:33:08",
+      "updated_at": "2025-01-27 22:33:12",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Coach-Women-s-Kristy-Shoulder-Bag/2100858768",
+      "job_id": "7289772444821251073",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:33:08",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772444821251073",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Coach-Women-s-Kristy-Shoulder-Bag/2100858768"
+  }
+}

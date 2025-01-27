@@ -1,0 +1,155 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 157.99,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 63,
+          "rating": 4.8
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Fuquay Varina",
+          "state": "NC",
+          "store_id": "2836",
+          "zip_code": "27526"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/health-medicine/976760",
+            "category_name": "Health and Medicine"
+          },
+          {
+            "url": "/cp/massage/36290",
+            "category_name": "Massage"
+          },
+          {
+            "url": "/cp/shop-all-massagers/2915217",
+            "category_name": "Shop all Massagers"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": false,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": true,
+          "pickup_information": ", Pickup, Get it nearby",
+          "delivery_information": ", Delivery, Not available",
+          "shipping_information": ", Shipping, Arrives Jan 29, Free"
+        },
+        "specifications": [
+          {
+            "key": "Features",
+            "value": "Handheld, Multi-Speed, Therapeutic, Cordless"
+          },
+          {
+            "key": "Brand",
+            "value": "Therabody"
+          },
+          {
+            "key": "Assembled Product Weight",
+            "value": "1.7 lb"
+          },
+          {
+            "key": "Manufacturer Part Number",
+            "value": "TG0004001-5A91"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "2.50 x 6.70 x 6.50 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:32:36",
+      "updated_at": "2025-01-27 22:32:42",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Therabody-Theragun-Mini-2nd-Gen-Handheld-Percussive-Massager-Portable-Deep-Tissue-Massager-Gray/5150283577",
+      "job_id": "7289772309617864705",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:32:36",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772309617864705",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Therabody-Theragun-Mini-2nd-Gen-Handheld-Percussive-Massager-Portable-Deep-Tissue-Massager-Gray/5150283577"
+  }
+}

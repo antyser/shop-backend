@@ -1,0 +1,195 @@
+{
+  "results": [
+    {
+      "content": {
+        "price": {
+          "price": 19.98,
+          "currency": "USD",
+          "price_strikethrough": null
+        },
+        "rating": {
+          "count": 8196,
+          "rating": 4.5
+        },
+        "seller": {
+          "id": "F55CDC31AB754BB68FE0B39041159D63",
+          "name": "Walmart.com",
+          "official_name": "Walmart.com"
+        },
+        "location": {
+          "city": "Herndon",
+          "state": "VA",
+          "store_id": "2038",
+          "zip_code": "20170"
+        },
+        "breadcrumbs": [
+          {
+            "url": "/cp/health-medicine/976760",
+            "category_name": "Health and Medicine"
+          },
+          {
+            "url": "/cp/protein/1166769",
+            "category_name": "Protein"
+          },
+          {
+            "url": "/cp/all-protein-supplements/9231506",
+            "category_name": "All Protein Supplements"
+          }
+        ],
+        "fulfillment": {
+          "pickup": true,
+          "delivery": true,
+          "shipping": true,
+          "out_of_stock": false,
+          "free_shipping": false,
+          "pickup_information": ", Pickup, Tomorrow",
+          "delivery_information": ", Delivery, Today",
+          "shipping_information": ", Shipping, Arrives tomorrow, Order within 3 hr 43 min"
+        },
+        "specifications": [
+          {
+            "key": "Features",
+            "value": "No Dairy Ingredients, No Soy Ingredients, Gluten Free, Non-GMO, Vegan, 0g Sugar Per Serving (Not a Reduced Calorie Food)"
+          },
+          {
+            "key": "Brand",
+            "value": "Orgain"
+          },
+          {
+            "key": "Flavor",
+            "value": "Vanilla Bean"
+          },
+          {
+            "key": "Manufacturer",
+            "value": "Orgain, LLC."
+          },
+          {
+            "key": "Manufacturer Part Number",
+            "value": "851770003926"
+          },
+          {
+            "key": "Model",
+            "value": "851770003926"
+          },
+          {
+            "key": "Size",
+            "value": "16.3 oz"
+          },
+          {
+            "key": "Vitamin & Supplement Type",
+            "value": "Protein Supplements"
+          },
+          {
+            "key": "Food Form",
+            "value": "Powders"
+          },
+          {
+            "key": "Allergen-Free Statements",
+            "value": "Gluten-Free, Soy-Free"
+          },
+          {
+            "key": "Gender",
+            "value": "Unisex"
+          },
+          {
+            "key": "Multipack Quantity",
+            "value": "1"
+          },
+          {
+            "key": "Age Group",
+            "value": "Teen, Adult, Senior"
+          },
+          {
+            "key": "Count Per Pack",
+            "value": "1"
+          },
+          {
+            "key": "Assembled Product Dimensions (L x W x H)",
+            "value": "4.88 x 4.88 x 6.50 Inches"
+          }
+        ],
+        "parse_status_code": 12000
+      },
+      "created_at": "2025-01-27 22:32:32",
+      "updated_at": "2025-01-27 22:32:35",
+      "page": 1,
+      "url": "https://www.walmart.com/ip/Orgain-Organic-Plant-Based-Protein-Powder-Sweet-Vanilla-Bean/553332207",
+      "job_id": "7289772295877322753",
+      "status_code": 200,
+      "parser_type": "walmart_product_new"
+    }
+  ],
+  "job": {
+    "callback_url": null,
+    "client_id": 95504,
+    "context": [
+      {
+        "key": "force_headers",
+        "value": false
+      },
+      {
+        "key": "force_cookies",
+        "value": false
+      },
+      {
+        "key": "hc_policy",
+        "value": true
+      },
+      {
+        "key": "successful_status_codes",
+        "value": []
+      },
+      {
+        "key": "follow_redirects",
+        "value": null
+      },
+      {
+        "key": "cookies",
+        "value": []
+      },
+      {
+        "key": "headers",
+        "value": []
+      },
+      {
+        "key": "session_id",
+        "value": null
+      },
+      {
+        "key": "http_method",
+        "value": "get"
+      },
+      {
+        "key": "content",
+        "value": null
+      },
+      {
+        "key": "store_id",
+        "value": null
+      },
+      {
+        "key": "proxy_location",
+        "value": null
+      },
+      {
+        "key": "delivery_location",
+        "value": null
+      },
+      {
+        "key": "fulfillment_type",
+        "value": null
+      }
+    ],
+    "created_at": "2025-01-27 22:32:32",
+    "domain": "com",
+    "geo_location": "United States",
+    "id": "7289772295877322753",
+    "limit": 10,
+    "parse": true,
+    "parser_type": null,
+    "query": "",
+    "source": "universal_walmart_product",
+    "status": "done",
+    "url": "https://www.walmart.com/ip/Orgain-Organic-Plant-Based-Protein-Powder-Sweet-Vanilla-Bean/553332207"
+  }
+}

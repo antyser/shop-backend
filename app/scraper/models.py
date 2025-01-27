@@ -3,11 +3,20 @@ Pydantic models for the scraper module
 """
 
 from datetime import datetime
+from enum import Enum
 
 from pydantic import BaseModel, HttpUrl
 
 from app.scraper.oxylabs.amazon.models import AmazonProductContent
+from app.scraper.oxylabs.walmart.models import WalmartProductContent
 from app.scraper.searchapi.google_search import GoogleSearchResponse
+
+
+class ProductSource(str, Enum):
+    """Supported product sources"""
+
+    AMAZON = "amazon"
+    WALMART = "walmart"
 
 
 class ScrapeRequest(BaseModel):
@@ -39,10 +48,27 @@ class ScrapeProductRequest(BaseModel):
     url: HttpUrl
 
 
+class UnifiedProductContent(BaseModel):
+    """Unified product content model that works for both Amazon and Walmart"""
+
+    title: str
+    price: float
+    currency: str
+    rating: float | None = None
+    reviews_count: int | None = None
+    description: str | None = None
+    brand: str | None = None
+    seller: str | None = None
+    in_stock: bool = True
+    shipping_available: bool = True
+    source: ProductSource
+    raw_data: AmazonProductContent | WalmartProductContent
+
+
 class ScrapeProductResponse(BaseModel):
     """Response model for product information and reviews"""
 
-    product: AmazonProductContent
+    product: UnifiedProductContent
     url: HttpUrl
     search_results: GoogleSearchResponse
 
