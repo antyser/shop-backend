@@ -585,6 +585,88 @@ class GoogleSearchResponse(BaseModel):
         return values
 
 
+async def scrape_search_content(search_response: GoogleSearchResponse) -> GoogleSearchResponse:
+    """
+    Scrape content from links found in search response
+
+    Args:
+        search_response: GoogleSearchResponse object containing search results
+
+    Returns:
+        GoogleSearchResponse with updated content fields
+    """
+    logger.info("Starting content scraping")
+    links_to_fetch = set()
+
+    if search_response.organic_results:
+        organic_links = {result.link for result in search_response.organic_results if result.link}
+        logger.debug(f"Found {len(organic_links)} organic result links")
+        links_to_fetch.update(organic_links)
+
+    if search_response.discussions_and_forums:
+        forum_links = {forum.link for forum in search_response.discussions_and_forums if forum.link}
+        logger.debug(f"Found {len(forum_links)} discussion forum links")
+        links_to_fetch.update(forum_links)
+
+    if search_response.inline_videos:
+        video_links = {video.link for video in search_response.inline_videos if video.link}
+        logger.debug(f"Found {len(video_links)} video links")
+        links_to_fetch.update(video_links)
+
+    if search_response.perspectives:
+        perspective_links = {perspective.link for perspective in search_response.perspectives if perspective.link}
+        logger.debug(f"Found {len(perspective_links)} perspective links")
+        links_to_fetch.update(perspective_links)
+
+    if search_response.related_questions:
+        question_links = {question.source.link for question in search_response.related_questions if question.source and question.source.link}
+        logger.debug(f"Found {len(question_links)} related question links")
+        links_to_fetch.update(question_links)
+
+    logger.info(f"Total unique links to fetch: {len(links_to_fetch)}")
+
+    if links_to_fetch:
+        logger.info("Starting batch fetch of content")
+        fetched_contents = await fetch_batch(list(links_to_fetch))
+        logger.info(f"Successfully fetched {len(fetched_contents)} contents")
+
+        # Update content fields
+        updated_count = 0
+        if search_response.organic_results:
+            for result in search_response.organic_results:
+                if result.link in fetched_contents:
+                    result.content = fetched_contents[result.link]
+                    updated_count += 1
+
+        if search_response.discussions_and_forums:
+            for forum in search_response.discussions_and_forums:
+                if forum.link in fetched_contents:
+                    forum.content = fetched_contents[forum.link]
+                    updated_count += 1
+
+        if search_response.inline_videos:
+            for video in search_response.inline_videos:
+                if video.link in fetched_contents:
+                    video.content = fetched_contents[video.link]
+                    updated_count += 1
+
+        if search_response.perspectives:
+            for perspective in search_response.perspectives:
+                if perspective.link in fetched_contents:
+                    perspective.content = fetched_contents[perspective.link]
+                    updated_count += 1
+
+        if search_response.related_questions:
+            for question in search_response.related_questions:
+                if question.source and question.source.link in fetched_contents:
+                    question.source.content = fetched_contents[question.source.link]
+                    updated_count += 1
+
+        logger.info(f"Updated content for {updated_count} results")
+
+    return search_response
+
+
 async def search_google(
     query: str,
     location: str = "California,United States",
@@ -592,8 +674,9 @@ async def search_google(
     country: str = "us",
     num_results: int = 10,
     start_index: int = 0,
-    save_debug: bool = True,
+    save_debug: bool = False,
     scrape_content: bool = False,
+    unset_images: bool = False,
 ) -> GoogleSearchResponse:
     """
     Search Google using SearchAPI.io and fetch content for relevant links
@@ -651,74 +734,10 @@ async def search_google(
             logger.info(f"Saved initial response to {initial_file}")
 
         if scrape_content:
-            logger.info(f"Starting content scraping for query: {query}")
-            links_to_fetch = set()
+            search_response = await scrape_search_content(search_response)
 
-            if search_response.organic_results:
-                organic_links = {result.link for result in search_response.organic_results if result.link}
-                logger.debug(f"Found {len(organic_links)} organic result links")
-                links_to_fetch.update(organic_links)
-
-            if search_response.discussions_and_forums:
-                forum_links = {forum.link for forum in search_response.discussions_and_forums if forum.link}
-                logger.debug(f"Found {len(forum_links)} discussion forum links")
-                links_to_fetch.update(forum_links)
-
-            if search_response.inline_videos:
-                video_links = {video.link for video in search_response.inline_videos if video.link}
-                logger.debug(f"Found {len(video_links)} video links")
-                links_to_fetch.update(video_links)
-
-            if search_response.perspectives:
-                perspective_links = {perspective.link for perspective in search_response.perspectives if perspective.link}
-                logger.debug(f"Found {len(perspective_links)} perspective links")
-                links_to_fetch.update(perspective_links)
-
-            if search_response.related_questions:
-                question_links = {question.source.link for question in search_response.related_questions if question.source and question.source.link}
-                logger.debug(f"Found {len(question_links)} related question links")
-                links_to_fetch.update(question_links)
-
-            logger.info(f"Total unique links to fetch: {len(links_to_fetch)}")
-
-            if links_to_fetch:
-                logger.info("Starting batch fetch of content")
-                fetched_contents = await fetch_batch(list(links_to_fetch))
-                logger.info(f"Successfully fetched {len(fetched_contents)} contents")
-
-                # Update content fields
-                updated_count = 0
-                if search_response.organic_results:
-                    for result in search_response.organic_results:
-                        if result.link in fetched_contents:
-                            result.content = fetched_contents[result.link]
-                            updated_count += 1
-
-                if search_response.discussions_and_forums:
-                    for forum in search_response.discussions_and_forums:
-                        if forum.link in fetched_contents:
-                            forum.content = fetched_contents[forum.link]
-                            updated_count += 1
-
-                if search_response.inline_videos:
-                    for video in search_response.inline_videos:
-                        if video.link in fetched_contents:
-                            video.content = fetched_contents[video.link]
-                            updated_count += 1
-
-                if search_response.perspectives:
-                    for perspective in search_response.perspectives:
-                        if perspective.link in fetched_contents:
-                            perspective.content = fetched_contents[perspective.link]
-                            updated_count += 1
-
-                if search_response.related_questions:
-                    for question in search_response.related_questions:
-                        if question.source and question.source.link in fetched_contents:
-                            question.source.content = fetched_contents[question.source.link]
-                            updated_count += 1
-
-                logger.info(f"Updated content for {updated_count} results")
+        if unset_images:
+            search_response = unset_image_fields(search_response)
 
         if save_debug:
             debug_dir = Path("debug/searchapi/google_search")
@@ -759,6 +778,65 @@ async def fetch_url(url: str, client: httpx.AsyncClient) -> str:
     except Exception as e:
         logger.error(f"Error fetching {url}: {str(e)}")
         return ""
+
+
+def unset_image_fields(response: GoogleSearchResponse) -> GoogleSearchResponse:
+    """
+    Remove image-related fields from GoogleSearchResponse to reduce payload size
+
+    Args:
+        response: Original GoogleSearchResponse object
+
+    Returns:
+        GoogleSearchResponse with image fields removed
+    """
+    if response.organic_results:
+        for result in response.organic_results:
+            result.favicon = None
+
+    if response.discussions_and_forums:
+        for forum in response.discussions_and_forums:
+            forum.favicon = None
+
+    if response.inline_videos:
+        for video in response.inline_videos:
+            video.image = None
+            if video.key_moments:
+                for moment in video.key_moments:
+                    moment.thumbnail = None
+
+    if response.inline_images:
+        response.inline_images = None
+
+    if response.inline_recipes:
+        for recipe in response.inline_recipes:
+            recipe.thumbnail = None
+
+    if response.inline_shopping:
+        for item in response.inline_shopping:
+            item.thumbnail = None
+
+    if response.top_stories:
+        for story in response.top_stories:
+            story.thumbnail = None
+
+    if response.perspectives:
+        for perspective in response.perspectives:
+            perspective.thumbnail = None
+
+    if response.courses:
+        for course in response.courses:
+            course.thumbnail = None
+
+    if response.explore_brands:
+        for brand in response.explore_brands:
+            brand.thumbnail = None
+
+    if response.knowledge_graph:
+        response.knowledge_graph.image = None
+        response.knowledge_graph.images = None
+
+    return response
 
 
 if __name__ == "__main__":

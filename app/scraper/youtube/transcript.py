@@ -1,4 +1,7 @@
+from loguru import logger
 from youtube_transcript_api import YouTubeTranscriptApi
+
+from app.utils.counter import crawler_counter
 
 
 def _convert_transcript_to_text(transcript_list: list[dict]) -> str:
@@ -27,8 +30,12 @@ def get_transcript(video_id: str) -> str | None:
     """
     try:
         transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
-        return _convert_transcript_to_text(transcript_list)
-    except Exception:
+        text = _convert_transcript_to_text(transcript_list)
+        crawler_counter.add(1, {"type": "youtube", "status": "success"})
+        return text
+    except Exception as e:
+        logger.error(f"Failed to get transcript for video {video_id}: {e}")
+        crawler_counter.add(1, {"type": "youtube", "status": "error", "error": "transcript"})
         return None
 
 
@@ -43,25 +50,10 @@ async def aget_transcript(video_id: str) -> str | None:
     """
     try:
         transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
-        return _convert_transcript_to_text(transcript_list)
-    except Exception:
+        text = _convert_transcript_to_text(transcript_list)
+        crawler_counter.add(1, {"type": "youtube", "status": "success"})
+        return text
+    except Exception as e:
+        logger.error(f"Failed to get transcript for video {video_id}: {e}")
+        crawler_counter.add(1, {"type": "youtube", "status": "error", "error": "transcript"})
         return None
-
-
-def get_transcripts(video_ids: list[str], continue_after_error: bool = True) -> tuple[dict[str, str | None], list[str]]:
-    """Get transcripts for multiple YouTube videos.
-
-    Args:
-        video_ids (List[str]): List of YouTube video IDs
-        continue_after_error (bool): Continue if error occurs
-
-    Returns:
-        Tuple[Dict[str, Optional[str]], List[str]]:
-            - Dict mapping video IDs to transcripts
-            - List of failed video IDs
-    """
-    transcripts, failed_ids = YouTubeTranscriptApi.get_transcripts(video_ids, languages=["en"], continue_after_error=continue_after_error)
-
-    processed_transcripts = {video_id: _convert_transcript_to_text(transcript_list) for video_id, transcript_list in transcripts.items()}
-
-    return processed_transcripts, failed_ids  # type: ignore
