@@ -139,6 +139,7 @@ opentelemetry-instrumentation==0.50b0
 opentelemetry-instrumentation-asgi==0.50b0
 opentelemetry-instrumentation-fastapi==0.50b0
 opentelemetry-instrumentation-httpx==0.50b0
+opentelemetry-instrumentation-system-metrics==0.50b0
 opentelemetry-proto==1.29.0
 opentelemetry-sdk==1.29.0
 opentelemetry-semantic-conventions==0.50b0
@@ -204,8 +205,8 @@ rpds-py==0.22.3
 rsa==4.9
 ruff==0.8.6
 send2trash==1.8.3
-setuptools==75.7.0
 sentry-sdk==2.20.0
+setuptools==75.7.0
 shellingham==1.5.4
 six==1.17.0
 smmap==5.0.2
