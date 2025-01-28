@@ -67,6 +67,8 @@ class WalmartProductContent(BaseModel):
     """Main product content information"""
 
     title: str | None = None  # Derived from URL or specifications
+    description: str | None = None
+    brand: str | None = None
     price: Price | None = None
     rating: Rating | None = None
     seller: Seller | None = None
@@ -156,4 +158,40 @@ def parse_walmart_response(response_data: dict[str, Any]) -> OxyWalmartResponse:
     Raises:
         ValidationError: If response data is invalid
     """
-    return OxyWalmartResponse(**response_data)
+    # Extract content from results
+    if not response_data.get("results"):
+        raise ValueError("No results in response")
+
+    result = response_data["results"][0]
+    content = result.get("content", {})
+    general = content.get("general", {})
+
+    # Combine general and other fields
+    product_content = {
+        "url": general.get("url"),
+        "title": general.get("title"),
+        "description": general.get("description"),
+        "brand": general.get("brand"),
+        "price": content.get("price"),
+        "rating": content.get("rating"),
+        "seller": content.get("seller"),
+        "location": content.get("location"),
+        "breadcrumbs": content.get("breadcrumbs"),
+        "fulfillment": content.get("fulfillment"),
+        "specifications": content.get("specifications"),
+        "parse_status_code": content.get("parse_status_code"),
+    }
+
+    # Create QueryResult with the combined content
+    query_result = QueryResult(
+        content=WalmartProductContent(**product_content),
+        created_at=result.get("created_at"),
+        updated_at=result.get("updated_at"),
+        page=result.get("page"),
+        url=result.get("url"),
+        job_id=result.get("job_id"),
+        status_code=result.get("status_code"),
+        parser_type=result.get("parser_type"),
+    )
+
+    return OxyWalmartResponse(results=[query_result], job=response_data.get("job"))

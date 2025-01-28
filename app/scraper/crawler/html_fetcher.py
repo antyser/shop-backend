@@ -1,14 +1,13 @@
 import asyncio
-import re
 from enum import Enum
 from pathlib import Path
+from typing import Any
 
 import chardet
+import html5lib
 import httpx
-from bs4 import BeautifulSoup
 from fake_headers import Headers
 from loguru import logger
-from markdownify import markdownify as md
 
 from app.config import get_settings
 from app.scraper.youtube.transcript import aget_transcript
@@ -204,52 +203,180 @@ async def fetch(
 
 def html_to_markdown(html_content: str) -> str | None:
     """
-    Convert HTML content from body tag to markdown format
+    Convert HTML content to markdown format, preserving important content and structure
+    while removing unnecessary elements.
 
     Args:
         html_content: Raw HTML string to convert
 
     Returns:
-        Markdown formatted string if successful, None otherwise
-
-    Raises:
-        ValueError: If html_content is empty or invalid
+        Markdown formatted string or None if conversion fails
     """
     if not html_content:
-        logger.error("Empty HTML content provided")
         return None
 
     try:
-        logger.info("Starting HTML to markdown conversion")
-        logger.debug(f"HTML content length: {len(html_content)}")
+        document = html5lib.parse(html_content)
+        result = []
+        seen_texts = set()  # To avoid duplicates
 
-        # Extract body content using BeautifulSoup
-        soup = BeautifulSoup(html_content, "html.parser")
-        body = soup.find("body")
+        def should_skip_element(elem: Any) -> bool:
+            """Check if the element should be skipped."""
+            tag_str = str(elem.tag)
+            # Skip common non-content elements
+            skip_tags = {
+                "{http://www.w3.org/1999/xhtml}script",
+                "{http://www.w3.org/1999/xhtml}style",
+                "{http://www.w3.org/1999/xhtml}nav",
+                "{http://www.w3.org/1999/xhtml}footer",
+                "{http://www.w3.org/1999/xhtml}header",
+                "{http://www.w3.org/1999/xhtml}aside",
+            }
+            if tag_str in skip_tags:
+                return True
 
-        if not body:
-            logger.warning("No body tag found in HTML content")
-            return None
+            # Skip elements with specific class/id patterns
+            for attr, value in elem.items():
+                if str(attr).endswith(("class", "id")):
+                    skip_patterns = {
+                        "cookie",
+                        "banner",
+                        "ad-",
+                        "advertisement",
+                        "popup",
+                        "modal",
+                        "sidebar",
+                        "menu",
+                        "nav-",
+                        "footer",
+                        "header",
+                        "comment",
+                    }
+                    if any(pattern in str(value).lower() for pattern in skip_patterns):
+                        return True
 
-        # Convert body HTML to markdown using markdownify
-        markdown_content = md(
-            str(body),
-            heading_style="ATX",  # Use # style headings
-            bullets="*",  # Use * for unordered lists
-            strip=["img"],  # Remove img tags
-            strong_em_symbol="*",  # Use * for bold/italic
-            escape_asterisks=True,
-            escape_underscores=True,
-            code_language="",
-            newline_style="SPACES",
+            # Skip empty elements
+            if not any(text.strip() for text in elem.itertext()):
+                return True
+
+            return False
+
+        def get_heading_level(tag: str) -> int:
+            """Get markdown heading level from HTML heading tag."""
+            tag_str = str(tag)
+            if (
+                not tag_str.endswith("}h1")
+                and not tag_str.endswith("}h2")
+                and not tag_str.endswith("}h3")
+                and not tag_str.endswith("}h4")
+                and not tag_str.endswith("}h5")
+                and not tag_str.endswith("}h6")
+            ):
+                return 0
+            return int(tag_str[-1])
+
+        def process_element(elem: Any, depth: int = 0) -> None:
+            """Process an element and its children recursively."""
+            if should_skip_element(elem):
+                return
+
+            # Handle text content
+            if hasattr(elem, "text") and elem.text:
+                text = elem.text.strip()
+                if text and text not in seen_texts:
+                    prefix = ""
+                    tag_str = str(elem.tag)
+
+                    # Handle headings
+                    heading_level = get_heading_level(tag_str)
+                    if heading_level > 0:
+                        prefix = "#" * heading_level + " "
+
+                    # Handle lists
+                    elif tag_str.endswith("}li"):
+                        prefix = "* "
+
+                    # Handle links
+                    if tag_str == "{http://www.w3.org/1999/xhtml}a":
+                        href = None
+                        for attr, value in elem.items():
+                            if str(attr).endswith("href"):
+                                href = value
+                                break
+                        if href and not str(href).startswith(("#", "javascript:", "mailto:")):
+                            result.append("  " * depth + prefix + f"[{text}]({href})")
+                            seen_texts.add(text)
+                            return
+
+                    # Handle emphasis
+                    elif tag_str.endswith("}strong") or tag_str.endswith("}b"):
+                        text = f"**{text}**"
+                    elif tag_str.endswith("}em") or tag_str.endswith("}i"):
+                        text = f"*{text}*"
+
+                    # Add text with appropriate prefix
+                    result.append("  " * depth + prefix + text)
+                    seen_texts.add(text)
+
+            # Process children
+            for child in elem:
+                process_element(child, depth + 1)
+
+            # Handle tail text
+            if hasattr(elem, "tail") and elem.tail:
+                tail = elem.tail.strip()
+                if tail and tail not in seen_texts:
+                    result.append("  " * depth + tail)
+                    seen_texts.add(tail)
+
+        # Find main content area if possible
+        main_content = (
+            document.find(".//{http://www.w3.org/1999/xhtml}main")
+            or document.find(".//{http://www.w3.org/1999/xhtml}article")
+            or document.find(".//{http://www.w3.org/1999/xhtml}body")
         )
 
-        # --- Space and newline cleanup ---
-        markdown_content = re.sub(r" {2,}", " ", markdown_content)  # Replace multiple spaces
-        markdown_content = re.sub(r"^\s+|\s+$", "", markdown_content, flags=re.MULTILINE)  # Remove leading/trailing spaces
-        markdown_content = re.sub(r"\n{3,}", "\n\n", markdown_content)  # Replace 3+ newlines
+        if main_content is not None:
+            process_element(main_content)
+        else:
+            # Fallback to processing the entire document
+            process_element(document)
 
-        return markdown_content if markdown_content else None
+        # Filter out unwanted content
+        filtered_result = []
+        for line in result:
+            # Skip lines that are likely to be noise
+            skip_patterns = {
+                "var ",
+                "function()",
+                ".js",
+                ".css",
+                "google-analytics",
+                "disqus",
+                "{",
+                "}",
+                "undefined",
+                "null",
+                "NaN",
+                "cookie",
+                "privacy policy",
+                "terms of service",
+                "all rights reserved",
+                "copyright ©",
+            }
+            if not any(pattern in str(line).lower() for pattern in skip_patterns):
+                filtered_result.append(line)
+
+        # Clean up the result
+        markdown = "\n".join(filtered_result)
+
+        # Remove excessive newlines
+        markdown = "\n".join(line for line in markdown.splitlines() if line.strip())
+
+        # Ensure proper spacing between sections
+        markdown = markdown.replace("\n\n\n", "\n\n")
+
+        return markdown
 
     except Exception as e:
         logger.error(f"Error converting HTML to markdown: {str(e)}")

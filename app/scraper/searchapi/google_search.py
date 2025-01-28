@@ -92,6 +92,7 @@ class KnowledgeGraphLink(BaseModel):
 
     text: str | None = None
     link: str | None = None
+    content: str | None = None
 
 
 class Manufacturer(BaseModel):
@@ -101,6 +102,7 @@ class Manufacturer(BaseModel):
     link: str | None = None
     name: str | None = None
     type: str | None = None
+    content: str | None = None
 
 
 class TypicalPrices(BaseModel):
@@ -129,6 +131,7 @@ class Merchant(BaseModel):
     reviews: int | None = None
     link: str | None = None
     favicon: str | None = None
+    content: str | None = None
 
 
 class Offer(BaseModel):
@@ -143,6 +146,7 @@ class Offer(BaseModel):
     delivery_price: str | None = None
     total_price: str | None = None
     merchant: Merchant | None = None
+    content: str | None = None
 
 
 class Feature(BaseModel):
@@ -181,6 +185,7 @@ class WebReview(BaseModel):
     rating_text: str | None = None
     rating: float | None = None
     rating_out_of: int | None = None
+    content: str | None = None
 
 
 class ReviewUser(BaseModel):
@@ -219,6 +224,7 @@ class EditorialReview(BaseModel):
     rating_out_of: int | None = None
     review: str | None = None
     link: str | None = None
+    content: str | None = None
 
 
 class KnowledgeGraph(BaseModel):
@@ -477,6 +483,7 @@ class Question(BaseModel):
     date: str | None = None
     answers: int | None = None
     source: str | None = None
+    content: str | None = None
 
 
 class WebSource(BaseModel):
@@ -488,6 +495,7 @@ class WebSource(BaseModel):
     date: str | None = None
     snippet: str | None = None
     thumbnail: str | None = None
+    content: str | None = None
 
 
 class InlineShoppingItem(BaseModel):
@@ -598,6 +606,45 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
     logger.info("Starting content scraping")
     links_to_fetch = set()
 
+    # Collect links from all relevant fields
+    if search_response.knowledge_graph:
+        kg = search_response.knowledge_graph
+
+        # Editorial reviews
+        if kg.editorial_reviews:
+            editorial_links = {review.link for review in kg.editorial_reviews if review.link}
+            logger.debug(f"Found {len(editorial_links)} editorial review links")
+            links_to_fetch.update(editorial_links)
+
+        # Web reviews
+        if kg.web_reviews:
+            web_review_links = {review.link for review in kg.web_reviews if review.link}
+            logger.debug(f"Found {len(web_review_links)} web review links")
+            links_to_fetch.update(web_review_links)
+
+        # Offers and merchants
+        if kg.offers:
+            offer_links = {offer.link for offer in kg.offers if offer.link}
+            logger.debug(f"Found {len(offer_links)} offer links")
+            links_to_fetch.update(offer_links)
+
+            # Merchant links from offers
+            merchant_links = {offer.merchant.link for offer in kg.offers if offer.merchant and offer.merchant.link}
+            logger.debug(f"Found {len(merchant_links)} merchant links")
+            links_to_fetch.update(merchant_links)
+
+        # Manufacturer
+        if kg.manufacturer and kg.manufacturer.link:
+            links_to_fetch.add(kg.manufacturer.link)
+            logger.debug("Found manufacturer link")
+
+        # Knowledge graph links
+        for link_field in ["programming_language_links", "developers_links", "engine_links", "platform_links"]:
+            if hasattr(kg, link_field) and getattr(kg, link_field):
+                kg_links = {link.link for link in getattr(kg, link_field) if link.link}
+                logger.debug(f"Found {len(kg_links)} {link_field}")
+                links_to_fetch.update(kg_links)
+
     if search_response.organic_results:
         organic_links = {result.link for result in search_response.organic_results if result.link}
         logger.debug(f"Found {len(organic_links)} organic result links")
@@ -623,6 +670,21 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
         logger.debug(f"Found {len(question_links)} related question links")
         links_to_fetch.update(question_links)
 
+    if search_response.web_sources:
+        web_source_links = {source.link for source in search_response.web_sources if source.link}
+        logger.debug(f"Found {len(web_source_links)} web source links")
+        links_to_fetch.update(web_source_links)
+
+    if search_response.courses:
+        course_links = {course.link for course in search_response.courses if course.link}
+        logger.debug(f"Found {len(course_links)} course links")
+        links_to_fetch.update(course_links)
+
+    if search_response.questions_and_answers:
+        qa_links = {qa.link for qa in search_response.questions_and_answers if qa.link}
+        logger.debug(f"Found {len(qa_links)} Q&A links")
+        links_to_fetch.update(qa_links)
+
     logger.info(f"Total unique links to fetch: {len(links_to_fetch)}")
 
     if links_to_fetch:
@@ -632,29 +694,73 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
 
         # Update content fields
         updated_count = 0
+
+        # Helper function to update content
+        def update_content(item, link_field="link"):  # type: ignore
+            nonlocal updated_count
+            if hasattr(item, link_field) and getattr(item, link_field) in fetched_contents:
+                item.content = fetched_contents[getattr(item, link_field)]
+                updated_count += 1
+
+        # Update knowledge graph content
+        if search_response.knowledge_graph:
+            kg = search_response.knowledge_graph
+
+            # Update editorial reviews
+            if kg.editorial_reviews:
+                for review in kg.editorial_reviews:
+                    update_content(review)
+
+            # Update web reviews
+            if kg.web_reviews:
+                for review in kg.web_reviews:
+                    update_content(review)
+
+            # Update offers and merchants
+            if kg.offers:
+                for offer in kg.offers:
+                    update_content(offer)
+                    if offer.merchant:
+                        update_content(offer.merchant)
+
+            # Update manufacturer
+            if kg.manufacturer:
+                update_content(kg.manufacturer)
+
+            # Update knowledge graph links
+            for link_field in ["programming_language_links", "developers_links", "engine_links", "platform_links"]:
+                if hasattr(kg, link_field) and getattr(kg, link_field):
+                    for link in getattr(kg, link_field):
+                        update_content(link)
+
+        # Update content for all relevant fields
         if search_response.organic_results:
             for result in search_response.organic_results:
-                if result.link in fetched_contents:
-                    result.content = fetched_contents[result.link]
-                    updated_count += 1
+                update_content(result)
 
         if search_response.discussions_and_forums:
             for forum in search_response.discussions_and_forums:
-                if forum.link in fetched_contents:
-                    forum.content = fetched_contents[forum.link]
-                    updated_count += 1
+                update_content(forum)
 
         if search_response.inline_videos:
             for video in search_response.inline_videos:
-                if video.link in fetched_contents:
-                    video.content = fetched_contents[video.link]
-                    updated_count += 1
+                update_content(video)
 
         if search_response.perspectives:
             for perspective in search_response.perspectives:
-                if perspective.link in fetched_contents:
-                    perspective.content = fetched_contents[perspective.link]
-                    updated_count += 1
+                update_content(perspective)
+
+        if search_response.web_sources:
+            for source in search_response.web_sources:
+                update_content(source)
+
+        if search_response.courses:
+            for course in search_response.courses:
+                update_content(course)
+
+        if search_response.questions_and_answers:
+            for qa in search_response.questions_and_answers:
+                update_content(qa)
 
         if search_response.related_questions:
             for question in search_response.related_questions:
@@ -837,6 +943,31 @@ def unset_image_fields(response: GoogleSearchResponse) -> GoogleSearchResponse:
         response.knowledge_graph.images = None
 
     return response
+
+
+def main() -> None:
+    """Main function to test Google search functionality"""
+    import asyncio
+    from pathlib import Path
+
+    # Create debug directory
+    debug_dir = Path("debug")
+    debug_dir.mkdir(exist_ok=True)
+
+    # Test search query
+    query = "best coffee maker 2024"
+
+    try:
+        response = asyncio.run(search_google(query))
+
+        # Save response to debug file
+        debug_file = debug_dir / "google_search_response.json"
+        with open(debug_file, "w") as f:
+            json.dump(response.model_dump(), f, indent=2, default=str)
+        logger.info(f"Response saved to {debug_file}")
+
+    except Exception as e:
+        logger.error(f"Failed to search: {str(e)}", exc_info=True)
 
 
 if __name__ == "__main__":
