@@ -63,7 +63,7 @@ async def scrape_product(url: str) -> ScrapeProductResponse:
                 # Convert slug to search query and run tasks in parallel
                 search_query = f"{slug.replace('-', ' ')} review"
                 product_task = fetch_amazon_product(asin)
-                search_task = search_google(query=search_query, scrape_content=True)
+                search_task = search_google(query=search_query, scrape_content=True, unset_images=True)
                 product_data, search_response = await asyncio.gather(product_task, search_task)
                 unified_product = convert_amazon_product(product_data.results[0].content)
 
@@ -73,7 +73,7 @@ async def scrape_product(url: str) -> ScrapeProductResponse:
                 unified_product = convert_amazon_product(product_data.results[0].content)
 
                 # Search using product title
-                search_response = await search_google(query=f"{unified_product.title} review", scrape_content=True)
+                search_response = await search_google(query=f"{unified_product.title} review", scrape_content=True, unset_images=True)
 
         elif is_walmart_url(url):
             # Extract product ID and slug
@@ -83,7 +83,7 @@ async def scrape_product(url: str) -> ScrapeProductResponse:
                 # Convert slug to search query and run tasks in parallel
                 search_query = f"{slug.replace('-', ' ')} review"
                 product_task = fetch_walmart_product(url)
-                search_task = search_google(query=search_query, scrape_content=True)
+                search_task = search_google(query=search_query, scrape_content=True, unset_images=True)
                 product_data, search_response = await asyncio.gather(product_task, search_task)
                 unified_product = convert_walmart_product(product_data.results[0].content)
             else:
@@ -92,7 +92,7 @@ async def scrape_product(url: str) -> ScrapeProductResponse:
                 unified_product = convert_walmart_product(product_data.results[0].content)
 
                 # Search using product title
-                search_response = await search_google(query=f"{unified_product.title} review", scrape_content=True)
+                search_response = await search_google(query=f"{unified_product.title} review", scrape_content=True, unset_images=True)
 
         else:
             raise ValueError("Only Amazon and Walmart URLs are supported")
