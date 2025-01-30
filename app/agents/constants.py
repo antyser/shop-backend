@@ -1,0 +1,6 @@
+GEMINI_MODEL = "google/gemini-2.0-flash-thinking-exp:free"
+DEEPSEEK_R1_FREE_MODEL = "deepseek/deepseek-r1:free"
+DEEPSEEK_R1_MODEL = "deepseek/deepseek-r1"
+GPT_4_MODEL = "openai/chatgpt-4o-latest"
+GPT_4_MINI_MODEL = "openai/gpt-4O-mini"
+CLAUDE_3_5_SONNET_MODEL = "anthropic/claude-3.5-sonnet"

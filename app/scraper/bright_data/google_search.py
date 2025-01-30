@@ -1,4 +1,5 @@
 import asyncio
+import os
 import sys
 from datetime import datetime
 
@@ -7,15 +8,16 @@ from dotenv import load_dotenv
 from loguru import logger
 from pydantic import BaseModel
 
-from app.config import get_settings
 from app.scraper.crawler.html_fetcher import fetch_batch
 
 # Load environment variables
 load_dotenv()
 
-# Proxy configuration
+# Get proxy config from environment
 PROXY_HOST = "brd.superproxy.io"
 PROXY_PORT = "33335"
+PROXY_USERNAME = os.getenv("BRIGHT_DATA_USERNAME")
+PROXY_PASSWORD = os.getenv("BRIGHT_DATA_PASSWORD")
 
 
 class GeneralInfo(BaseModel):
@@ -171,17 +173,13 @@ async def google_search(query: str, scrape_content: bool = False) -> GoogleSearc
         or None if request fails
     """
     try:
-        settings = get_settings()
-        proxy_username = settings.BRIGHT_DATA_USERNAME
-        proxy_password = settings.BRIGHT_DATA_PASSWORD
-
         # Validate proxy credentials exist
-        if not all([proxy_username, proxy_password]):
-            logger.error("Missing proxy credentials in settings")
+        if not all([PROXY_USERNAME, PROXY_PASSWORD]):
+            logger.error("Missing proxy credentials in environment")
             return None
 
         # Format proxy auth and URL
-        proxy_auth = aiohttp.BasicAuth(proxy_username, proxy_password)
+        proxy_auth = aiohttp.BasicAuth(PROXY_USERNAME, PROXY_PASSWORD)
         url = f"https://www.google.com/search?q={query}&gl=us&hl=en&brd_json=1"
 
         # Make request through proxy

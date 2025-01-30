@@ -7,8 +7,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     """Global application settings"""
 
-    ENVIRONMENT: str = Field(..., env="ENVIRONMENT")
-
     # API Settings
     API_V0_STR: str = "/v0"
     PROJECT_NAME: str = "Shop Backend API"
@@ -46,6 +44,8 @@ class Settings(BaseSettings):
     MAX_CONCURRENT_REQUESTS: int = 10
     REQUEST_TIMEOUT: int = 30
     MAX_RETRIES: int = 3
+
+    OPENROUTER_API_KEY: str = Field(..., env="OPENROUTER_API_KEY")
 
     # Cache Settings
     CACHE_TTL: int = 3600  # 1 hour
