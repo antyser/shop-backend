@@ -44,6 +44,10 @@ def test_extract_asin_and_slug(url: str, expected_asin: str, expected_slug: str 
         ("https://amazon.co.uk/dp/B0107QP1VE", True),
         ("https://www.amazon.com/not-a-product", False),
         ("https://www.fake-amazon.com/dp/B0107QP1VE", False),
+        (
+            "https://www.amazon.com/gp/aw/d/B08FWXPRFP/?_encoding=UTF8&pd_rd_plhdr=t&aaxitk=d2985da0d2bf385a04fe04d96f96bf5b&hsa_cr_id=0&qid=1737901978&sr=1-1-9e67e56a-6f64-441f-a281-df67fc737124&ref_=sbx_be_s_sparkle_lsi4d_asin_0_img&pd_rd_w=NKQgY&content-id=amzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942%3Aamzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_p=8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_r=T5K2MPMEN5D7RWH0GDQM&pd_rd_wg=yQjdN&pd_rd_r=91b2a848-21f8-4afa-bedb-3093bfba4a19&th=1:",
+            True,
+        ),
         ("not a url", False),
     ],
 )

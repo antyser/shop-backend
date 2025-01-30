@@ -12,19 +12,19 @@ The goal is to help you maintain a big picture as well as the progress of the ta
 
 # Tools
 
-Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script.
+Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script. You should put your scripts in ./cursor_scripts
 
 ## Screenshot Verification
 The screenshot verification workflow allows you to capture screenshots of web pages and verify their appearance using LLMs. The following tools are available:
 
 1. Screenshot Capture:
 ```bash
-venv/bin/python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
 ```
 
 2. LLM Verification with Images:
 ```bash
-venv/bin/python tools/llm_api.py --prompt "Your verification question" --provider {openai|anthropic} --image path/to/screenshot.png
+python tools/llm_api.py --prompt "Your verification question" --provider {openai|anthropic} --image path/to/screenshot.png
 ```
 
 Example workflow:
@@ -48,7 +48,7 @@ print(response)
 
 You always have an LLM at your side to help you with the task. For simple tasks, you could invoke the LLM by running the following command:
 ```
-venv/bin/python ./tools/llm_api.py --prompt "What is the capital of France?" --provider "gemini"
+python ./tools/llm_api.py --prompt "What is the capital of France?" --provider "gemini"
 ```
 
 The LLM API supports multiple providers:
@@ -127,3 +127,52 @@ If needed, you can further use the `web_scraper.py` file to scrape the web page 
   - Place happy path last in functions
 
 # Scratchpad
+
+## Current Task: Create Product Research Agent V1
+Create a simplified version of the product research agent with the following changes:
+1. Only use scrape_product tool from service.py
+2. Implement with OpenRouter model using raw OpenAI client
+
+### Plan:
+[X] Create product_research_agent_v1.py
+[X] Set up OpenRouter configuration with OpenAI client
+[X] Implement workflow pattern for product analysis
+[X] Add example usage in main block
+[X] Add local caching for scrape results
+[X] Add Oxylabs universal scraper for Reddit URLs
+
+### Progress:
+- Created product_research_agent_v1.py with:
+  - Single review field in ProductReviewAnalysis model
+  - OpenRouter integration using raw OpenAI client
+  - Sequential workflow: scrape then analyze
+  - Example usage in main block
+- Using Claude 3 Opus model for better analysis
+- Added error handling and logging for both scraping and review generation
+- Structured context from product data and search results
+- Fixed JSON serialization using model_dump()
+- Added response validation for model output
+- Added local file-based caching for scrape results
+- Added Oxylabs universal scraper for Reddit URLs:
+  - Fixed URL parameter bug
+  - Added proper HTML/Markdown conversion
+  - Added debug file saving
+  - Added content preview in logs
+  - Fixed model schema to match actual response
+  - Added raw response saving for debugging
+  - Disabled parsing to get raw HTML
+- Requires OPENROUTER_API_KEY in .env file
+
+### Lessons:
+- When using OpenRouter with tools, use Claude 3 Opus model as it has better tool support
+- Other models like Gemini may not support function/tool calling through OpenRouter
+- For simpler workflows, using raw OpenAI client can be more straightforward than using pydantic-ai tools
+- Always use model_dump() to convert Pydantic models to dictionaries before JSON serialization
+- Always validate LLM response fields before accessing them (choices, message, content)
+- Use specialized crawlers for specific sites (e.g., Oxylabs universal scraper for Reddit)
+- Implement caching for expensive operations like web scraping to improve performance
+- Handle scraping errors gracefully and provide meaningful error messages
+- When using external APIs, ensure proper parameter naming to avoid URL overwriting
+- Save raw HTML for debugging and convert to markdown only when needed
+- When working with external APIs, save raw responses for debugging schema issues
+- Disable parsing in scrapers when raw HTML is needed

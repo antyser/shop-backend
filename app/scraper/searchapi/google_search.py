@@ -1,6 +1,5 @@
 import asyncio
 import json
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -10,7 +9,8 @@ from loguru import logger
 from pydantic import BaseModel, Field, model_validator
 
 from app.config import get_settings
-from app.scraper.crawler.html_fetcher import fetch_batch
+from app.scraper.crawler.html_fetcher import OutputFormat, fetch_batch
+from app.utils.count_token import count_model_tokens, count_tokens
 
 
 class SearchMetadata(BaseModel):
@@ -604,6 +604,7 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
         GoogleSearchResponse with updated content fields
     """
     logger.info("Starting content scraping")
+    initial_token_count = count_model_tokens(search_response)
     links_to_fetch = set()
 
     # Collect links from all relevant fields
@@ -689,18 +690,26 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
 
     if links_to_fetch:
         logger.info("Starting batch fetch of content")
-        fetched_contents = await fetch_batch(list(links_to_fetch))
+        fetched_contents = await fetch_batch(list(links_to_fetch), output_format=OutputFormat.SUMMARY)
         logger.info(f"Successfully fetched {len(fetched_contents)} contents")
 
-        # Update content fields
-        updated_count = 0
+        # Track token counts for each content type
+        content_token_counts: dict[str, int] = {}
 
-        # Helper function to update content
-        def update_content(item, link_field="link"):  # type: ignore
-            nonlocal updated_count
-            if hasattr(item, link_field) and getattr(item, link_field) in fetched_contents:
-                item.content = fetched_contents[getattr(item, link_field)]
-                updated_count += 1
+        # Helper function to update content and track tokens
+        def update_content(item: Any, link_field: str = "link") -> bool:
+            if hasattr(item, link_field):
+                link = getattr(item, link_field)
+                if link and link in fetched_contents:
+                    content = fetched_contents[link]
+                    if content:  # Only update if content is not None
+                        item.content = content
+                        # Track tokens for this content type
+                        content_type = type(item).__name__
+                        content_tokens = count_tokens(content)
+                        content_token_counts[content_type] = content_token_counts.get(content_type, 0) + content_tokens
+                        return True
+            return False
 
         # Update knowledge graph content
         if search_response.knowledge_graph:
@@ -765,10 +774,20 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
         if search_response.related_questions:
             for question in search_response.related_questions:
                 if question.source and question.source.link in fetched_contents:
-                    question.source.content = fetched_contents[question.source.link]
-                    updated_count += 1
+                    content = fetched_contents[question.source.link]
+                    if content and isinstance(content, str):
+                        question.source.content = content
+                        content_tokens = count_tokens(content)
+                        content_token_counts["RelatedQuestionSource"] = content_token_counts.get("RelatedQuestionSource", 0) + content_tokens
 
-        logger.info(f"Updated content for {updated_count} results")
+        # Log token counts for each content type
+        logger.info("Token counts by content type:")
+        for content_type, token_count in content_token_counts.items():
+            logger.info(f"  {content_type}: {token_count} tokens")
+
+        final_token_count = count_model_tokens(search_response)
+        total_new_tokens = final_token_count - initial_token_count
+        logger.info(f"Total tokens added from content: {total_new_tokens}")
 
     return search_response
 
@@ -796,6 +815,7 @@ async def search_google(
         start_index: Starting index for pagination
         save_debug: Whether to save debug directory
         scrape_content: Whether to fetch content from links
+        unset_images: Whether to remove image fields
 
     Returns:
         GoogleSearchResponse object containing search results with fetched content
@@ -829,21 +849,20 @@ async def search_google(
 
         response_json = response.json()
         search_response = GoogleSearchResponse.model_validate(response_json)
-
-        # Save initial response if debug is enabled
-        if save_debug:
-            debug_dir = Path("debug/google_search")
-            debug_dir.mkdir(parents=True, exist_ok=True)
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            initial_file = debug_dir / f"{timestamp}_initial.json"
-            initial_file.write_text(json.dumps(search_response.model_dump(), indent=2))
-            logger.info(f"Saved initial response to {initial_file}")
+        initial_token_count = count_model_tokens(search_response)
+        logger.info(f"Initial response contains {initial_token_count} tokens")
 
         if scrape_content:
             search_response = await scrape_search_content(search_response)
+            after_scrape_token_count = count_model_tokens(search_response)
+            logger.info(f"After scraping content: {after_scrape_token_count} tokens (added {after_scrape_token_count - initial_token_count} tokens)")
 
         if unset_images:
             search_response = unset_image_fields(search_response)
+            after_unset_token_count = count_model_tokens(search_response)
+            logger.info(
+                f"After unsetting images: {after_unset_token_count} tokens (reduced {after_scrape_token_count - after_unset_token_count} tokens)"
+            )
 
         if save_debug:
             debug_dir = Path("debug/searchapi/google_search")
@@ -886,63 +905,42 @@ async def fetch_url(url: str, client: httpx.AsyncClient) -> str:
         return ""
 
 
+def recursive_unset(obj: Any) -> Any:
+    """Recursively unset image fields in nested structures"""
+    if isinstance(obj, dict):
+        # Remove image-related fields
+        for field in ["favicon", "image", "images", "thumbnail"]:
+            obj.pop(field, None)
+
+        # Recurse into remaining dictionary values
+        return {k: recursive_unset(v) for k, v in obj.items()}
+
+    elif isinstance(obj, list):
+        # Recurse into list items
+        return [recursive_unset(item) for item in obj]
+
+    return obj
+
+
 def unset_image_fields(response: GoogleSearchResponse) -> GoogleSearchResponse:
     """
-    Remove image-related fields from GoogleSearchResponse to reduce payload size
+    Recursively remove all image-related fields from GoogleSearchResponse to reduce payload size.
+    Handles fields: favicon, image, images, thumbnail across all nested objects.
 
     Args:
         response: Original GoogleSearchResponse object
 
     Returns:
-        GoogleSearchResponse with image fields removed
+        GoogleSearchResponse with all image-related fields removed
     """
-    if response.organic_results:
-        for result in response.organic_results:
-            result.favicon = None
+    # Convert to dict for easier manipulation
+    data = response.model_dump()
 
-    if response.discussions_and_forums:
-        for forum in response.discussions_and_forums:
-            forum.favicon = None
+    # Clean the data recursively
+    cleaned_data = recursive_unset(data)
 
-    if response.inline_videos:
-        for video in response.inline_videos:
-            video.image = None
-            if video.key_moments:
-                for moment in video.key_moments:
-                    moment.thumbnail = None
-
-    if response.inline_images:
-        response.inline_images = None
-
-    if response.inline_recipes:
-        for recipe in response.inline_recipes:
-            recipe.thumbnail = None
-
-    if response.inline_shopping:
-        for item in response.inline_shopping:
-            item.thumbnail = None
-
-    if response.top_stories:
-        for story in response.top_stories:
-            story.thumbnail = None
-
-    if response.perspectives:
-        for perspective in response.perspectives:
-            perspective.thumbnail = None
-
-    if response.courses:
-        for course in response.courses:
-            course.thumbnail = None
-
-    if response.explore_brands:
-        for brand in response.explore_brands:
-            brand.thumbnail = None
-
-    if response.knowledge_graph:
-        response.knowledge_graph.image = None
-        response.knowledge_graph.images = None
-
-    return response
+    # Convert back to GoogleSearchResponse
+    return GoogleSearchResponse.model_validate(cleaned_data)  # type: ignore
 
 
 def main() -> None:
@@ -975,25 +973,6 @@ if __name__ == "__main__":
     # init_logfire()
     queries = [
         "Murad Retinol Youth Renewal Serum",
-        "Samsonite Freeform 21-Inch Hardside Carry-On Luggage with Spinner Wheels",
-        "Orgain Organic Vegan 21g Protein Powder",
-        "NEW Lego Friends Central Perk Cafe (21319) BRAND",
-        "Nespresso Vertuo Pop+ Combination Espresso and Coffee Maker",
-        "Big Daisy Earrings with Opal in Sterling Silver, Woodstock Festival Statement Jewelry",
-        "Nike Free Metcon 6",
-        "Sharper Image Power Percussion Pro+ Hot + Cold Percussion Massager",
-        "LG - Counter-Depth MAX 25.5 Cu. Ft. French Door Smart Refrigerator with Dual Ice - Stainless Steel",
-        "Galaxy Z Flip6",
-        "Aquaphor Aquaphor Healing Ointment",
-        "Insta360 X4 Standard Bundle - Waterproof 8K 360 Action Camera",
-        "BÅRSLÖV",
-        "Side Knot Sleeveless Sheath Midi Dress",
-        "RYOBI ONE+ 18V Lithium-Ion 4.0 Ah Battery, 2.0 Ah Battery, and Charger Kit with ONE+ Hybrid WHISPER SERIES 7-1/2 in. Fan review",
-        "Bones & Chews All-Natural Beef Lung Dehydrated Dog Treats",
-        "MICHAEL Michael Kors Sallie Medium Crossbody",
-        "Cestar Coffee Table",
-        "Gap Modern Rib Cropped T-Shirt",
-        "Zara TRF DENIM OVERSHIRT",
     ]
     for query in queries:
         results = asyncio.run(search_google(query + " review", scrape_content=True))

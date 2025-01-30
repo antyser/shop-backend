@@ -4,28 +4,32 @@ from urllib.parse import unquote, urlparse, urlunparse
 
 def is_amazon_url(url: str) -> bool:
     """
-    Check if URL is a valid Amazon product URL
+    Check if URL is from Amazon product page
 
     Args:
-        url: URL to check
+        url: URL string to check
 
     Returns:
-        bool: True if valid Amazon product URL
+        bool: True if URL is from Amazon product page
     """
     try:
-        # Parse URL
+        # Parse the URL
         parsed = urlparse(url)
 
-        # Check domain - only allow amazon.com and amazon.co.uk etc.
-        if not re.match(r"^(?:www\.)?amazon\.[a-z.]+$", parsed.netloc):
+        # Check domain is amazon
+        if not re.match(r"^(?:www\.)?amazon\.(?:com|co\.uk|ca|de|fr|co\.jp|in|it|es|nl)$", parsed.netloc.lower()):
             return False
 
-        # Check path pattern for product URLs
-        path = parsed.path
-        is_dp = bool(re.search(r"/dp/[A-Z0-9]{10}", path))
-        is_gp = bool(re.search(r"/gp/product/[A-Z0-9]{10}", path))
+        # Check path patterns for product pages
+        path = parsed.path.rstrip("/")
+        valid_patterns = [
+            r"/dp/[A-Za-z0-9]{10}",  # Standard product URL
+            r"/gp/product/[A-Za-z0-9]{10}",  # Alternative product URL
+            r"/gp/aw/d/[A-Za-z0-9]{10}",  # Mobile URLs
+            r"/[^/]+/dp/[A-Za-z0-9]{10}",  # Category URLs
+        ]
 
-        return is_dp or is_gp
+        return any(re.search(pattern, path, re.IGNORECASE) for pattern in valid_patterns)
 
     except Exception:
         return False

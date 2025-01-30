@@ -2,14 +2,18 @@ import asyncio
 from enum import Enum
 from pathlib import Path
 from typing import Any
+from xml.etree.ElementTree import Element
 
 import chardet
 import html5lib
 import httpx
+import logfire
 from fake_headers import Headers
 from loguru import logger
 
+from app.agents.summarizer import generate_summary
 from app.config import get_settings
+from app.scraper.oxylabs.universal.scraper import fetch_universal
 from app.scraper.youtube.transcript import aget_transcript
 from app.utils.counter import crawler_counter
 
@@ -19,6 +23,7 @@ class OutputFormat(str, Enum):
 
     HTML = "html"
     MARKDOWN = "markdown"
+    SUMMARY = "summary"
 
 
 def save_debug_files(url: str, html: str, markdown: str | None) -> None:
@@ -172,12 +177,10 @@ async def fetch(
         use_external_crawler: Whether to use Spider API
 
     Returns:
-        HTML or markdown content if successful, None otherwise
+        HTML, markdown, or summary content if successful, None otherwise
     """
-
-    # TODO: spider api has batch mode and markdown parsing. Need benchmark against our own implementation.
     try:
-        logger.info(f"Fetching content from {'Spider API' if use_external_crawler else 'direct request'}: " f"{url}")
+        logger.info(f"Fetching content from {'Spider API' if use_external_crawler else 'direct request'}: {url}")
 
         # Fetch content using appropriate method
         content = await fetch_with_spider(url) if use_external_crawler else await fetch_direct(url)
@@ -186,10 +189,19 @@ async def fetch(
             logger.error("No content received")
             return None
 
-        if output_format == OutputFormat.MARKDOWN:
+        # Convert to markdown first if needed
+        if output_format in (OutputFormat.MARKDOWN, OutputFormat.SUMMARY):
             markdown_content = html_to_markdown(content)
+            if not markdown_content:
+                return None
+
             if save_debug:
                 save_debug_files(url, content, markdown_content)
+
+            # Generate summary if requested
+            if output_format == OutputFormat.SUMMARY:
+                return await generate_summary(markdown_content)  # type: ignore
+
             return markdown_content
 
         if save_debug:
@@ -220,7 +232,7 @@ def html_to_markdown(html_content: str) -> str | None:
         result = []
         seen_texts = set()  # To avoid duplicates
 
-        def should_skip_element(elem: Any) -> bool:
+        def should_skip_element(elem: Element) -> bool:
             """Check if the element should be skipped."""
             tag_str = str(elem.tag)
             # Skip common non-content elements
@@ -236,7 +248,7 @@ def html_to_markdown(html_content: str) -> str | None:
                 return True
 
             # Skip elements with specific class/id patterns
-            for attr, value in elem.items():
+            for attr, value in elem.attrib.items():
                 if str(attr).endswith(("class", "id")):
                     skip_patterns = {
                         "cookie",
@@ -299,7 +311,7 @@ def html_to_markdown(html_content: str) -> str | None:
                     # Handle links
                     if tag_str == "{http://www.w3.org/1999/xhtml}a":
                         href = None
-                        for attr, value in elem.items():
+                        for attr, value in elem.attrib.items():
                             if str(attr).endswith("href"):
                                 href = value
                                 break
@@ -432,16 +444,35 @@ async def fetch_batch(
             if youtube_id:
                 # Call transcript function for YouTube links
                 tasks.append(aget_transcript(youtube_id))
+            elif "reddit.com" in url:
+                # Use Oxylabs for Reddit URLs
+                tasks.append(fetch_universal(url))
             else:
                 # Fetch HTML content for non-YouTube links
                 tasks.append(fetch(url, output_format, save_debug, use_external_crawler))
 
         # Wait for batch completion
-        batch_results = await asyncio.gather(*tasks)
+        batch_results = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Map results to URLs
         for url, result in zip(batch, batch_results, strict=False):
-            results[url] = result
+            if isinstance(result, Exception):
+                logger.error(f"Failed to fetch {url}: {str(result)}")
+                results[url] = None
+            elif "reddit.com" in url and hasattr(result, "results"):
+                # Extract content from Oxylabs response
+                content = result.results[0].content  # type: ignore
+                if output_format == OutputFormat.MARKDOWN:
+                    # Convert HTML to markdown if needed
+                    results[url] = html_to_markdown(content.html)
+                    if save_debug:
+                        save_debug_files(url, content.html, results[url])
+                else:
+                    results[url] = content.html
+                    if save_debug:
+                        save_debug_files(url, content.html, None)
+            else:
+                results[url] = result  # type: ignore
 
         logger.info(f"Completed batch {i//max_concurrent + 1}, " f"processed {len(results)}/{len(urls)} URLs")
 
@@ -449,4 +480,18 @@ async def fetch_batch(
 
 
 if __name__ == "__main__":
-    asyncio.run(fetch_batch(["https://us.sengled.com/?srsltid=AfmBOooZN01Nn7DFngmVx5Pjt86DLG37GbGskjiqZdlXc9Y9Y3o_4oy7"]))
+    import asyncio
+
+    logfire.configure()
+
+    # Test Reddit URL
+    reddit_url = "https://www.reddit.com/r/Insta360/comments/1c6jbpi/poll_insta360_x4_buy_it_or_skip_it_please_comment/"
+    results = asyncio.run(fetch_batch(urls=[reddit_url], output_format=OutputFormat.MARKDOWN, save_debug=True))
+
+    # Print results
+    for url, content in results.items():
+        if content:
+            logger.info(f"Successfully fetched {url}")
+            logger.info(f"Content preview:\n{content[:500]}...")
+        else:
+            logger.error(f"Failed to fetch {url}")

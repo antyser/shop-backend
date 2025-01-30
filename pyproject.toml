@@ -49,6 +49,7 @@ dependencies = [
     "sentry-sdk>=2.20.0",
     "streamlit>=1.41.1",
     "supabase>=2.11.0",
+    "tiktoken>=0.8.0",
     "types-requests>=2.32.0.20241016",
     "unstructured>=0.16.12",
     "uvicorn>=0.34.0",
