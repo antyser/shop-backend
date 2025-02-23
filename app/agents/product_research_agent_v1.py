@@ -100,9 +100,6 @@ async def generate_full_review(context: dict) -> FullReview:
         logger.info("Generating full product review")
         system_prompt = (
             "You are a product research expert. "
-            "Analyze product features and reviews to provide balanced feedback. "
-            "First say how to select this type of product and then provide a review given this "
-            "product's features and reviews."
         )
 
         response = await client.chat.completions.create(
@@ -114,7 +111,7 @@ async def generate_full_review(context: dict) -> FullReview:
                     "content": (
                         f"Here is the product data and related reviews to analyze:\n"
                         f"{json.dumps(context, indent=2)}\n\n"
-                        f"Please provide a comprehensive review."
+                        f"Please provide a review including key features, pros/cons, and verdict."
                     ),
                 },
             ],
