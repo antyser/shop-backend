@@ -1,95 +1,60 @@
-# Shop Backend
+# Smolagents with OpenAI o3-mini
 
-A Python backend service using FastAPI.
+This project demonstrates how to use the [smolagents](https://github.com/huggingface/smolagents) library with OpenAI's o3-mini model to create powerful AI agents.
 
-## Development Setup
+## Setup
 
-### Prerequisites
+1. Make sure you have Python 3.8+ installed.
 
-1. Install [uv](https://github.com/astral-sh/uv):
+2. Install the required packages:
    ```bash
-   # macOS
-   brew install uv
-   
-   # Linux/macOS (alternative)
-   curl -LsSf https://astral.sh/uv/install.sh | sh
+   pip install smolagents python-dotenv
    ```
 
-### Project Setup
-
-1. Create virtual environment for ide
-   ```bash
-   uv venv
+3. Create a `.env` file in the project root with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
    ```
 
-2. Install dependencies:
-   ```bash
-   uv sync
-   ```
+## Available Scripts
 
-### Running Scripts
+### Basic Example
 
-All Python scripts should be run using `uv run` prefix:
+Run the basic example with:
 
 ```bash
-
-# Run tests
-uv run pytest
-
-# Run specific script
-uv run python path/to/script.py
+python smolagent_demo.py
 ```
 
-### Project Structure
-```
-shop-backend/
-├── .venv/             # Virtual environment
-├── pyproject.toml     # Project configuration and dependencies
-└── src/               # Source code
-    └── shop_backend/  # Main package directory
-```
+This script creates a simple CodeAgent with the DuckDuckGoSearchTool and uses it to answer a question about France.
 
-## Troubleshooting
+### Advanced Example
 
-### Virtual Environment Issues
-
-If you need to recreate the virtual environment:
-```bash
-rm -rf .venv
-uv venv
-uv sync
-```
-
-## Development Guidelines
-
-Use pre-commit hooks for code quality:
-   ```bash
-   # Install pre-commit hooks
-   source .venv/bin/activate
-   pre-commit install
-   
-   # Run pre-commit hooks manually
-   pre-commit run --all-files
-   ```
-
-It includes
-
-- **Black**: Code formatter that ensures consistent code style
-- **Ruff**: Fast Python linter that combines multiple tools
-- **Mypy**: Static type checker for Python
-
-These tools are automatically run on each commit through pre-commit hooks. You can also run them manually:
+Run the advanced example with:
 
 ```bash
-# Format code with Black
-uv run black .
-
-# Lint with Ruff
-uv run ruff check .
-uv run ruff check . --fix  # Auto-fix issues
-
-# Type check with Mypy
-uv run mypy .
+python smolagent_advanced.py
 ```
 
-Follow bast Practices https://github.com/zhanymkanov/fastapi-best-practices
+This script demonstrates using multiple tools (web search, Python code execution, and web browsing) to find weather information and create a visualization.
+
+### ToolCallingAgent Example
+
+Run the ToolCallingAgent example with:
+
+```bash
+python smolagent_toolcalling.py
+```
+
+This script shows how to use the ToolCallingAgent (which uses JSON/text blobs for actions instead of code) with web search and user input tools.
+
+## Key Features of smolagents
+
+- **Code Agents**: Agents write their actions in Python code, which is more efficient than traditional tool-calling approaches.
+- **Multiple Model Support**: Works with various LLM providers including OpenAI, Anthropic, and open-source models.
+- **Tool Integration**: Easily integrate with various tools for web search, code execution, web browsing, and more.
+- **Modality Support**: Handles text, vision, video, and audio inputs.
+
+## Documentation
+
+For more information, visit the [smolagents GitHub repository](https://github.com/huggingface/smolagents).

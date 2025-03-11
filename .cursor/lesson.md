@@ -1,0 +1,43 @@
+## Cursor learned
+
+- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
+- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
+- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
+- Use 'gpt-4o' as the model name for OpenAI's GPT-4 with vision capabilities
+- Use functional, declarative programming; avoid classes where possible
+- Prefer iteration and modularization over code duplication
+- Favor named exports for routes and utility functions
+- Use the Receive an Object, Return an Object (RORO) pattern
+- For FastAPI:
+  - Use type hints for all function signatures
+  - Prefer Pydantic models over raw dictionaries for input validation
+  - Use Optional instead of | None
+  - Use model_dump instead of dict() for Pydantic models
+  - Always handle ValidationError and log the errors when loading Pydantic models
+  - Follow the recommended FastAPI project structure:
+    - Domain directories inside src folder
+    - Separate router.py, models.py, db_models.py, service.py, etc.
+    - Use dependencies.py for router dependencies
+    - Implement proper error handling with custom exceptions
+- Performance best practices:
+  - Minimize blocking I/O operations
+  - Use asynchronous operations for database and external API calls
+  - Implement caching for static and frequently accessed data
+  - Use lazy loading for large datasets
+  - Handle errors and edge cases at the beginning of functions
+  - Use early returns for error conditions
+  - Place happy path last in functions
+
+### Lessons:
+- When using OpenRouter with tools, use Claude 3 Opus model as it has better tool support
+- Other models like Gemini may not support function/tool calling through OpenRouter
+- For simpler workflows, using raw OpenAI client can be more straightforward than using pydantic-ai tools
+- Always use model_dump() to convert Pydantic models to dictionaries before JSON serialization
+- Always validate LLM response fields before accessing them (choices, message, content)
+- Use specialized crawlers for specific sites (e.g., Oxylabs universal scraper for Reddit)
+- Implement caching for expensive operations like web scraping to improve performance
+- Handle scraping errors gracefully and provide meaningful error messages
+- When using external APIs, ensure proper parameter naming to avoid URL overwriting
+- Save raw HTML for debugging and convert to markdown only when needed
+- When working with external APIs, save raw responses for debugging schema issues
+- Disable parsing in scrapers when raw HTML is needed

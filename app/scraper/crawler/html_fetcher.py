@@ -1,4 +1,5 @@
 import asyncio
+import re
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -11,9 +12,10 @@ import logfire
 from fake_headers import Headers
 from loguru import logger
 
-from app.agents.summarizer import generate_summary
 from app.config import get_settings
+from app.llm.func.summarizer import generate_summary
 from app.scraper.oxylabs.universal.scraper import fetch_universal
+from app.scraper.reddit.json_parser import convert_reddit_json_to_markdown
 from app.scraper.youtube.transcript import aget_transcript
 from app.utils.counter import crawler_counter
 
@@ -164,6 +166,30 @@ async def fetch_with_spider(url: str) -> str | None:
         return None
 
 
+def sanitize_markdown_links(markdown: str) -> str:
+    """
+    Remove external links from markdown content while preserving text
+
+    Args:
+        markdown: Markdown content with links
+
+    Returns:
+        Markdown content with links removed
+    """
+    if markdown is None:
+        return None
+
+    # Replace markdown links with just the text
+    link_pattern = r"\[([^\]]+)\]\([^)]+\)"
+    sanitized = re.sub(link_pattern, r"\1", markdown)
+
+    # Replace bare URLs with empty string
+    url_pattern = r"https?://\S+"
+    sanitized = re.sub(url_pattern, "", sanitized)
+
+    return sanitized
+
+
 async def fetch(
     url: str, output_format: OutputFormat = OutputFormat.MARKDOWN, save_debug: bool = False, use_external_crawler: bool = False
 ) -> str | None:
@@ -186,13 +212,23 @@ async def fetch(
         content = await fetch_with_spider(url) if use_external_crawler else await fetch_direct(url)
 
         if not content:
-            logger.error("No content received")
+            # If direct fetch failed, try to get status code for better debugging
+            if not use_external_crawler:
+                try:
+                    async with httpx.AsyncClient(timeout=5.0, follow_redirects=True) as client:
+                        response = await client.get(url)
+                        logger.error(f"Failed to fetch content from {url} (HTTP Status: {response.status_code})")
+                except Exception as e:
+                    logger.error(f"Failed to fetch content from {url} (Error: {str(e)})")
+            else:
+                logger.error(f"Failed to fetch content from {url} using Spider API")
             return None
 
         # Convert to markdown first if needed
         if output_format in (OutputFormat.MARKDOWN, OutputFormat.SUMMARY):
             markdown_content = html_to_markdown(content)
             if not markdown_content:
+                logger.error("Failed to convert HTML to markdown")
                 return None
 
             if save_debug:
@@ -247,27 +283,6 @@ def html_to_markdown(html_content: str) -> str | None:
             if tag_str in skip_tags:
                 return True
 
-            # Skip elements with specific class/id patterns
-            for attr, value in elem.attrib.items():
-                if str(attr).endswith(("class", "id")):
-                    skip_patterns = {
-                        "cookie",
-                        "banner",
-                        "ad-",
-                        "advertisement",
-                        "popup",
-                        "modal",
-                        "sidebar",
-                        "menu",
-                        "nav-",
-                        "footer",
-                        "header",
-                        "comment",
-                    }
-                    if any(pattern in str(value).lower() for pattern in skip_patterns):
-                        return True
-
-            # Skip empty elements
             if not any(text.strip() for text in elem.itertext()):
                 return True
 
@@ -412,6 +427,26 @@ def extract_youtube_id(url: str) -> str | None:
     return None
 
 
+def convert_reddit_url_to_json(url: str) -> str:
+    """Convert a Reddit URL to its JSON API equivalent.
+
+    Args:
+        url: Reddit URL
+
+    Returns:
+        JSON API URL
+    """
+    # Remove trailing slash if present
+    if url.endswith("/"):
+        url = url[:-1]
+
+    # Add .json extension if not already present
+    if not url.endswith(".json"):
+        url = f"{url}.json"
+
+    return url
+
+
 async def fetch_batch(
     urls: list[str],
     output_format: OutputFormat = OutputFormat.MARKDOWN,
@@ -423,11 +458,11 @@ async def fetch_batch(
     Download HTML content from multiple URLs concurrently
 
     Args:
-        urls: List of target URLs to fetch
+        urls: List of URLs to fetch
         output_format: Desired output format
         save_debug: Whether to save debug files
         use_external_crawler: Whether to use Spider API
-        max_concurrent: Maximum concurrent requests
+        max_concurrent: Maximum number of concurrent requests
 
     Returns:
         Dictionary mapping URLs to their content
@@ -445,8 +480,10 @@ async def fetch_batch(
                 # Call transcript function for YouTube links
                 tasks.append(aget_transcript(youtube_id))
             elif "reddit.com" in url:
-                # Use Oxylabs for Reddit URLs
-                tasks.append(fetch_universal(url))
+                # Convert Reddit URL to JSON API URL and fetch with universal fetcher
+                json_url = convert_reddit_url_to_json(url)
+                logger.info(f"Converting Reddit URL to JSON API: {url} -> {json_url}")
+                tasks.append(fetch_universal(json_url))
             else:
                 # Fetch HTML content for non-YouTube links
                 tasks.append(fetch(url, output_format, save_debug, use_external_crawler))
@@ -459,22 +496,21 @@ async def fetch_batch(
             if isinstance(result, Exception):
                 logger.error(f"Failed to fetch {url}: {str(result)}")
                 results[url] = None
-            elif "reddit.com" in url and hasattr(result, "results"):
-                # Extract content from Oxylabs response
-                content = result.results[0].content  # type: ignore
-                if output_format == OutputFormat.MARKDOWN:
-                    # Convert HTML to markdown if needed
-                    results[url] = html_to_markdown(content.html)
-                    if save_debug:
-                        save_debug_files(url, content.html, results[url])
-                else:
-                    results[url] = content.html
-                    if save_debug:
-                        save_debug_files(url, content.html, None)
+            elif "reddit.com" in url and isinstance(result, str):
+                # Process Reddit JSON content
+                try:
+                    markdown = convert_reddit_json_to_markdown(result)
+                    # Remove links from Reddit markdown
+                    markdown = sanitize_markdown_links(markdown)
+                    results[url] = markdown
+                except Exception as e:
+                    logger.error(f"Failed to convert Reddit JSON to markdown: {e}")
+                    results[url] = None
             else:
-                results[url] = result  # type: ignore
-
-        logger.info(f"Completed batch {i//max_concurrent + 1}, " f"processed {len(results)}/{len(urls)} URLs")
+                # Remove links from regular markdown content
+                if isinstance(result, str) and output_format == OutputFormat.MARKDOWN:
+                    result = sanitize_markdown_links(result)
+                results[url] = result
 
     return results
 
@@ -485,13 +521,13 @@ if __name__ == "__main__":
     logfire.configure()
 
     # Test Reddit URL
-    reddit_url = "https://www.reddit.com/r/Insta360/comments/1c6jbpi/poll_insta360_x4_buy_it_or_skip_it_please_comment/"
+    reddit_url = "https://www.travelandleisure.com/best-samsonite-luggage-6835399"
     results = asyncio.run(fetch_batch(urls=[reddit_url], output_format=OutputFormat.MARKDOWN, save_debug=True))
 
     # Print results
     for url, content in results.items():
         if content:
             logger.info(f"Successfully fetched {url}")
-            logger.info(f"Content preview:\n{content[:500]}...")
+            logger.info(f"Content :\n{content}")
         else:
             logger.error(f"Failed to fetch {url}")

@@ -1,0 +1,9 @@
+---
+description: Best practices for using Pydantic for data validation and settings 
+globs: globs: **/*.{py}
+---
+- Use `BaseModel` for data validation and serialization
+- Implement custom validators for complex field validation logic
+- Use `Field` to add metadata and constraints to model fields
+- Leverage `pydantic_settings` for configuration management
+- Use `root_validator` for cross-field validation

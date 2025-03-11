@@ -5,7 +5,7 @@ from loguru import logger
 from openai import AsyncOpenAI
 from tenacity import retry, retry_if_exception_type, stop_after_attempt
 
-from app.agents.constants import GPT_4_MINI_MODEL
+from app.llm.constants import GPT_4_MINI_MODEL
 from app.config import get_settings
 from app.utils.count_token import count_tokens
 

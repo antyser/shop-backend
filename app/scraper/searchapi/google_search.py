@@ -593,12 +593,14 @@ class GoogleSearchResponse(BaseModel):
         return values
 
 
-async def scrape_search_content(search_response: GoogleSearchResponse) -> GoogleSearchResponse:
+async def scrape_search_content(search_response: GoogleSearchResponse, query: str = "", save_coverage: bool = False) -> GoogleSearchResponse:
     """
     Scrape content from links found in search response
 
     Args:
         search_response: GoogleSearchResponse object containing search results
+        query: The search query string (for organizing coverage files)
+        save_coverage: Whether to save fetched content to .eval/coverage
 
     Returns:
         GoogleSearchResponse with updated content fields
@@ -690,8 +692,41 @@ async def scrape_search_content(search_response: GoogleSearchResponse) -> Google
 
     if links_to_fetch:
         logger.info("Starting batch fetch of content")
-        fetched_contents = await fetch_batch(list(links_to_fetch), output_format=OutputFormat.SUMMARY)
+        fetched_contents = await fetch_batch(list(links_to_fetch), output_format=OutputFormat.MARKDOWN)
         logger.info(f"Successfully fetched {len(fetched_contents)} contents")
+
+        # Save fetched contents to .eval/coverage if requested
+        if save_coverage and query:
+            # Create a sanitized query name for the directory
+            sanitized_query = query.replace(" ", "_").replace("/", "_").replace("\\", "_").replace(":", "_")[:50]
+
+            # Create .eval/coverage directory with a subdirectory for the query
+            coverage_dir = Path(".evals/coverage") / sanitized_query
+            coverage_dir.mkdir(parents=True, exist_ok=True)
+
+            # Save each URL content as a markdown file
+            for url, content in fetched_contents.items():
+                if content:  # Only save if content exists
+                    # Create a sanitized filename from the URL
+                    # Remove protocol and special characters
+                    filename = url.replace("https://", "").replace("http://", "")
+                    filename = filename.replace("/", "_").replace("\\", "_").replace(":", "_").replace("?", "_")
+                    filename = filename.replace("&", "_").replace("=", "_").replace("%", "_")
+
+                    # Limit filename length
+                    if len(filename) > 100:
+                        filename = filename[:100]
+
+                    # Ensure it ends with .md
+                    if not filename.endswith(".md"):
+                        filename += ".md"
+
+                    # Save the content to the file
+                    file_path = coverage_dir / filename
+                    with open(file_path, "w", encoding="utf-8") as f:
+                        f.write(f"# Content from {url}\n\n{content}")
+
+            logger.info(f"Saved {len(fetched_contents)} content files to {coverage_dir}")
 
         # Track token counts for each content type
         content_token_counts: dict[str, int] = {}
@@ -798,8 +833,9 @@ async def search_google(
     language: str = "en",
     country: str = "us",
     num_results: int = 10,
-    start_index: int = 0,
+    page: int = 1,
     save_debug: bool = False,
+    save_coverage: bool = False,
     scrape_content: bool = False,
     unset_images: bool = False,
 ) -> GoogleSearchResponse:
@@ -812,8 +848,9 @@ async def search_google(
         language: Language code
         country: Country code
         num_results: Number of results to return (max 100)
-        start_index: Starting index for pagination
+        page: Page number to fetch (1-indexed)
         save_debug: Whether to save debug directory
+        save_coverage: Whether to save to .eval/coverage directory
         scrape_content: Whether to fetch content from links
         unset_images: Whether to remove image fields
 
@@ -838,13 +875,13 @@ async def search_google(
         "gl": country,
         "hl": language,
         "num": min(num_results, 100),
-        "start": start_index,
+        "page": page,
         "api_key": api_key,
     }
 
     try:
         async with httpx.AsyncClient() as client:
-            response = await client.get(url, params=params, timeout=10)
+            response = await client.get(url, params=params, timeout=30)
             response.raise_for_status()
 
         response_json = response.json()
@@ -853,7 +890,7 @@ async def search_google(
         logger.info(f"Initial response contains {initial_token_count} tokens")
 
         if scrape_content:
-            search_response = await scrape_search_content(search_response)
+            search_response = await scrape_search_content(search_response, query=query, save_coverage=save_coverage)
             after_scrape_token_count = count_model_tokens(search_response)
             logger.info(f"After scraping content: {after_scrape_token_count} tokens (added {after_scrape_token_count - initial_token_count} tokens)")
 
@@ -896,7 +933,7 @@ async def fetch_url(url: str, client: httpx.AsyncClient) -> str:
         Fetched content as string
     """
     try:
-        response = await client.get(url, follow_redirects=True)
+        response = await client.get(url, follow_redirects=True, timeout=30)
         response.raise_for_status()
         text = str(response.text)
         return text
@@ -956,7 +993,7 @@ def main() -> None:
     query = "best coffee maker 2024"
 
     try:
-        response = asyncio.run(search_google(query))
+        response = asyncio.run(search_google(query, save_coverage=True, scrape_content=True))
 
         # Save response to debug file
         debug_file = debug_dir / "google_search_response.json"
@@ -972,10 +1009,40 @@ if __name__ == "__main__":
     load_dotenv()
     # init_logfire()
     queries = [
-        "Murad Retinol Youth Renewal Serum",
+       "millie moon diaper",
+       "Orgain Organic Vegan 21g Protein Powder",
+       "Sports Research, Omega-3 Fish Oil, Triple Strength",
+        "Aquasana Claryum® 3-Stage Max Flow",
+        "honest baby wipes",
+        "Ninja Air Fryer",
+        "Cooper Discoverer All-Terrain 275/60R20 115T All-Terrain Tire",
+        "CRZ YOGA Butterluxe Racerback High Neck Longline Sports Bras",
+        "Keurig K-Elite Single-Serve K-Cup Pod Coffee Maker",
+        "Quip 360 Oscillating Rechargeable Electric Toothbrush",
+        "Google - Nest Learning Smart Wifi Thermostat"
     ]
+    expensions = [
+        "Key new features of iPhone 16 and release date details",
+        "iPhone 16 design changes and color options",
+        "iPhone 16 display specs and brightness test",
+        "iPhone 16 processor performance (Geekbench scores)",
+        "Latest iOS features exclusive to iPhone 16",
+        "iPhone 16 camera tests and real-world photo samples",
+        "iPhone 16 battery life comparison and charging speed",
+        "Overview of iPhone 16 ecosystem integration (Apple Watch, AirPods)",
+        "iPhone 16 pricing tiers and regional comparisons",
+        "iPhone 16 pros, cons, and final verdict from reviewers",
+    ]
+    for expension in expensions:
+        results = asyncio.run(search_google(expension, scrape_content=False, save_coverage=False, num_results=100))
+        logger.info(f"Found {len(results.organic_results)} results")
+        for result in results.organic_results:
+            logger.info(f"Title: {result.title}")
+            logger.info(f"Link: {result.link}")
+            logger.info("---")
+    """
     for query in queries:
-        results = asyncio.run(search_google(query + " review", scrape_content=True))
+        results = asyncio.run(search_google(query + " review", scrape_content=False, save_coverage=False))
         if results and results.organic_results:
             logger.info(f"Found {len(results.organic_results)} results")
             for result in results.organic_results[:3]:
@@ -984,3 +1051,4 @@ if __name__ == "__main__":
                 logger.info("---")
         else:
             logger.warning("No search results found")
+    """
