@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.12, <4.0"
 resolution-markers = [
     "python_full_version >= '3.13'",
@@ -1199,7 +1200,7 @@ http2 = [
 
 [[package]]
 name = "huggingface-hub"
-version = "0.27.1"
+version = "0.29.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "filelock" },
@@ -1210,9 +1211,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e1/d2/d6976de7542792fc077b498d64af64882b6d8bb40679284ec0bff77d5929/huggingface_hub-0.27.1.tar.gz", hash = "sha256:c004463ca870283909d715d20f066ebd6968c2207dae9393fdffb3c1d4d8f98b", size = 379407 }
+sdist = { url = "https://files.pythonhosted.org/packages/58/b2/f8b3c9842a794e8203448725aefa02d7c9e0da42d5f22f4ed806057cc36e/huggingface_hub-0.29.2.tar.gz", hash = "sha256:590b29c0dcbd0ee4b7b023714dc1ad8563fe4a68a91463438b74e980d28afaf3", size = 389816 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/3f/50f6b25fafdcfb1c089187a328c95081abf882309afd86f4053951507cd1/huggingface_hub-0.27.1-py3-none-any.whl", hash = "sha256:1c5155ca7d60b60c2e2fc38cbb3ffb7f7c3adf48f824015b219af9061771daec", size = 450658 },
+    { url = "https://files.pythonhosted.org/packages/13/5f/088ff08dc41808fcd99d9972b9bcfa7e3a35e30e8b0a3155b57938f1611c/huggingface_hub-0.29.2-py3-none-any.whl", hash = "sha256:c56f20fca09ef19da84dcde2b76379ecdaddf390b083f59f166715584953307d", size = 468087 },
 ]
 
 [[package]]
@@ -1790,6 +1791,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b6/17/71e9984cf0570cd202ac0a1c9ed5c1b8889b0fc8dc736f5ef0ffb181c284/lxml-5.3.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:df5c7333167b9674aa8ae1d4008fa4bc17a313cc490b2cca27838bbdcc6bb15b", size = 5011053 },
     { url = "https://files.pythonhosted.org/packages/69/68/9f7e6d3312a91e30829368c2b3217e750adef12a6f8eb10498249f4e8d72/lxml-5.3.0-cp313-cp313-win32.whl", hash = "sha256:c802e1c2ed9f0c06a65bc4ed0189d000ada8049312cfeab6ca635e39c9608957", size = 3485634 },
     { url = "https://files.pythonhosted.org/packages/7d/db/214290d58ad68c587bd5d6af3d34e56830438733d0d0856c0275fde43652/lxml-5.3.0-cp313-cp313-win_amd64.whl", hash = "sha256:406246b96d552e0503e17a1006fd27edac678b3fcc9f1be71a2f94b4ff61528d", size = 3814417 },
+]
+
+[[package]]
+name = "markdown"
+version = "3.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/28/3af612670f82f4c056911fbbbb42760255801b3068c48de792d354ff4472/markdown-3.7.tar.gz", hash = "sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2", size = 357086 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/08/83871f3c50fc983b88547c196d11cf8c3340e37c32d2e9d6152abe2c61f7/Markdown-3.7-py3-none-any.whl", hash = "sha256:7eb6df5690b81a1d7942992c97fad2938e956e79df20cbc6186e9c3a77b1c803", size = 106349 },
 ]
 
 [[package]]
@@ -3467,6 +3477,7 @@ dependencies = [
     { name = "jupyter" },
     { name = "logfire", extra = ["fastapi", "httpx", "system-metrics"] },
     { name = "loguru" },
+    { name = "markdown" },
     { name = "markdownify" },
     { name = "openai" },
     { name = "playwright" },
@@ -3476,6 +3487,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "sentry-sdk" },
+    { name = "smolagents" },
     { name = "streamlit" },
     { name = "supabase" },
     { name = "tiktoken" },
@@ -3513,6 +3525,7 @@ requires-dist = [
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "logfire", extras = ["fastapi", "httpx", "system-metrics"], specifier = ">=3.1.0" },
     { name = "loguru", specifier = ">=0.7.3,<1.0.0" },
+    { name = "markdown", specifier = ">=3.7" },
     { name = "markdownify", specifier = ">=0.14.1" },
     { name = "openai", specifier = ">=1.59.8" },
     { name = "playwright", specifier = ">=1.49.1" },
@@ -3522,6 +3535,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.0.1,<2.0.0" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "sentry-sdk", specifier = ">=2.20.0" },
+    { name = "smolagents", specifier = ">=1.10.0" },
     { name = "streamlit", specifier = ">=1.41.1" },
     { name = "supabase", specifier = ">=2.11.0" },
     { name = "tiktoken", specifier = ">=0.8.0" },
@@ -3556,6 +3570,26 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/44/cd/a040c4b3119bbe532e5b0732286f805445375489fceaec1f48306068ee3b/smmap-5.0.2.tar.gz", hash = "sha256:26ea65a03958fa0c8a1c7e8c7a58fdc77221b8910f6be2131affade476898ad5", size = 22329 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/04/be/d09147ad1ec7934636ad912901c5fd7667e1c858e19d355237db0d0cd5e4/smmap-5.0.2-py3-none-any.whl", hash = "sha256:b30115f0def7d7531d22a0fb6502488d879e75b260a9db4d0819cfb25403af5e", size = 24303 },
+]
+
+[[package]]
+name = "smolagents"
+version = "1.10.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "duckduckgo-search" },
+    { name = "huggingface-hub" },
+    { name = "jinja2" },
+    { name = "markdownify" },
+    { name = "pandas" },
+    { name = "pillow" },
+    { name = "python-dotenv" },
+    { name = "requests" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7b/ca/40613468964a05b0615281fd3aadd1b6ea8c9c643d012db6ae72754a0cee/smolagents-1.10.0.tar.gz", hash = "sha256:d2ec37b92d5abf3a586206088d7cff3598e70fd79b3b42eeaf93848e0f9cc150", size = 133529 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/59/99/dfe4d96ddb10534c6aaf5b88ed59c7b0d0db602a3a4254cecb0a8f96b9b8/smolagents-1.10.0-py3-none-any.whl", hash = "sha256:e6d4161c3836fdfaac5f24854ad23a77443f1ac056e151525806ca33ade62a41", size = 104600 },
 ]
 
 [[package]]

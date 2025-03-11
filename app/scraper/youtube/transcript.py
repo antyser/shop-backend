@@ -49,6 +49,7 @@ async def aget_transcript(video_id: str) -> str | None:
         Optional[str]: Transcript text or None if not available
     """
     try:
+        logger.info(f"Getting transcript for video {video_id}")
         transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
         text = _convert_transcript_to_text(transcript_list)
         crawler_counter.add(1, {"type": "youtube", "status": "success"})

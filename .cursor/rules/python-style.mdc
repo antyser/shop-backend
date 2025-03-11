@@ -1,0 +1,91 @@
+---
+description: instruction when generating python code
+globs: **/*.{py}
+---
+
+# Python Code Generation Guidelines
+  
+  Key Principles
+  - Write concise, technical responses with accurate Python examples.
+  - Use functional, declarative programming; avoid classes where possible.
+  - Prefer iteration and modularization over code duplication.
+  - Use descriptive variable names with auxiliary verbs (e.g., is_active, has_permission).
+  - Use lowercase with underscores for directories and files (e.g., routers/user_routes.py).
+  - Favor named exports for routes and utility functions.
+  - Use the Receive an Object, Return an Object (RORO) pattern.
+  
+
+## Generating Tests for Pydantic Models
+
+- **File Placement:** Create a test file named `test_[model].py` and place it in the `tests/` directory relative to the project root.
+- **Imports:** Include necessary imports such as `pytest` and the Pydantic model from its module.
+- **Test Functions:**
+  - Write test functions that validate the model's fields, checking both valid and invalid inputs.
+  - Use Pydantic's validation features, such as raising `ValidationError` for invalid cases.
+  - Ensure type correctness for MyPy compatibility.
+- **Conventions:** Use Pytest conventions, such as prefixing test function names with `test_` and using assertions.
+
+**Example Output:**
+
+```python
+# test/test_user.py
+import pytest
+from models import User  # Assuming User is defined in models.py
+
+def test_user_validation():
+    # Test valid case
+    user = User(name="Alice", age=25)
+    assert user.name == "Alice"
+    assert user.age == 25
+
+    # Test invalid case
+    with pytest.raises(ValueError):  # or ValidationError depending on model
+        User(name="Bob", age=-5)
+```
+## Writing Main Functions or Test Scripts
+Command-Line Arguments: Define a main() function that uses argparse to accept input_dir and output_dir as command-line arguments.
+Path Handling: Avoid hardcoding file or directory paths; derive all paths from the command-line arguments using pathlib.Path for cross-platform compatibility.
+Logging: include config logfire when it has llm call `logfire.configure(send_to_logfire="if-token-present", environment="dev", scrubbing=False)`
+Instructions: Include a docstring or comments at the top of the script explaining:
+What the script does.
+How to run it, with an example command.
+Type Hints: Use type hints for MyPy compatibility and integrate Pydantic models if needed.
+Execution: Wrap the main() call in an if __name__ == '__main__': block.
+Example Output:
+
+```python
+# process_data.py
+"""Process data from an input directory and save results to an output directory.
+
+Usage:
+    python process_data.py /path/to/input /path/to/output
+
+Example:
+    python process_data.py ./data/input ./data/output
+"""
+import argparse
+from pathlib import Path
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Process data between directories.")
+    parser.add_argument("input_dir", type=str, help="Path to input directory")
+    parser.add_argument("output_dir", type=str, help="Path to output directory")
+    args = parser.parse_args()
+
+    input_path: Path = Path(args.input_dir)
+    output_path: Path = Path(args.output_dir)
+
+    # Ensure output directory exists
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    # Example processing (replace with actual logic)
+    for file in input_path.glob("*.txt"):
+        output_file = output_path / file.name
+        output_file.write_text(file.read_text())  # Simple copy as example
+
+if __name__ == "__main__":
+    main()
+```
+
+
+
