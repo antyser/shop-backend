@@ -14,7 +14,6 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [tool.logfire]
-pydantic_plugin_record = "all"
 
 
 [project]
@@ -43,6 +42,7 @@ dependencies = [
     "markdown>=3.7",
     "markdownify>=0.14.1",
     "openai>=1.59.8",
+    "openai-agents>=0.0.4",
     "playwright>=1.49.1",
     "playwright-dompath>=0.0.1",
     "pydantic-ai[logfire]>=0.0.19",

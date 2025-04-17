@@ -1,0 +1,268 @@
+---
+description: When using openai agents package
+globs: **/*.{py}
+---
+# OpenAI Agents Python SDK - Simplified Guide
+
+## Introduction
+
+The OpenAI Agents SDK is a lightweight yet powerful framework for building multi-agent workflows. It allows you to create AI agents that can use tools, hand off tasks to other agents, and be traced for debugging and monitoring.
+
+
+> **Important Note**: This guide provides a simplified overview of the OpenAI Agents SDK. For the most up-to-date and comprehensive documentation, always refer to the @openai agent doc. If you can't find a specific function, configuration option, or feature in this guide, consult the official documentation.
+
+## Installation
+
+```bash
+pip install openai-agents
+```
+
+Set your OpenAI API key:
+```bash
+export OPENAI_API_KEY=your_api_key_here
+```
+
+## Core Concepts
+
+1. **Agents**: LLMs configured with instructions, tools, and capabilities
+2. **Tools**: Functions that agents can use to perform actions
+3. **Handoffs**: Allow agents to transfer control to other agents
+4. **Tracing**: Built-in tracking of agent runs for debugging
+
+## Basic Usage
+
+### Hello World Example
+
+```python
+from agents import Agent, Runner
+
+# Create a simple agent
+agent = Agent(name="Assistant", instructions="You are a helpful assistant")
+
+# Run the agent synchronously
+result = Runner.run_sync(agent, "Write a haiku about recursion in programming.")
+print(result.final_output)
+```
+
+### Async Usage
+
+```python
+import asyncio
+from agents import Agent, Runner
+
+async def main():
+    agent = Agent(name="Assistant", instructions="You are a helpful assistant")
+    result = await Runner.run(agent, "Write a haiku about recursion in programming.")
+    print(result.final_output)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Creating Tools
+
+Tools allow agents to perform actions. The simplest way to create a tool is with the `@function_tool` decorator:
+
+```python
+from agents import Agent, Runner, function_tool
+
+@function_tool
+def get_weather(city: str) -> str:
+    """Fetch the weather for a given location.
+    
+    Args:
+        city: The name of the city to get weather for.
+    """
+    # In a real application, you would call a weather API here
+    return f"The weather in {city} is sunny."
+
+# Create an agent with the tool
+agent = Agent(
+    name="Weather Assistant",
+    instructions="You help users check the weather.",
+    tools=[get_weather],
+)
+
+# Run the agent
+async def main():
+    result = await Runner.run(agent, "What's the weather in Tokyo?")
+    print(result.final_output)  # The weather in Tokyo is sunny.
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Using Complex Types
+
+You can use Pydantic models or TypedDict for complex parameter types:
+
+```python
+from typing_extensions import TypedDict
+from agents import function_tool
+
+class Location(TypedDict):
+    lat: float
+    long: float
+
+@function_tool
+async def fetch_weather(location: Location) -> str:
+    """Fetch the weather for a given location.
+    
+    Args:
+        location: The location coordinates.
+    """
+    # In a real application, you would call a weather API here
+    return f"The weather at coordinates {location['lat']}, {location['long']} is sunny."
+```
+
+## Using Multiple Agents with Handoffs
+
+Handoffs allow agents to transfer control to other specialized agents:
+
+```python
+from agents import Agent, Runner
+import asyncio
+
+# Create specialized agents
+spanish_agent = Agent(
+    name="Spanish agent",
+    instructions="You only speak Spanish.",
+)
+
+english_agent = Agent(
+    name="English agent",
+    instructions="You only speak English",
+)
+
+# Create a triage agent that can hand off to specialized agents
+triage_agent = Agent(
+    name="Triage agent",
+    instructions="Handoff to the appropriate agent based on the language of the request.",
+    handoffs=[spanish_agent, english_agent],
+)
+
+async def main():
+    result = await Runner.run(triage_agent, "Hola, ¿cómo estás?")
+    print(result.final_output)  # Response in Spanish
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Customizing Handoffs
+
+You can customize handoffs with additional data:
+
+```python
+from pydantic import BaseModel
+from agents import Agent, handoff, RunContextWrapper
+
+class EscalationData(BaseModel):
+    reason: str
+
+async def on_handoff(ctx: RunContextWrapper[None], input_data: EscalationData):
+    print(f"Escalation agent called with reason: {input_data.reason}")
+
+agent = Agent(name="Support agent")
+
+# Create a handoff with custom input type
+escalation_agent = Agent(name="Escalation agent")
+custom_handoff = handoff(
+    agent=escalation_agent,
+    on_handoff=on_handoff,
+    input_type=EscalationData,
+)
+
+# Create the main agent with the handoff
+main_agent = Agent(
+    name="Main agent",
+    instructions="Handle customer inquiries. Escalate difficult issues.",
+    handoffs=[custom_handoff],
+)
+```
+
+## Tracing
+
+Tracing is enabled by default and helps you debug and monitor your agent workflows:
+
+```python
+from agents import Agent, Runner, trace
+
+async def main():
+    agent = Agent(name="Joke generator", instructions="Tell funny jokes.")
+
+    # Create a trace for the entire workflow
+    with trace("Joke workflow"):
+        first_result = await Runner.run(agent, "Tell me a joke")
+        second_result = await Runner.run(agent, f"Rate this joke: {first_result.final_output}")
+        print(f"Joke: {first_result.final_output}")
+        print(f"Rating: {second_result.final_output}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Disabling Tracing
+
+You can disable tracing globally or for a specific run:
+
+```python
+# Disable globally via environment variable
+import os
+os.environ["OPENAI_AGENTS_DISABLE_TRACING"] = "1"
+
+# Or disable for a specific run
+from agents.run import RunConfig
+
+result = await Runner.run(
+    agent, 
+    "Hello", 
+    config=RunConfig(tracing_disabled=True)
+)
+```
+
+## The Agent Loop
+
+When you call `Runner.run()`, the SDK runs a loop until it gets a final output:
+
+1. The LLM is called with the agent's configuration and message history
+2. The LLM returns a response, which may include tool calls
+3. If the response has a final output, the loop ends
+4. If the response has a handoff, the agent is switched to the new agent
+5. Tool calls are processed and their responses are added to the message history
+6. The loop continues from step 1
+
+## Advanced Configuration
+
+You can configure various aspects of your agents:
+
+```python
+from agents import Agent, Runner
+from agents.run import RunConfig
+
+agent = Agent(
+    name="Advanced agent",
+    instructions="You are a helpful assistant with advanced capabilities.",
+    model="gpt-4o",  # Specify the model to use
+    temperature=0.7,  # Control randomness (0-1)
+    tools=[...],      # List of tools
+    handoffs=[...],   # List of handoffs
+)
+
+# Configure the run
+result = await Runner.run(
+    agent,
+    "Hello",
+    config=RunConfig(
+        max_turns=10,           # Maximum number of turns in the conversation
+        trace_name="My trace",  # Custom name for the trace
+        tracing_disabled=False, # Enable/disable tracing
+    )
+)
+```
+
+## Conclusion
+
+The OpenAI Agents SDK provides a flexible framework for building AI agent workflows. By combining agents, tools, and handoffs, you can create powerful applications that leverage the capabilities of large language models while maintaining control over their behavior.
+
+For more detailed information, visit the [official documentation](mdc:https:/openai.github.io/openai-agents-python).

@@ -1,6 +1,6 @@
 ---
 description: cursor composer agent instruction
-globs: 
+globs: **/*.{py}
 ---
 # Instructions
 

@@ -1,60 +1,85 @@
-# Smolagents with OpenAI o3-mini
+# AI Research Assistant
 
-This project demonstrates how to use the [smolagents](https://github.com/huggingface/smolagents) library with OpenAI's o3-mini model to create powerful AI agents.
+![Status](https://img.shields.io/badge/status-active-success.svg)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 
-## Setup
+## 🔍 Overview
 
-1. Make sure you have Python 3.8+ installed.
+A powerful AI-powered research assistant that helps you generate comprehensive reports on any topic using advanced language models and internet search capabilities.
 
-2. Install the required packages:
-   ```bash
-   pip install smolagents python-dotenv
-   ```
+## ✨ Features
 
-3. Create a `.env` file in the project root with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
+- **AI-Powered Research**: Generate detailed reports from any query
+- **Web Search Integration**: Leverage internet data for up-to-date information
+- **Intelligent Planning**: AI creates optimized research plans
+- **User-Friendly Interface**: Easy-to-use Streamlit UI
+- **Concurrent Processing**: Parallel execution for faster results
 
-## Available Scripts
+## 🚀 Getting Started
 
-### Basic Example
+### 1. Prerequisites
 
-Run the basic example with:
+- Python 3.9+
+- Internet connection
+- OpenAI API key
+- SearchAPI key
 
-```bash
-python smolagent_demo.py
-```
-
-This script creates a simple CodeAgent with the DuckDuckGoSearchTool and uses it to answer a question about France.
-
-### Advanced Example
-
-Run the advanced example with:
+### 2. Installation
 
 ```bash
-python smolagent_advanced.py
+# Clone the repository
+git clone [repository-url]
+cd shop-backend
+
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment variables
+# Create a .env file with:
+# OPENAI_API_KEY=your_openai_api_key
+# SEARCHAPI_API_KEY=your_searchapi_key
 ```
 
-This script demonstrates using multiple tools (web search, Python code execution, and web browsing) to find weather information and create a visualization.
-
-### ToolCallingAgent Example
-
-Run the ToolCallingAgent example with:
+### 3. Launch
 
 ```bash
-python smolagent_toolcalling.py
+# Use the provided script
+./run_research_ui.sh
+
+# Or run directly with Streamlit
+streamlit run app/streamlit_research_ui.py
 ```
 
-This script shows how to use the ToolCallingAgent (which uses JSON/text blobs for actions instead of code) with web search and user input tools.
+The UI will be available at: http://localhost:8503
 
-## Key Features of smolagents
+## 📚 Documentation
 
-- **Code Agents**: Agents write their actions in Python code, which is more efficient than traditional tool-calling approaches.
-- **Multiple Model Support**: Works with various LLM providers including OpenAI, Anthropic, and open-source models.
-- **Tool Integration**: Easily integrate with various tools for web search, code execution, web browsing, and more.
-- **Modality Support**: Handles text, vision, video, and audio inputs.
+For detailed information about the Research UI, installation, usage, and technical details, please see:
 
-## Documentation
+- [Research UI Documentation](README_RESEARCH_UI.md)
 
-For more information, visit the [smolagents GitHub repository](https://github.com/huggingface/smolagents).
+## 🔄 Workflow
+
+1. **Input Query**: Specify your research topic
+2. **AI Planning**: Generate a research strategy
+3. **Execute Searches**: Gather relevant information
+4. **Synthesize Report**: Compile findings into a coherent document
+5. **Download**: Save your report for later use
+
+## 🛡️ License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🔗 Related Projects
+
+- [Search Agent](app/llm/agents/search_agent.py) - Handles web search functionality
+- [Planner Agent](app/llm/agents/planner_agent.py) - Creates research strategies
+- [Research Manager](app/llm/agents/research_manager.py) - Coordinates the research workflow
+
+## 📝 Note
+
+This is a research tool that relies on external search APIs and language models. The quality of results may vary based on the availability and accuracy of these services.

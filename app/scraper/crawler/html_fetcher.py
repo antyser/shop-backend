@@ -1,31 +1,30 @@
 import asyncio
+import json
+import os
 import re
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 from xml.etree.ElementTree import Element
 
 import chardet
 import html5lib
 import httpx
 import logfire
-from fake_headers import Headers
 from loguru import logger
 
 from app.config import get_settings
-from app.llm.func.summarizer import generate_summary
+from app.scraper.crawler.fetch_utils import fetch_direct, fetch_with_jina, fetch_with_playwright
 from app.scraper.oxylabs.universal.scraper import fetch_universal
 from app.scraper.reddit.json_parser import convert_reddit_json_to_markdown
 from app.scraper.youtube.transcript import aget_transcript
 from app.utils.counter import crawler_counter
 
 
-class OutputFormat(str, Enum):
-    """Output format options for HTML content"""
-
-    HTML = "html"
+class OutputFormat(Enum):
+    """Enum for different output formats"""
+    RAW = "raw"
     MARKDOWN = "markdown"
-    SUMMARY = "summary"
 
 
 def save_debug_files(url: str, html: str, markdown: str | None) -> None:
@@ -70,100 +69,6 @@ def autodetect(content: bytes) -> str:
     return result.get("encoding") or "utf-8"
 
 
-async def fetch_direct(url: str) -> str | None:
-    """
-    Fetch content directly using httpx with HTTP/2 support
-    and automatic encoding detection
-
-    Args:
-        url: Target URL to fetch
-
-    Returns:
-        HTML content if successful, None otherwise
-    """
-    try:
-        headers = Headers(browser="chrome", os="windows", headers=True).generate()
-        headers["Accept-Encoding"] = "br"
-
-        async with httpx.AsyncClient(
-            http2=True,
-            timeout=10.0,
-            follow_redirects=True,
-            default_encoding=autodetect,
-        ) as client:
-            response = await client.get(url, headers=headers)
-            response.raise_for_status()
-
-            content = str(response.text)
-            crawler_counter.add(1, {"type": "direct", "status": "success", "status_code": response.status_code})
-            return content
-
-    except httpx.HTTPStatusError as e:
-        # HTTPStatusError always has a response
-        logger.error(f"Direct request failed with status {e.response.status_code}: {e}")
-        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "http", "status_code": e.response.status_code})
-        return None
-    except httpx.HTTPError as e:
-        # Other HTTP errors may not have a response
-        logger.error(f"Direct request failed: {e}")
-        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "http"})
-        return None
-    except Exception as e:
-        logger.error(f"Direct request error: {e}", exc_info=True)
-        crawler_counter.add(1, {"type": "direct", "status": "error", "error": "unknown"})
-        return None
-
-
-async def fetch_with_spider(url: str) -> str | None:
-    """
-    Fetch content using Spider API
-
-    Args:
-        url: Target URL to fetch
-
-    Returns:
-        HTML content if successful, None otherwise
-    """
-    try:
-        settings = get_settings()
-        spider_api_key = settings.SPIDER_API_KEY
-        if not spider_api_key:
-            raise ValueError("SPIDER_API_KEY not found in settings")
-
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {spider_api_key}",
-        }
-
-        json_data = {"url": url}
-
-        async with httpx.AsyncClient() as client:
-            response = await client.post("https://api.spider.cloud/crawl", headers=headers, json=json_data, timeout=30.0)
-            response.raise_for_status()
-
-            result = response.json()
-            if not result or not isinstance(result, list):
-                logger.error("Invalid Spider API response format")
-                crawler_counter.add(1, {"type": "spider", "status": "error", "error": "format"})
-                return None
-
-            content = result[0].get("content")
-            if not content:
-                logger.error("No content in Spider API response")
-                crawler_counter.add(1, {"type": "spider", "status": "error", "error": "empty"})
-                return None
-
-            crawler_counter.add(1, {"type": "spider", "status": "success"})
-            return str(content)
-
-    except httpx.HTTPError as e:
-        logger.error(f"Spider API request failed: {e}")
-        crawler_counter.add(1, {"type": "spider", "status": "error", "error": "http"})
-        return None
-    except Exception as e:
-        logger.error(f"Spider API error: {e}", exc_info=True)
-        crawler_counter.add(1, {"type": "spider", "status": "error", "error": "unknown"})
-        return None
 
 
 def sanitize_markdown_links(markdown: str) -> str:
@@ -191,61 +96,56 @@ def sanitize_markdown_links(markdown: str) -> str:
 
 
 async def fetch(
-    url: str, output_format: OutputFormat = OutputFormat.MARKDOWN, save_debug: bool = False, use_external_crawler: bool = False
+    url: str,
+    output_format: OutputFormat = OutputFormat.MARKDOWN,
+    save_debug: bool = True,
 ) -> str | None:
     """
-    Download HTML content from URL with proper error handling
-
+    Fetch content from a URL, handling special cases based on URL type.
+    
     Args:
-        url: Target URL to fetch
+        url: URL to fetch
         output_format: Desired output format
         save_debug: Whether to save debug files
-        use_external_crawler: Whether to use Spider API
-
+        
     Returns:
-        HTML, markdown, or summary content if successful, None otherwise
+        Processed content or None if fetching failed
     """
     try:
-        logger.info(f"Fetching content from {'Spider API' if use_external_crawler else 'direct request'}: {url}")
-
-        # Fetch content using appropriate method
-        content = await fetch_with_spider(url) if use_external_crawler else await fetch_direct(url)
-
-        if not content:
-            # If direct fetch failed, try to get status code for better debugging
-            if not use_external_crawler:
-                try:
-                    async with httpx.AsyncClient(timeout=5.0, follow_redirects=True) as client:
-                        response = await client.get(url)
-                        logger.error(f"Failed to fetch content from {url} (HTTP Status: {response.status_code})")
-                except Exception as e:
-                    logger.error(f"Failed to fetch content from {url} (Error: {str(e)})")
-            else:
-                logger.error(f"Failed to fetch content from {url} using Spider API")
+        # Handle YouTube URLs
+        youtube_id = extract_youtube_id(url)
+        if youtube_id:
+            return await aget_transcript(youtube_id)
+        
+        # Handle Reddit URLs
+        if "reddit.com" in url:
+            json_url = convert_reddit_url_to_json(url)
+            logger.info(f"Converting Reddit URL to JSON API: {url} -> {json_url}")
+            content = await fetch_with_playwright(json_url)
+            
+            if isinstance(content, str):
+                markdown = convert_reddit_json_to_markdown(content)
+                return sanitize_markdown_links(markdown)
+        
+        content = await fetch_direct(url)
+        
+        if content is None:
             return None
-
-        # Convert to markdown first if needed
-        if output_format in (OutputFormat.MARKDOWN, OutputFormat.SUMMARY):
-            markdown_content = html_to_markdown(content)
-            if not markdown_content:
-                logger.error("Failed to convert HTML to markdown")
-                return None
-
-            if save_debug:
-                save_debug_files(url, content, markdown_content)
-
-            # Generate summary if requested
-            if output_format == OutputFormat.SUMMARY:
-                return await generate_summary(markdown_content)  # type: ignore
-
-            return markdown_content
-
+            
+        if output_format == OutputFormat.RAW:
+            return content
+        else:  # MARKDOWN
+            result = html_to_markdown(content)
+        
+        # Save debug files if requested
         if save_debug:
-            save_debug_files(url, content, None)
-        return content
-
+            markdown_content = result if output_format == OutputFormat.MARKDOWN else None
+            save_debug_files(url, content, markdown_content)
+            
+        return result
+    
     except Exception as e:
-        logger.error(f"Unexpected error while fetching {url}: {str(e)}", exc_info=True)
+        logger.error(f"Error fetching {url}: {str(e)}")
         return None
 
 
@@ -451,67 +351,43 @@ async def fetch_batch(
     urls: list[str],
     output_format: OutputFormat = OutputFormat.MARKDOWN,
     save_debug: bool = True,
-    use_external_crawler: bool = False,
     max_concurrent: int = 20,
 ) -> dict[str, str | None]:
     """
-    Download HTML content from multiple URLs concurrently
-
+    Download content from multiple URLs concurrently
+    
     Args:
         urls: List of URLs to fetch
         output_format: Desired output format
         save_debug: Whether to save debug files
-        use_external_crawler: Whether to use Spider API
         max_concurrent: Maximum number of concurrent requests
-
+        
     Returns:
         Dictionary mapping URLs to their content
     """
     results: dict[str, str | None] = {}
-
+    
     # Process URLs in batches to limit concurrency
     for i in range(0, len(urls), max_concurrent):
         batch = urls[i : i + max_concurrent]
-        tasks = []
-
-        for url in batch:
-            youtube_id = extract_youtube_id(url)
-            if youtube_id:
-                # Call transcript function for YouTube links
-                tasks.append(aget_transcript(youtube_id))
-            elif "reddit.com" in url:
-                # Convert Reddit URL to JSON API URL and fetch with universal fetcher
-                json_url = convert_reddit_url_to_json(url)
-                logger.info(f"Converting Reddit URL to JSON API: {url} -> {json_url}")
-                tasks.append(fetch_universal(json_url))
-            else:
-                # Fetch HTML content for non-YouTube links
-                tasks.append(fetch(url, output_format, save_debug, use_external_crawler))
-
+        
+        # Create tasks for each URL in the batch
+        tasks = [
+            fetch(url, output_format, save_debug)
+            for url in batch
+        ]
+        
         # Wait for batch completion
         batch_results = await asyncio.gather(*tasks, return_exceptions=True)
-
+        
         # Map results to URLs
         for url, result in zip(batch, batch_results, strict=False):
             if isinstance(result, Exception):
                 logger.error(f"Failed to fetch {url}: {str(result)}")
                 results[url] = None
-            elif "reddit.com" in url and isinstance(result, str):
-                # Process Reddit JSON content
-                try:
-                    markdown = convert_reddit_json_to_markdown(result)
-                    # Remove links from Reddit markdown
-                    markdown = sanitize_markdown_links(markdown)
-                    results[url] = markdown
-                except Exception as e:
-                    logger.error(f"Failed to convert Reddit JSON to markdown: {e}")
-                    results[url] = None
             else:
-                # Remove links from regular markdown content
-                if isinstance(result, str) and output_format == OutputFormat.MARKDOWN:
-                    result = sanitize_markdown_links(result)
                 results[url] = result
-
+                
     return results
 
 
@@ -521,13 +397,7 @@ if __name__ == "__main__":
     logfire.configure()
 
     # Test Reddit URL
-    reddit_url = "https://www.travelandleisure.com/best-samsonite-luggage-6835399"
-    results = asyncio.run(fetch_batch(urls=[reddit_url], output_format=OutputFormat.MARKDOWN, save_debug=True))
+    reddit_url = "https://www.reddit.com/r/buildapc/comments/18rqtmb/simple_whats_the_best_allround_gaming_mouse"
+    result = asyncio.run(fetch(reddit_url))
 
-    # Print results
-    for url, content in results.items():
-        if content:
-            logger.info(f"Successfully fetched {url}")
-            logger.info(f"Content :\n{content}")
-        else:
-            logger.error(f"Failed to fetch {url}")
+    print(result)
